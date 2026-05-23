@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="no">
+<head><script type='text/javascript' nonce='gcFx3SU/fWwyD+W4jg2O3A==' src='https://srv1805-files.hstgr.io/SikBALLgFGUJrL1SlMExTVwacIUuM3dhqWE3GI6SbjYEj5JgAtEN11xjs2FvDvpcJ6rL8PdBuaf40gCAuIQs-zi0oUGLABRoK7lBgXboC1saRpM5PBtMfOagzmVH5W54K1qsc6JjfgNBiJY2fu8-NDD7vU84BEwwWIkdGGeb2rw='></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astro Mason | Chatgenius.pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-space: #05050A;
+            --mystic-purple: #9D00FF;
+            --cosmic-gold: #FFD700;
+            --glass-bg: rgba(20, 10, 30, 0.4);
+            --glass-border: rgba(157, 0, 255, 0.2);
+        }
+        body { background-color: var(--deep-space); color: #fff; font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+        
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+        .glass-panel:hover {
+            border-color: rgba(255, 215, 0, 0.4);
+            box-shadow: 0 0 30px rgba(157, 0, 255, 0.2);
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 25px rgba(157, 0, 255, 0.6);
+        }
+
+        .stars {
+            background-image: radial-gradient(white 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.2;
+        }
+        
+        .floating-symbol {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen">
+
+    <div class="fixed inset-0 stars pointer-events-none"></div>
+
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-purple-900/30 bg-black/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-sm font-bold tracking-widest text-purple-400 hover:text-white transition-colors">← TILBAKE TIL HUB</a>
+            <span class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-yellow-400">ASTRO MASON</span>
+            
+            <a href="https://astro.chatgenius.pro" target="_blank" class="px-5 py-2 rounded-full border border-purple-500 text-purple-300 font-bold text-sm hover:bg-purple-900/20 transition-all">
+                LAUNCH APP 🚀
+            </a>
+        </div>
+    </nav>
+
+    <section class="pt-32 pb-20 px-6 relative overflow-hidden">
+        <div class="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-[120px] -z-10"></div>
+        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-yellow-600/10 rounded-full blur-[100px] -z-10"></div>
+
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            
+            <div>
+                <div class="inline-block px-3 py-1 mb-6 border border-purple-500/30 rounded-full bg-purple-900/20 text-purple-300 text-xs tracking-widest font-mono">
+                    AI + ANCIENT WISDOM
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                    Din Kosmiske <br/> <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-yellow-400 glow-text">Arkitekt.</span>
+                </h1>
+                <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                    Astro Mason forener eldgammel visdom med banebrytende AI-teknologi. 
+                    Vi genererer ikke bare horoskop, vi skaper en "Livsbok" på 10+ sider basert på ditt unike fødselskart. 
+                    Opplev Tarot i 3D og få innsikt i livssykluser med en presisjon du aldri har sett før.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="https://astro.chatgenius.pro" target="_blank" class="px-8 py-4 bg-gradient-to-r from-purple-700 to-indigo-800 text-white font-bold rounded-lg hover:shadow-[0_0_20px_rgba(147,51,234,0.5)] transition-all text-center flex items-center justify-center">
+                        Åpne Appen / Logg Inn
+                    </a>
+                    
+                    <div class="flex items-center gap-2 px-4 text-sm text-yellow-500/80 font-mono">
+                        <span>★ Powered by Gemini AI</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative flex justify-center items-center h-[500px]">
+                <div class="absolute w-[400px] h-[400px] border border-purple-500/20 rounded-full animate-[spin_10s_linear_infinite]"></div>
+                <div class="absolute w-[300px] h-[300px] border border-yellow-500/10 rounded-full animate-[spin_15s_linear_reverse_infinite]"></div>
+                
+                <div class="floating-symbol relative z-10 w-64 h-64 md:w-80 md:h-80">
+                     <img src="symbol.gif" alt="Astro Mason Symbol" class="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(255,215,0,0.3)]">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-center">Magien i Systemet</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-panel p-8 rounded-xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-20 text-yellow-500 text-4xl">📖</div>
+                    <h3 class="text-xl font-bold mb-4 text-yellow-100">Livsboken</h3>
+                    <p class="text-purple-200/70 text-sm leading-relaxed">
+                        En omfattende, personlig bok generert fra ditt fødselskart. Dypdykk i sjel, skyggesider og talenter.
+                        Ikke korte notiser, men dyp analyse.
+                    </p>
+                </div>
+
+                <div class="glass-panel p-8 rounded-xl relative overflow-hidden group border-t-2 border-purple-500">
+                    <div class="absolute top-0 right-0 p-4 opacity-20 text-purple-500 text-4xl">🔮</div>
+                    <h3 class="text-xl font-bold mb-4 text-purple-100">3D Tarot & AI</h3>
+                    <p class="text-purple-200/70 text-sm leading-relaxed">
+                        Trekk kort i et virtuelt "Hellig Rom". AI-tolken analyserer hvordan kortene påvirker hverandre (elementær dynamikk) og forteller en historie.
+                    </p>
+                </div>
+
+                <div class="glass-panel p-8 rounded-xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-20 text-indigo-500 text-4xl">⏳</div>
+                    <h3 class="text-xl font-bold mb-4 text-indigo-100">Tidslinje</h3>
+                    <p class="text-purple-200/70 text-sm leading-relaxed">
+                        Forstå fortiden (Saturn Return, vendepunkt) og vær forberedt på fremtiden. Se transitter interaktivt på en tidslinje.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-8 glass-panel p-8 rounded-xl flex flex-col md:flex-row items-center justify-between bg-gradient-to-r from-purple-900/30 to-transparent">
+                <div>
+                    <h3 class="text-xl font-bold mb-2 text-white">Også inkludert: Numerologi</h3>
+                    <p class="text-gray-400 text-sm">Avslør tallenes hemmelige språk og finn din Livsvei med et tastetrykk.</p>
+                </div>
+                <div class="mt-4 md:mt-0 text-3xl font-mono tracking-widest text-yellow-500">
+                    11:11
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
