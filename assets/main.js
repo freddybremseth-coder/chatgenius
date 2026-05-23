@@ -22,7 +22,7 @@ filterButtons.forEach((button) => {
   });
 });
 
-document.querySelectorAll(".preview-button").forEach((button) => {
+document.querySelectorAll(".preview-button[data-preview]").forEach((button) => {
   button.addEventListener("click", () => {
     if (!dialog || !previewImage || !previewTitle) return;
 
@@ -42,4 +42,62 @@ dialog?.addEventListener("click", (event) => {
   if (event.target === dialog) {
     dialog.close();
   }
+});
+
+document.querySelector("#leadForm")?.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const form = event.currentTarget;
+  const data = new FormData(form);
+  const note = document.querySelector("#formNote");
+  const payload = {
+    name: data.get("name") || "",
+    email: data.get("email") || "",
+    company: data.get("company") || "",
+    message: data.get("message") || "",
+    interests: [data.get("interest") || "Ikke sikker ennå"]
+  };
+  const subject = encodeURIComponent("Ny prosjektbrief fra ChatGenius.pro");
+  const body = encodeURIComponent(
+    [
+      `Navn: ${payload.name}`,
+      `E-post: ${payload.email}`,
+      `Bedrift: ${payload.company}`,
+      `Interesse: ${payload.interests.join(", ")}`,
+      "",
+      "Behov:",
+      payload.message
+    ].join("\n")
+  );
+
+  if (note) {
+    note.textContent = "Sender briefen...";
+  }
+
+  fetch("/api/submit_lead.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Lead endpoint unavailable");
+      }
+
+      return response.json();
+    })
+    .then(() => {
+      form.reset();
+
+      if (note) {
+        note.textContent = "Takk! Vi tar kontakt med konkrete forslag.";
+      }
+    })
+    .catch(() => {
+      window.location.href = `mailto:post@chatgenius.pro?subject=${subject}&body=${body}`;
+
+      if (note) {
+        note.textContent = "E-postklienten din åpnes med prosjektbriefen ferdig utfylt.";
+      }
+    });
 });
