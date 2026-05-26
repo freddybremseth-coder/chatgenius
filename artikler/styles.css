@@ -26,7 +26,6 @@
 }
 
 .article-card {
-  overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 14px;
   background: var(--surface);
@@ -38,8 +37,6 @@
   box-shadow: 0 20px 50px rgba(37, 99, 235, 0.12);
 }
 
-.article-card img,
-.article-card .placeholder,
 .detail-cover {
   width: 100%;
   aspect-ratio: 16 / 10;
