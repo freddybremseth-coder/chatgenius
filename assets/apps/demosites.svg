@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">DemoSites nettsidepakker</title>
+  <desc id="desc">Lys demoillustrasjon for nettsidepakker med landingsside, kontaktskjema og prisplaner.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8fffd"/>
+      <stop offset="0.55" stop-color="#eefcf8"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+    <linearGradient id="teal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#10b981"/>
+      <stop offset="1" stop-color="#0f766e"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0f172a" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <circle cx="160" cy="120" r="3" fill="#99f6e4" opacity="0.9"/>
+  <circle cx="205" cy="120" r="3" fill="#99f6e4" opacity="0.75"/>
+  <circle cx="250" cy="120" r="3" fill="#99f6e4" opacity="0.55"/>
+  <circle cx="160" cy="165" r="3" fill="#99f6e4" opacity="0.75"/>
+  <circle cx="205" cy="165" r="3" fill="#99f6e4" opacity="0.55"/>
+  <circle cx="250" cy="165" r="3" fill="#99f6e4" opacity="0.35"/>
+  <path d="M0 650 C180 730 360 700 520 620 C680 540 840 545 1200 620 L1200 800 L0 800 Z" fill="#ccfbf1" opacity="0.45"/>
+  <g transform="translate(70 130)">
+    <rect x="0" y="0" width="86" height="86" rx="22" fill="url(#teal)"/>
+    <rect x="22" y="24" width="42" height="34" rx="5" fill="white" opacity="0.95"/>
+    <rect x="29" y="31" width="12" height="8" rx="2" fill="#0f766e"/>
+    <rect x="45" y="31" width="12" height="8" rx="2" fill="#0f766e"/>
+    <rect x="29" y="44" width="28" height="5" rx="2.5" fill="#0f766e" opacity="0.75"/>
+    <text x="110" y="42" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="900" fill="#0f172a">DemoSites</text>
+    <text x="112" y="82" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="800" fill="#0f9f8f">Nettsidepakker</text>
+    <text x="0" y="160" font-family="Inter, Arial, sans-serif" font-size="28" fill="#475569">Ferdige nettsider, klare for</text>
+    <text x="0" y="198" font-family="Inter, Arial, sans-serif" font-size="28" fill="#475569">lansering og vekst.</text>
+    <g transform="translate(0 280)">
+      <rect x="0" y="0" width="58" height="58" rx="16" fill="white" filter="url(#shadow)"/>
+      <path d="M29 14 L36 29 L29 44 L22 29 Z" fill="#0f9f8f"/>
+      <text x="82" y="22" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800" fill="#0f172a">Moderne design</text>
+      <text x="82" y="52" font-family="Inter, Arial, sans-serif" font-size="18" fill="#64748b">Bygget for konvertering</text>
+    </g>
+    <g transform="translate(0 365)">
+      <rect x="0" y="0" width="58" height="58" rx="16" fill="white" filter="url(#shadow)"/>
+      <path d="M34 10 L18 34 H30 L24 50 L42 25 H30 Z" fill="#0f9f8f"/>
+      <text x="82" y="22" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800" fill="#0f172a">Rask og responsiv</text>
+      <text x="82" y="52" font-family="Inter, Arial, sans-serif" font-size="18" fill="#64748b">Perfekt på alle enheter</text>
+    </g>
+  </g>
+  <g transform="translate(475 70) rotate(-3 330 330)" filter="url(#shadow)">
+    <rect x="0" y="0" width="640" height="610" rx="24" fill="white" stroke="#dbe7ee"/>
+    <rect x="0" y="0" width="640" height="56" rx="24" fill="#f8fafc"/>
+    <circle cx="32" cy="28" r="8" fill="#ef4444"/><circle cx="58" cy="28" r="8" fill="#f59e0b"/><circle cx="84" cy="28" r="8" fill="#22c55e"/>
+    <text x="460" y="34" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#0f172a">Hjem</text>
+    <text x="510" y="34" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#0f172a">Kontakt</text>
+    <rect x="565" y="16" width="54" height="24" rx="8" fill="url(#teal)"/>
+    <text x="577" y="32" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="800" fill="white">Start</text>
+    <path d="M0 330 C120 390 250 360 380 305 C495 256 570 275 640 320 V420 H0 Z" fill="#ccfbf1" opacity="0.55"/>
+    <text x="58" y="165" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="900" fill="#0f172a">Profesjonelle</text>
+    <text x="58" y="205" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="900" fill="#0f172a">nettsider som skaper</text>
+    <text x="58" y="246" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="900" fill="#0f9f8f">resultater</text>
+    <rect x="58" y="280" width="94" height="32" rx="10" fill="url(#teal)"/>
+    <text x="77" y="301" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="white">Se pakkene</text>
+    <rect x="430" y="116" width="160" height="190" rx="18" fill="white" stroke="#e2e8f0"/>
+    <text x="454" y="146" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="900" fill="#0f172a">Få tilbud</text>
+    <rect x="454" y="165" width="112" height="18" rx="6" fill="#f8fafc" stroke="#e2e8f0"/>
+    <rect x="454" y="193" width="112" height="18" rx="6" fill="#f8fafc" stroke="#e2e8f0"/>
+    <rect x="454" y="221" width="112" height="44" rx="6" fill="#f8fafc" stroke="#e2e8f0"/>
+    <rect x="454" y="276" width="112" height="22" rx="7" fill="url(#teal)"/>
+    <text x="485" y="291" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="800" fill="white">Send</text>
+    <text x="250" y="420" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="900" fill="#0f172a">Våre nettsidepakker</text>
+    <g transform="translate(72 450)">
+      <rect x="0" y="0" width="145" height="118" rx="14" fill="white" stroke="#e2e8f0"/>
+      <text x="72" y="32" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="900" fill="#0f172a">Basis</text>
+      <text x="72" y="66" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="900" fill="#0f172a">4 900</text>
+      <rect x="30" y="88" width="85" height="18" rx="7" fill="none" stroke="#0f9f8f"/>
+    </g>
+    <g transform="translate(247 438)">
+      <rect x="0" y="0" width="145" height="130" rx="14" fill="white" stroke="#0f9f8f"/>
+      <rect x="0" y="0" width="145" height="22" rx="12" fill="url(#teal)"/>
+      <text x="72" y="15" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="900" fill="white">Mest valgt</text>
+      <text x="72" y="48" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="900" fill="#0f9f8f">Standard</text>
+      <text x="72" y="82" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="900" fill="#0f172a">7 900</text>
+      <rect x="30" y="102" width="85" height="18" rx="7" fill="url(#teal)"/>
+    </g>
+    <g transform="translate(422 450)">
+      <rect x="0" y="0" width="145" height="118" rx="14" fill="white" stroke="#e2e8f0"/>
+      <text x="72" y="32" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="900" fill="#0f172a">Premium</text>
+      <text x="72" y="66" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="900" fill="#0f172a">14 900</text>
+      <rect x="30" y="88" width="85" height="18" rx="7" fill="none" stroke="#0f9f8f"/>
+    </g>
+  </g>
+</svg>
