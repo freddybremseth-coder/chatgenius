@@ -63,8 +63,9 @@
         <p class="eyebrow">Prøveside fra ChatGenius.pro</p>
         <h1 id="landing-title">Se den nye nettsiden din — før du betaler en krone.</h1>
         <p>
-          Skriv inn bedriften din under, så bygger vi en ekte prøveside på minutter: dine farger, din logo,
-          tekst skrevet for din bransje og profesjonelle bilder. Siden er live i 4 dager — liker du den, beholder du den.
+          Skriv inn nettadressen din, så bygger AI-en en ekte prøveside på minutter: dine farger, din logo,
+          tekst for din bransje og profesjonelle bilder. Du sendes rett til den ferdige siden — live i 4 dager.
+          Liker du den, beholder du den. Hvis ikke, forsvinner den av seg selv.
         </p>
         <div class="hero-actions">
           <a class="button button-primary" href="#start">Lag prøvesiden min nå</a>
@@ -95,37 +96,32 @@
     <section id="start" class="sales-section" aria-labelledby="start-title">
       <div class="section-heading">
         <p class="eyebrow">Kom i gang</p>
-        <h2 id="start-title">Lag prøvesiden din nå</h2>
-        <p>Fyll inn det du har — har du en nettside fra før henter vi logo, bilder og innhold derfra automatisk.</p>
+        <h2 id="start-title">Nettadresse + e-post. Det er alt.</h2>
+        <p>Ikke noe skjema, ingen møter. AI-en henter logo, farger og innhold selv — og du sendes rett til den ferdige prøvesiden.</p>
       </div>
 
       <div class="order-card" id="order-card">
         <form id="order-form" novalidate>
           <div class="order-grid">
-            <label>Bedriftsnavn *
-              <input name="company_name" required autocomplete="organization" placeholder="F.eks. Larvik Bilpleie AS">
+            <label>Nettadressen din — eller bedriftsnavnet hvis du ikke har nettside *
+              <input name="site_or_name" required placeholder="F.eks. www.bedriften.no eller Larvik Bilpleie AS">
             </label>
-            <label>Din e-post *
+            <label>Din e-post * <span style="font-weight:400;color:var(--muted)">(hit sender vi lenken til siden din)</span>
               <input name="customer_email" type="email" required autocomplete="email" placeholder="deg@bedriften.no">
             </label>
-            <label>Telefon
-              <input name="customer_phone" type="tel" autocomplete="tel" placeholder="+47 …">
-            </label>
-            <label>Eksisterende nettside
-              <input name="website_url" type="url" inputmode="url" placeholder="https://www.bedriften.no">
-            </label>
-            <label>Bransje
-              <input name="industry" placeholder="F.eks. bilverksted, frisør, restaurant">
-            </label>
-            <label>Ønsket pakke
-              <select name="package_id">
-                <option value="standard" selected>Standard – Lead-Maskinen</option>
-                <option value="basis">Basis – Digital Tilstedeværelse</option>
-                <option value="premium">Premium – Digital Resepsjonist</option>
-              </select>
-            </label>
           </div>
-          <button class="order-submit" type="submit" id="order-submit">Bygg prøvesiden min →</button>
+          <details style="margin-top:12px">
+            <summary style="cursor:pointer;font-size:0.88rem;color:var(--muted)">Valgfritt: telefon og bransje</summary>
+            <div class="order-grid" style="margin-top:12px">
+              <label>Telefon
+                <input name="customer_phone" type="tel" autocomplete="tel" placeholder="+47 …">
+              </label>
+              <label>Bransje
+                <input name="industry" placeholder="F.eks. bilverksted, frisør, restaurant">
+              </label>
+            </div>
+          </details>
+          <button class="order-submit" type="submit" id="order-submit">Vis meg den nye nettsiden min →</button>
           <div class="order-error" id="order-error"></div>
         </form>
 
@@ -137,9 +133,9 @@
         <div class="order-success" id="order-success">
           <div class="big-check">🎉</div>
           <h3>Prøvesiden din er klar!</h3>
-          <p>Den er live nå og aktiv i 4 dager. Åpne den, del den med kolleger — og bestill hvis du vil beholde den.</p>
-          <a class="preview-link" id="order-preview-link" href="#" target="_blank" rel="noopener">Åpne prøvesiden min →</a>
-          <p class="small">Vi har også sendt lenken til e-posten din sammen med bestillingslenke.</p>
+          <p>Sender deg dit nå…</p>
+          <a class="preview-link" id="order-preview-link" href="#" rel="noopener">Åpne prøvesiden min →</a>
+          <p class="small">Live i 4 dager. Bestill fra siden hvis du vil beholde den — ellers forsvinner den av seg selv.</p>
         </div>
       </div>
     </section>
@@ -266,13 +262,26 @@
       var successBox = document.getElementById("order-success");
       var previewLink = document.getElementById("order-preview-link");
 
-      // Preselect package from pricing cards.
+      // Pricing cards scroll to the start form; remember the chosen package.
+      var chosenPackage = "standard";
       document.querySelectorAll("[data-package]").forEach(function (link) {
         link.addEventListener("click", function () {
-          var select = form.querySelector("select[name=package_id]");
-          if (select) select.value = link.getAttribute("data-package");
+          chosenPackage = link.getAttribute("data-package") || "standard";
         });
       });
+
+      // One field for both: URL when it looks like one, company name otherwise.
+      function parseSiteOrName(value) {
+        var input = String(value || "").trim();
+        var looksLikeUrl = /^(https?:\/\/)?[a-z0-9æøå-]+(\.[a-z0-9æøå-]+)+([\/?#].*)?$/i.test(input) && input.indexOf(" ") < 0;
+        if (!looksLikeUrl) return { companyName: input, websiteUrl: null };
+        var url = /^https?:\/\//i.test(input) ? input : "https://" + input;
+        var host = "";
+        try { host = new URL(url).hostname.replace(/^www\./i, ""); } catch (e) { return { companyName: input, websiteUrl: null }; }
+        var base = host.split(".")[0].replace(/[-_]+/g, " ").trim();
+        var companyName = base.replace(/\b[a-zæøå]/g, function (ch) { return ch.toUpperCase(); }) || host;
+        return { companyName: companyName, websiteUrl: url };
+      }
 
       var steps = [
         "Leser nettsiden din…",
@@ -293,10 +302,10 @@
         errorBox.style.display = "none";
 
         var data = new FormData(form);
-        var companyName = String(data.get("company_name") || "").trim();
+        var parsed = parseSiteOrName(data.get("site_or_name"));
         var email = String(data.get("customer_email") || "").trim();
-        if (!companyName || !email || email.indexOf("@") < 0) {
-          showError("Fyll inn bedriftsnavn og en gyldig e-postadresse.");
+        if (!parsed.companyName || !email || email.indexOf("@") < 0) {
+          showError("Fyll inn nettadresse eller bedriftsnavn, og en gyldig e-postadresse.");
           return;
         }
 
@@ -318,12 +327,12 @@
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            company_name: companyName,
+            company_name: parsed.companyName,
             customer_email: email,
             customer_phone: String(data.get("customer_phone") || "").trim() || undefined,
-            website_url: String(data.get("website_url") || "").trim() || undefined,
+            website_url: parsed.websiteUrl || undefined,
             industry: String(data.get("industry") || "").trim() || undefined,
-            package_id: String(data.get("package_id") || "standard")
+            package_id: chosenPackage
           })
         })
           .then(function (res) { return res.json().then(function (body) { return { ok: res.ok, body: body }; }); })
@@ -333,14 +342,15 @@
               throw new Error(result.body && result.body.error ? result.body.error : "Noe gikk galt. Prøv igjen.");
             }
             progressBar.style.width = "100%";
-            progressText.textContent = "Ferdig!";
+            progressText.textContent = "Ferdig! Sender deg til den nye siden din…";
+            form.style.display = "none";
+            previewLink.href = result.body.previewUrl;
+            successBox.style.display = "block";
+            // Straight to the finished trial site — countdown, order button
+            // and the working contact form live there.
             setTimeout(function () {
-              form.style.display = "none";
-              progress.style.display = "none";
-              previewLink.href = result.body.previewUrl;
-              successBox.style.display = "block";
-              successBox.scrollIntoView({ behavior: "smooth", block: "center" });
-            }, 600);
+              window.location.href = result.body.previewUrl;
+            }, 1200);
           })
           .catch(function (err) {
             clearInterval(ticker);
