@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Selgerportal | ChatGenius.pro</title>
+  <meta name="description" content="Selgerportal for ChatGenius Prøveside.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="../logo.jpeg">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <style>
+    .portal-wrap { max-width: 1040px; margin: 0 auto; padding: 40px 20px 80px; }
+    .portal-card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); padding: 28px; }
+    .login-card { max-width: 420px; margin: 8vh auto 0; }
+    .login-card h1 { margin: 0 0 6px; font-size: 1.6rem; }
+    .login-card p { margin: 0 0 20px; color: var(--muted); font-size: 0.95rem; }
+    .portal-field { display: block; margin-bottom: 14px; font-size: 0.85rem; font-weight: 600; color: var(--ink-soft); }
+    .portal-field input {
+      margin-top: 6px; width: 100%; height: 46px; border: 1px solid var(--line); border-radius: 12px;
+      padding: 0 14px; font: inherit; background: var(--paper); color: var(--ink); box-sizing: border-box;
+    }
+    .portal-field input:focus { outline: 2px solid var(--teal); border-color: var(--teal); }
+    .portal-btn { width: 100%; height: 50px; border: 0; border-radius: 12px; background: var(--teal); color: #fff; font: inherit; font-weight: 700; cursor: pointer; }
+    .portal-btn[disabled] { opacity: 0.7; cursor: progress; }
+    .portal-error { display: none; margin-top: 12px; padding: 11px 13px; border-radius: 12px; background: #fdeceb; color: #b3261e; font-size: 0.9rem; }
+    .portal-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+    .portal-top h1 { margin: 0; font-size: 1.5rem; }
+    .portal-top .who { color: var(--muted); font-size: 0.9rem; }
+    .portal-tools { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+    .portal-tools input, .portal-tools select {
+      height: 42px; border: 1px solid var(--line); border-radius: 12px; padding: 0 12px; font: inherit;
+      background: var(--surface); color: var(--ink);
+    }
+    .portal-tools input { flex: 1; min-width: 200px; }
+    .demo-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 16px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); margin-bottom: 10px; }
+    .demo-row .info { min-width: 0; }
+    .demo-row .name { font-weight: 700; }
+    .demo-row .meta { color: var(--muted); font-size: 0.85rem; margin-top: 3px; }
+    .badge { display: inline-block; padding: 3px 10px; border-radius: 99px; font-size: 0.72rem; font-weight: 700; margin-left: 8px; vertical-align: 2px; }
+    .badge.live { background: #e3f6ef; color: #067a5b; }
+    .badge.expired { background: #f2f3f6; color: #68707d; }
+    .badge.claimed { background: #e5edff; color: #2451c7; }
+    .demo-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+    .demo-actions a, .demo-actions button {
+      display: inline-flex; align-items: center; padding: 9px 14px; border-radius: 11px; font: inherit; font-size: 0.85rem;
+      font-weight: 600; text-decoration: none; cursor: pointer; border: 1px solid var(--line); background: var(--surface-strong); color: var(--ink);
+    }
+    .demo-actions a.primary { background: var(--teal); border-color: var(--teal); color: #fff; }
+    .demo-actions a.present { background: var(--amber); border-color: var(--amber); color: #15151a; }
+    .logout-btn { border: 1px solid var(--line); background: var(--surface); border-radius: 11px; padding: 9px 14px; font: inherit; font-size: 0.85rem; cursor: pointer; }
+    .empty { padding: 30px; text-align: center; color: var(--muted); border: 1px dashed var(--line); border-radius: 16px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="ChatGenius.pro hjem">
+      <img src="../logo.jpeg" alt="" width="40" height="40">
+      <span>ChatGenius.pro</span>
+    </a>
+    <nav class="site-nav" aria-label="Hovedmeny">
+      <a href="/demosites/">Prøveside</a>
+      <a href="/selger/">Selgerportal</a>
+    </nav>
+  </header>
+
+  <main class="portal-wrap">
+    <!-- Login -->
+    <div id="login-view" class="portal-card login-card" hidden>
+      <h1>Selgerportal</h1>
+      <p>Logg inn med kontoen du har fått av administrator.</p>
+      <form id="login-form">
+        <label class="portal-field">E-post
+          <input name="email" type="email" required autocomplete="username">
+        </label>
+        <label class="portal-field">Passord
+          <input name="password" type="password" required autocomplete="current-password">
+        </label>
+        <button class="portal-btn" id="login-btn" type="submit">Logg inn</button>
+        <div class="portal-error" id="login-error"></div>
+      </form>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dash-view" hidden>
+      <div class="portal-top">
+        <div>
+          <h1>Prøvesider</h1>
+          <div class="who" id="who"></div>
+        </div>
+        <button class="logout-btn" id="logout-btn" type="button">Logg ut</button>
+      </div>
+
+      <div class="portal-tools">
+        <input id="search" type="search" placeholder="Søk på bedrift, e-post eller ordrenummer…">
+        <select id="status-filter">
+          <option value="all">Alle</option>
+          <option value="live" selected>Aktive prøvesider</option>
+          <option value="claimed">Bestilte</option>
+          <option value="expired">Utløpte</option>
+        </select>
+      </div>
+
+      <div id="list"></div>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      var API_BASE = "https://realtyflow.chatgenius.pro";
+      var TOKEN_KEY = "cg_portal_token";
+      var loginView = document.getElementById("login-view");
+      var dashView = document.getElementById("dash-view");
+      var loginForm = document.getElementById("login-form");
+      var loginBtn = document.getElementById("login-btn");
+      var loginError = document.getElementById("login-error");
+      var who = document.getElementById("who");
+      var list = document.getElementById("list");
+      var searchInput = document.getElementById("search");
+      var statusFilter = document.getElementById("status-filter");
+      var allOrders = [];
+
+      function token() { return localStorage.getItem(TOKEN_KEY) || ""; }
+
+      function showLogin() {
+        loginView.hidden = false;
+        dashView.hidden = true;
+      }
+
+      function esc(value) {
+        var div = document.createElement("div");
+        div.textContent = String(value == null ? "" : value);
+        return div.innerHTML;
+      }
+
+      function stateOf(order) {
+        if (order.claimed_at || order.status === "claimed" || order.billing_status === "paid") return "claimed";
+        if (order.status === "expired") return "expired";
+        if (order.expires_at && new Date(order.expires_at).getTime() < Date.now()) return "expired";
+        return "live";
+      }
+
+      function fmtDate(value) {
+        if (!value) return "–";
+        try { return new Intl.DateTimeFormat("nb-NO", { dateStyle: "medium" }).format(new Date(value)); } catch (e) { return "–"; }
+      }
+
+      function render() {
+        var q = (searchInput.value || "").toLowerCase();
+        var filter = statusFilter.value;
+        var rows = allOrders.filter(function (order) {
+          var state = stateOf(order);
+          if (filter !== "all" && state !== filter) return false;
+          if (!q) return true;
+          return [order.company_name, order.customer_email, order.customer_name, order.order_number]
+            .some(function (field) { return String(field || "").toLowerCase().indexOf(q) >= 0; });
+        });
+
+        if (!rows.length) {
+          list.innerHTML = '<div class="empty">Ingen prøvesider matcher.</div>';
+          return;
+        }
+
+        list.innerHTML = rows.map(function (order) {
+          var state = stateOf(order);
+          var badge = state === "claimed"
+            ? '<span class="badge claimed">Bestilt</span>'
+            : state === "expired"
+              ? '<span class="badge expired">Utløpt</span>'
+              : '<span class="badge live">Live til ' + esc(fmtDate(order.expires_at)) + "</span>";
+          var contact = [order.customer_name, order.customer_email, order.customer_phone].filter(Boolean).map(esc).join(" · ");
+          var actions = "";
+          if (order.present_url) actions += '<a class="present" href="' + esc(order.present_url) + '" target="_blank" rel="noopener">Presenter</a>';
+          if (order.preview_url) actions += '<a class="primary" href="' + esc(order.preview_url) + '" target="_blank" rel="noopener">Se prøveside</a>';
+          if (order.claim_url) actions += '<button type="button" data-copy="' + esc(order.claim_url) + '">Kopier bestillingslenke</button>';
+          if (order.customer_phone) actions += '<a href="tel:' + esc(order.customer_phone) + '">Ring kunde</a>';
+          return (
+            '<div class="demo-row">' +
+              '<div class="info">' +
+                '<div class="name">' + esc(order.company_name || "Ukjent bedrift") + badge + "</div>" +
+                '<div class="meta">' + contact + "</div>" +
+                '<div class="meta">' + esc(order.order_number || "") + " · Opprettet " + esc(fmtDate(order.created_at)) + "</div>" +
+              "</div>" +
+              '<div class="demo-actions">' + actions + "</div>" +
+            "</div>"
+          );
+        }).join("");
+
+        list.querySelectorAll("[data-copy]").forEach(function (button) {
+          button.addEventListener("click", function () {
+            navigator.clipboard.writeText(button.getAttribute("data-copy")).then(function () {
+              var original = button.textContent;
+              button.textContent = "Kopiert!";
+              setTimeout(function () { button.textContent = original; }, 1600);
+            });
+          });
+        });
+      }
+
+      function loadOrders() {
+        return fetch(API_BASE + "/api/saas/demosites/portal/orders", {
+          headers: { Authorization: "Bearer " + token() }
+        })
+          .then(function (res) { return res.json().then(function (body) { return { ok: res.ok, status: res.status, body: body }; }); })
+          .then(function (result) {
+            if (result.status === 401) {
+              localStorage.removeItem(TOKEN_KEY);
+              showLogin();
+              return;
+            }
+            if (!result.ok) throw new Error(result.body && result.body.error ? result.body.error : "Kunne ikke hente prøvesider.");
+            allOrders = result.body.orders || [];
+            if (result.body.seller) who.textContent = "Innlogget som " + result.body.seller.name + " (" + result.body.seller.email + ")";
+            loginView.hidden = true;
+            dashView.hidden = false;
+            render();
+          })
+          .catch(function (err) {
+            list.innerHTML = '<div class="empty">' + esc(err && err.message ? err.message : "Noe gikk galt.") + "</div>";
+            loginView.hidden = true;
+            dashView.hidden = false;
+          });
+      }
+
+      loginForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        loginError.style.display = "none";
+        loginBtn.disabled = true;
+        loginBtn.textContent = "Logger inn…";
+        var data = new FormData(loginForm);
+        fetch(API_BASE + "/api/saas/demosites/portal/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: data.get("email"), password: data.get("password") })
+        })
+          .then(function (res) { return res.json().then(function (body) { return { ok: res.ok, body: body }; }); })
+          .then(function (result) {
+            if (!result.ok || !result.body.token) {
+              throw new Error(result.body && result.body.error ? result.body.error : "Innlogging feilet.");
+            }
+            localStorage.setItem(TOKEN_KEY, result.body.token);
+            return loadOrders();
+          })
+          .catch(function (err) {
+            loginError.textContent = err && err.message ? err.message : "Innlogging feilet.";
+            loginError.style.display = "block";
+          })
+          .then(function () {
+            loginBtn.disabled = false;
+            loginBtn.textContent = "Logg inn";
+          });
+      });
+
+      document.getElementById("logout-btn").addEventListener("click", function () {
+        localStorage.removeItem(TOKEN_KEY);
+        allOrders = [];
+        showLogin();
+      });
+
+      searchInput.addEventListener("input", render);
+      statusFilter.addEventListener("change", render);
+
+      if (token()) {
+        loadOrders();
+      } else {
+        showLogin();
+      }
+    })();
+  </script>
+</body>
+</html>
