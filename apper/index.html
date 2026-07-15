@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Apper fra ChatGenius.pro — abonner i dag</title>
+  <meta name="description" content="Astro, Family, Spanish og flere apper fra ChatGenius.pro. Abonner med kort — kom i gang på minutter.">
+  <meta name="theme-color" content="#15151a">
+  <meta property="og:title" content="Apper fra ChatGenius.pro">
+  <meta property="og:description" content="AI-drevne apper du kan abonnere på: Astro, Family, Spanish og flere.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="../logo.jpeg">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <style>
+    .apps-wrap { max-width: 1120px; margin: 0 auto; padding: 30px 20px 90px; }
+    .apps-grid { display: grid; gap: 18px; margin-top: 26px; }
+    @media (min-width: 760px) { .apps-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1060px) { .apps-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    .sub-card { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow); }
+    .sub-card img { width: 100%; height: 168px; object-fit: cover; background: var(--surface-strong); }
+    .sub-body { display: flex; flex-direction: column; flex: 1; padding: 18px; }
+    .sub-body h3 { margin: 0 0 6px; font-size: 1.15rem; }
+    .sub-body p.desc { margin: 0 0 14px; color: var(--muted); font-size: 0.92rem; flex: 1; }
+    .sub-price { font-weight: 800; font-size: 1.25rem; }
+    .sub-price span { font-weight: 500; font-size: 0.8rem; color: var(--muted); }
+    .sub-actions { display: flex; gap: 8px; margin-top: 12px; }
+    .sub-btn { flex: 1; height: 46px; border: 0; border-radius: 12px; background: var(--teal); color: #fff; font: inherit; font-weight: 700; cursor: pointer; }
+    .sub-btn[disabled] { opacity: 0.7; cursor: progress; }
+    .sub-btn.secondary { background: var(--surface-strong); color: var(--ink); border: 1px solid var(--line); }
+    .sub-tag { display: inline-block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; background: #eefaf7; color: #067a5b; border-radius: 99px; padding: 3px 10px; margin-bottom: 10px; width: fit-content; }
+    .sub-tag.soon { background: var(--surface-strong); color: var(--muted); }
+    .apps-note { margin-top: 22px; color: var(--muted); font-size: 0.88rem; }
+    .apps-loading { padding: 40px; text-align: center; color: var(--muted); }
+    .subscribed-banner { display: none; margin: 20px 0; padding: 16px 18px; border-radius: 14px; background: #e3f6ef; color: #067a5b; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="ChatGenius.pro hjem">
+      <img src="../logo.jpeg" alt="" width="40" height="40">
+      <span>ChatGenius.pro</span>
+    </a>
+    <nav class="site-nav" aria-label="Hovedmeny">
+      <a href="/apper/">Apper</a>
+      <a href="/demosites/">Prøveside</a>
+      <a href="/#contact">Kontakt</a>
+    </nav>
+    <a class="header-action" href="#apps">Se appene</a>
+  </header>
+
+  <main class="apps-wrap" id="apps">
+    <p class="eyebrow">Apper fra ChatGenius.pro</p>
+    <h1 style="margin:6px 0 10px">Ikke demoer — ferdige apper du abonnerer på.</h1>
+    <p style="max-width:640px;color:var(--muted)">
+      Astro, Family, Spanish og flere: AI-drevne apper som er live og i daglig bruk.
+      Abonner med kort, avslutt når du vil — ingen bindingstid utover måneden.
+    </p>
+
+    <div class="subscribed-banner" id="subscribed-banner">🎉 Abonnementet er aktivt! Sjekk e-posten din for kvittering og innlogging.</div>
+
+    <div class="apps-grid" id="apps-grid">
+      <div class="apps-loading">Henter apper og priser…</div>
+    </div>
+
+    <p class="apps-note">
+      Alle priser inkluderer drift, oppdateringer og support. Betaling håndteres sikkert av Stripe.
+      Spørsmål? <a href="mailto:post@chatgenius.pro">post@chatgenius.pro</a>
+    </p>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 ChatGenius.pro</p>
+    <a href="#apps">Til toppen</a>
+  </footer>
+
+  <script>
+    (function () {
+      var API_BASE = "https://realtyflow.chatgenius.pro";
+      var grid = document.getElementById("apps-grid");
+
+      // Fallback marketing copy + images when the database rows are sparse.
+      var KNOWN = {
+        astro:   { desc: "Personlig AI-astrologi: daglige innsikter, dybdeanalyser og varsler — alltid oppdatert for deg.", img: "../assets/apps/astro.jpg" },
+        family:  { desc: "Hele familiens kommandosentral: oppgaver, rutiner, handlelister og kalender som alle faktisk bruker.", img: "../assets/apps/family.jpg" },
+        spanish: { desc: "Lær spansk med AI-mikroøvelser som tilpasser seg deg — 5 minutter om dagen er nok.", img: "../assets/apps/spanish.jpg" },
+        vm2026:  { desc: "Fotball-VM 2026 i lomma: kampoversikt, live-oppdateringer og tabeller.", img: "../assets/apps/vm2026.jpg" },
+        olivia:  { desc: "Olivia AI — din personlige assistent for hverdagen.", img: "../assets/apps/olivia.jpg" }
+      };
+
+      function esc(v) { var d = document.createElement("div"); d.textContent = String(v == null ? "" : v); return d.innerHTML; }
+
+      function fmtPrice(amount, currency) {
+        var cur = String(currency || "NOK").toUpperCase();
+        var symbol = cur === "EUR" ? "€" : cur === "USD" ? "$" : "kr";
+        return cur === "NOK" ? Math.round(amount) + " " + symbol : symbol + amount;
+      }
+
+      function render(apps) {
+        var cards = apps.map(function (app) {
+          var known = KNOWN[app.slug] || {};
+          var img = app.screenshot_url || known.img || "../logo.jpeg";
+          var desc = app.description || known.desc || "AI-drevet app fra ChatGenius.pro.";
+          var priceHtml = app.subscribable
+            ? '<div class="sub-price">' + esc(fmtPrice(app.price_monthly, app.currency)) + '<span>/mnd' + (app.price_yearly ? " · eller " + esc(fmtPrice(app.price_yearly, app.currency)) + "/år" : "") + "</span></div>"
+            : '<div class="sub-price"><span>Lanseres snart</span></div>';
+          var actions = app.subscribable
+            ? '<div class="sub-actions"><button class="sub-btn" data-app="' + esc(app.slug) + '" data-plan="monthly">Abonner</button>' +
+              (app.price_yearly ? '<button class="sub-btn secondary" data-app="' + esc(app.slug) + '" data-plan="yearly">Årspris</button>' : "") + "</div>"
+            : '<div class="sub-actions"><a class="sub-btn secondary" style="display:flex;align-items:center;justify-content:center;text-decoration:none" href="mailto:post@chatgenius.pro?subject=' + encodeURIComponent(app.name) + '">Gi meg beskjed</a></div>';
+          var openLink = app.live_url ? '<a href="' + esc(app.live_url) + '" target="_blank" rel="noopener" style="font-size:0.82rem">Se appen live →</a>' : "";
+          return (
+            '<article class="sub-card">' +
+              '<img src="' + esc(img) + '" alt="' + esc(app.name) + '" loading="lazy">' +
+              '<div class="sub-body">' +
+                '<span class="sub-tag' + (app.subscribable ? "" : " soon") + '">' + (app.subscribable ? "Abonnér i dag" : "Kommer") + "</span>" +
+                "<h3>" + esc(app.name) + "</h3>" +
+                '<p class="desc">' + esc(desc) + "</p>" +
+                priceHtml + actions +
+                '<div style="margin-top:8px">' + openLink + "</div>" +
+              "</div>" +
+            "</article>"
+          );
+        }).join("");
+        grid.innerHTML = cards || '<div class="apps-loading">Ingen apper tilgjengelig akkurat nå.</div>';
+
+        grid.querySelectorAll("button[data-app]").forEach(function (button) {
+          button.addEventListener("click", function () {
+            button.disabled = true;
+            button.textContent = "Åpner betaling…";
+            fetch(API_BASE + "/api/saas/subscribe", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ app_slug: button.getAttribute("data-app"), plan: button.getAttribute("data-plan") })
+            })
+              .then(function (res) { return res.json().then(function (body) { return { ok: res.ok, body: body }; }); })
+              .then(function (result) {
+                if (!result.ok || !result.body.url) throw new Error(result.body.error || "Kunne ikke starte betalingen.");
+                window.location.href = result.body.url;
+              })
+              .catch(function (err) {
+                button.disabled = false;
+                button.textContent = "Abonner";
+                alert(err && err.message ? err.message : "Kunne ikke starte betalingen.");
+              });
+          });
+        });
+      }
+
+      if (new URLSearchParams(location.search).get("subscribed")) {
+        document.getElementById("subscribed-banner").style.display = "block";
+      }
+
+      fetch(API_BASE + "/api/saas/subscribe")
+        .then(function (res) { return res.json(); })
+        .then(function (data) { render(data.apps || []); })
+        .catch(function () { grid.innerHTML = '<div class="apps-loading">Kunne ikke hente appene. Prøv igjen senere.</div>'; });
+    })();
+  </script>
+</body>
+</html>
