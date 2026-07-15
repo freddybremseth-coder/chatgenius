@@ -38,6 +38,17 @@
     .order-success p.small { color: var(--muted); font-size: 0.9rem; margin-top: 12px; }
     .trust-row { display: flex; flex-wrap: wrap; gap: 14px 26px; margin-top: 18px; font-size: 0.88rem; color: var(--muted); }
     .trust-row span::before { content: "✓ "; color: var(--teal); font-weight: 700; }
+    .tier-grid { display: grid; gap: 10px; }
+    @media (min-width: 720px) { .tier-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    .tier-card { display: block; cursor: pointer; border: 2px solid var(--line); border-radius: 14px; padding: 14px; font-size: 0.85rem; background: var(--paper); position: relative; }
+    .tier-card:has(input:checked) { border-color: var(--teal); background: #eefaf7; }
+    .tier-card input { position: absolute; opacity: 0; }
+    .tier-card strong { display: block; font-size: 0.95rem; }
+    .tier-card strong em { font-style: normal; font-size: 0.68rem; background: var(--teal); color: #fff; border-radius: 99px; padding: 2px 8px; margin-left: 6px; vertical-align: 2px; }
+    .tier-card .tier-price { display: block; color: var(--muted); font-size: 0.78rem; margin: 3px 0 8px; }
+    .tier-card ul { margin: 0; padding-left: 16px; color: var(--ink-soft); }
+    .tier-card ul li { margin-bottom: 2px; }
+    .tier-card.is-featured { border-color: color-mix(in srgb, var(--teal) 45%, var(--line)); }
     .seller-link { color: inherit; opacity: 0.7; text-decoration: none; }
     .seller-link:hover { opacity: 1; text-decoration: underline; }
   </style>
@@ -110,6 +121,43 @@
               <input name="customer_email" type="email" required autocomplete="email" placeholder="deg@bedriften.no">
             </label>
           </div>
+          <div style="margin-top:16px">
+            <p style="margin:0 0 8px;font-size:0.85rem;font-weight:600;color:var(--ink-soft)">Velg nivå — bedre abonnement gir en mer profesjonell side med flere funksjoner</p>
+            <div class="tier-grid">
+              <label class="tier-card">
+                <input type="radio" name="package_id" value="basis">
+                <strong>Basis</strong>
+                <span class="tier-price">4 900 kr + 490/mnd</span>
+                <ul>
+                  <li>Ren, proff one-pager</li>
+                  <li>Tjenester og kontaktskjema</li>
+                </ul>
+              </label>
+              <label class="tier-card is-featured">
+                <input type="radio" name="package_id" value="standard" checked>
+                <strong>Standard <em>Mest valgt</em></strong>
+                <span class="tier-price">7 900 kr + 990/mnd</span>
+                <ul>
+                  <li>Alt i Basis</li>
+                  <li>+ AI-resepsjonist som svarer kunder</li>
+                  <li>+ tilbud, priser og FAQ</li>
+                </ul>
+              </label>
+              <label class="tier-card">
+                <input type="radio" name="package_id" value="premium">
+                <strong>Premium</strong>
+                <span class="tier-price">14 900 kr + 1 990/mnd</span>
+                <ul>
+                  <li>Alt i Standard</li>
+                  <li>+ ansattliste med bilder og kontakt</li>
+                  <li>+ prioritert support</li>
+                </ul>
+              </label>
+            </div>
+          </div>
+          <label style="display:block;margin-top:14px;font-size:0.85rem;font-weight:600;color:var(--ink-soft)">Fortell om bedriften din <span style="font-weight:400;color:var(--muted)">(valgfritt, men gir en mye bedre side)</span>
+            <textarea name="business_description" rows="3" placeholder="Hva er viktigst for dere? Hvilke produkter, tjenester og priser vil dere fronte? F.eks. 'Vi fokuserer på dekkskift og hjulhotell, fastpris 899 kr, rask time samme uke.'" style="margin-top:6px;width:100%;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;background:var(--paper);color:var(--ink);box-sizing:border-box;resize:vertical"></textarea>
+          </label>
           <details style="margin-top:12px">
             <summary style="cursor:pointer;font-size:0.88rem;color:var(--muted)">Valgfritt: telefon og bransje</summary>
             <div class="order-grid" style="margin-top:12px">
@@ -274,6 +322,8 @@
       document.querySelectorAll("[data-package]").forEach(function (link) {
         link.addEventListener("click", function () {
           chosenPackage = link.getAttribute("data-package") || "standard";
+          var radio = form.querySelector('input[name=package_id][value="' + chosenPackage + '"]');
+          if (radio) radio.checked = true;
         });
       });
 
@@ -339,7 +389,8 @@
             customer_phone: String(data.get("customer_phone") || "").trim() || undefined,
             website_url: parsed.websiteUrl || undefined,
             industry: String(data.get("industry") || "").trim() || undefined,
-            package_id: chosenPackage
+            notes: String(data.get("business_description") || "").trim() || undefined,
+            package_id: String(data.get("package_id") || chosenPackage || "standard")
           })
         })
           .then(function (res) { return res.json().then(function (body) { return { ok: res.ok, body: body }; }); })

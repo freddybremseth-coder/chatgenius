@@ -40,6 +40,8 @@
     .badge.live { background: #e3f6ef; color: #067a5b; }
     .badge.expired { background: #f2f3f6; color: #68707d; }
     .badge.claimed { background: #e5edff; color: #2451c7; }
+    .badge.hot { background: #fde8e0; color: #c2410c; }
+    .meta.heat { color: #c2410c; font-weight: 600; }
     .demo-actions { display: flex; flex-wrap: wrap; gap: 8px; }
     .demo-actions a, .demo-actions button {
       display: inline-flex; align-items: center; padding: 9px 14px; border-radius: 11px; font: inherit; font-size: 0.85rem;
@@ -144,6 +146,21 @@
         try { return new Intl.DateTimeFormat("nb-NO", { dateStyle: "medium" }).format(new Date(value)); } catch (e) { return "–"; }
       }
 
+      function heatInfo(order) {
+        var views = Number(order.views || 0);
+        var inquiries = Number(order.inquiries || 0);
+        var last = order.last_viewed_at ? new Date(order.last_viewed_at) : null;
+        var hoursSince = last ? (Date.now() - last.getTime()) / 36e5 : null;
+        var hot = inquiries > 0 || (views >= 3 && hoursSince !== null && hoursSince < 48);
+        var parts = [];
+        if (views > 0) {
+          var when = hoursSince === null ? "" : hoursSince < 1 ? " · sist for under 1 t siden" : hoursSince < 24 ? " · sist for " + Math.round(hoursSince) + " t siden" : " · sist " + fmtDate(order.last_viewed_at);
+          parts.push("Åpnet " + views + (views === 1 ? " gang" : " ganger") + when);
+        }
+        if (inquiries > 0) parts.push(inquiries + (inquiries === 1 ? " henvendelse" : " henvendelser"));
+        return { hot: hot, text: parts.join(" · ") };
+      }
+
       function render() {
         var q = (searchInput.value || "").toLowerCase();
         var filter = statusFilter.value;
@@ -153,6 +170,12 @@
           if (!q) return true;
           return [order.company_name, order.customer_email, order.customer_name, order.order_number]
             .some(function (field) { return String(field || "").toLowerCase().indexOf(q) >= 0; });
+        });
+
+        rows.sort(function (a, b) {
+          var heatA = heatInfo(a), heatB = heatInfo(b);
+          if (heatA.hot !== heatB.hot) return heatA.hot ? -1 : 1;
+          return Number(b.views || 0) - Number(a.views || 0);
         });
 
         if (!rows.length) {
@@ -168,6 +191,9 @@
               ? '<span class="badge expired">Utløpt</span>'
               : '<span class="badge live">Live til ' + esc(fmtDate(order.expires_at)) + "</span>";
           var contact = [order.customer_name, order.customer_email, order.customer_phone].filter(Boolean).map(esc).join(" · ");
+          var heat = heatInfo(order);
+          var heatBadge = heat.hot ? '<span class="badge hot">🔥 Varm</span>' : "";
+          var heatLine = heat.text ? '<div class="meta heat">' + esc(heat.text) + "</div>" : "";
           var actions = "";
           if (order.present_url) actions += '<a class="present" href="' + esc(order.present_url) + '" target="_blank" rel="noopener">Presenter</a>';
           if (order.preview_url) actions += '<a class="primary" href="' + esc(order.preview_url) + '" target="_blank" rel="noopener">Se prøveside</a>';
@@ -176,8 +202,9 @@
           return (
             '<div class="demo-row">' +
               '<div class="info">' +
-                '<div class="name">' + esc(order.company_name || "Ukjent bedrift") + badge + "</div>" +
+                '<div class="name">' + esc(order.company_name || "Ukjent bedrift") + badge + heatBadge + "</div>" +
                 '<div class="meta">' + contact + "</div>" +
+                heatLine +
                 '<div class="meta">' + esc(order.order_number || "") + " · Opprettet " + esc(fmtDate(order.created_at)) + "</div>" +
               "</div>" +
               '<div class="demo-actions">' + actions + "</div>" +
