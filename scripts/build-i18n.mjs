@@ -17,7 +17,8 @@ import vm from "node:vm";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const SITE = "https://chatgenius.pro";
+// Apex-domenet 307-omdirigerer til www — canonical/hreflang må bruke www.
+const SITE = "https://www.chatgenius.pro";
 const LANGS = ["fr", "es", "de", "ru"];
 
 const PAGES = [
