@@ -1,412 +1,31 @@
 /*
- * ChatGenius.pro i18n — norsk er kildespråket (ligger i HTML-en); ordbøkene
- * under oversetter alle [data-i18n]-elementer (innerHTML) og
- * [data-i18n-ph]-placeholdere. Valget lagres i localStorage («cg_lang»),
- * førstegang gjettes språket fra navigator.language.
- * Dynamiske strenger i sidenes egne script hentes via window.CG_T(key, fallback).
+ * ChatGenius.pro språkhåndtering. Hvert språk har egne indekserbare sider
+ * (/, /fr/, /es/, /de/, /ru/ — generert av scripts/build-i18n.mjs), så
+ * språkvelgeren NAVIGERER til riktig side i stedet for å bytte tekst i DOM-en.
+ * Ordbøkene (assets/i18n-dict.js, lastes før denne) brukes her kun til
+ * dynamiske strenger via window.CG_T(key, fallback).
  */
 (function () {
-  var dict = {
-    fr: {
-      nav_apps: "Applis", nav_trial: "Site d'essai", nav_build: "Ce que nous créons", nav_products: "Produits", nav_articles: "Articles", nav_contact: "Contact",
-      header_cta: "Site d'essai gratuit",
-      hero_eyebrow: "Studio IA — applis, sites web et automatisation",
-      hero_t1: "Produits numériques.", hero_t2: "Propulsés par l'IA.",
-      hero_copy: "Nous créons des applis IA par abonnement et des sites web professionnels avec réceptionniste IA intégrée. Découvrez votre nouveau site entièrement construit — gratuitement — avant de vous décider.",
-      hero_cta1: "Site d'essai gratuit en 2 minutes", hero_cta2: "Découvrir les applis",
-      stat_ai: "réceptionniste, chat et contenu", stat_web: "sites livrés en quelques minutes", stat_apps: "abonnez-vous et utilisez immédiatement",
-      band: "Saisissez votre adresse web — notre IA construit un site d'essai complet pour votre entreprise pendant que vous patientez. Gratuit et sans engagement.",
-      promo_eyebrow: "Formules de sites web",
-      promo_title: "Site d'essai : voyez votre site terminé avant de payer",
-      promo_copy: "Pour les entreprises qui veulent un site rapide, moderne et adapté au mobile — avec une réceptionniste IA qui répond à vos clients 24h/24. Nous le construisons d'abord, vous commandez ensuite.",
-      promo_cta1: "Créer mon site d'essai", promo_cta2: "Parlez-nous",
-      promo_from: "à partir de", promo_permonth: "+ 490 kr par mois",
-      sv_eyebrow: "Ce que nous créons", sv_title: "De l'idée au produit fini — avec l'IA au cœur",
-      sv_copy: "Sites web, chatbots, tableaux de bord et applis. Construits vite, livrés finis, gérés pour vous.",
-      sv1_t: "Sites web &amp; sites d'essai", sv1_p: "Sites modernes à prix fixes, hébergement, SSL et sous-domaine dédié. Vous voyez le résultat avant d'acheter.",
-      sv2_t: "Réceptionniste IA", sv2_p: "Un chat qui connaît votre entreprise, répond à vos clients jour et nuit et capte des prospects pendant que vous dormez.",
-      sv3_t: "Tableaux de bord &amp; SaaS", sv3_p: "Systèmes sur mesure pour la gestion de projets, les KPI et l'exploitation — conçus comme de vrais produits.",
-      sv4_t: "Automatisation", sv4_p: "Contenu généré par IA, e-mail marketing et flux de travail qui économisent des heures chaque semaine.",
-      ap_eyebrow: "Produits", ap_title: "Des applis à découvrir dès aujourd'hui", ap_copy: "Des applis IA prêtes à l'emploi — abonnez-vous et démarrez immédiatement.",
-      meta_sub: "Appli · abonnement", meta_custom: "Sur mesure", meta_web: "Formules de sites web", meta_business: "entreprise",
-      app_astro: "Astrologie IA personnelle avec analyses quotidiennes et approfondies.",
-      app_family: "Le centre de commandement familial : tâches, routines, listes de courses et calendrier.",
-      app_vm: "La Coupe du monde dans votre poche : matchs, live et classements.",
-      app_spanish: "Apprenez l'espagnol avec des micro-exercices IA adaptés à vous — 5 min par jour.",
-      app_custom_t: "Systèmes sur mesure", app_custom_p: "Tableaux de bord, CRM et flux de travail conçus pour votre entreprise.",
-      app_trial_t: "Site d'essai", app_trial_p: "Voyez votre site construit par l'IA avant d'acheter. Prix fixes et gestion mensuelle.",
-      act_subscribe: "S'abonner →", act_try: "Essayer l'appli", act_contact: "Nous contacter", act_maketrial: "Créer mon site d'essai",
-      ct_eyebrow: "Lancez-vous", ct_title: "Prêt à créer quelque chose d'intelligent ?",
-      ct_copy: "Commencez par un site d'essai gratuit, abonnez-vous à une appli ou dites-nous ce qu'il vous faut — réponse rapide.",
-      ct_cta1: "Site d'essai gratuit",
-      chk_t: "Pourquoi ChatGenius", chk1: "Voyez le résultat avant de payer", chk2: "Réceptionniste IA active 24h/24", chk3: "Prix fixes — aucune surprise", chk4: "Hébergement, SSL et gestion inclus",
-      footer_top: "Haut de page",
-      d_nav_trial: "Site d'essai", d_nav_prices: "Tarifs", d_nav_how: "Comment ça marche", d_nav_start: "Commencer", d_cta: "Créer mon site d'essai",
-      d_hero_eyebrow: "Site d'essai par ChatGenius.pro",
-      d_h1: "Découvrez votre nouveau site — avant de payer un centime.",
-      d_copy: "Saisissez votre adresse web et l'IA construit un vrai site d'essai en quelques minutes : vos couleurs, votre logo, des textes pour votre secteur et des images professionnelles. Vous êtes redirigé vers le site terminé — en ligne pendant 4 jours. Il vous plaît ? Gardez-le. Sinon, il disparaît tout seul.",
-      d_cta1: "Créer mon site d'essai maintenant", d_cta2: "Voir le prix pour le garder",
-      d_trust1: "Sans aucun engagement", d_trust2: "Prêt en quelques minutes", d_trust3: "En ligne 4 jours",
-      d_p1v: "0 kr", d_p1l: "pour essayer — sans engagement", d_p2v: "4 jours", d_p2l: "votre site d'essai est en ligne et reçoit des clients", d_p3l: "pour le garder, dès 490 kr/mois",
-      d_s_eyebrow: "Commencer", d_s_title: "Adresse web + e-mail. C'est tout.",
-      d_s_copy: "Pas de formulaire, pas de réunion. L'IA récupère elle-même logo, couleurs et contenu — et vous êtes redirigé vers votre site d'essai terminé.",
-      d_f_url_label: "Votre adresse web — ou le nom de votre entreprise si vous n'avez pas de site *",
-      d_f_url_ph: "Ex. www.entreprise.fr ou Garage Dupont",
-      d_f_email_label: "Votre e-mail *", d_f_email_note: "(nous y envoyons le lien vers votre site)", d_f_email_ph: "vous@entreprise.fr",
-      d_f_tier_label: "Choisissez un niveau — un meilleur abonnement donne un site plus professionnel avec plus de fonctions",
-      d_t_badge: "Le plus choisi",
-      d_t1_f1: "One-page sobre et pro", d_t1_f2: "Services et formulaire de contact",
-      d_t2_f1: "Tout Basis", d_t2_f2: "+ réceptionniste IA qui répond aux clients", d_t2_f3: "+ offres, tarifs et FAQ",
-      d_t3_f1: "Tout Standard", d_t3_f2: "+ équipe avec photos et contacts", d_t3_f3: "+ support prioritaire",
-      d_f_desc_label: "Parlez-nous de votre entreprise", d_f_desc_note: "(facultatif, mais le site sera bien meilleur)",
-      d_f_desc_ph: "Qu'est-ce qui compte le plus pour vous ? Quels produits, services et prix mettre en avant ? Ex. « Pneus et gardiennage, forfait 899 kr, rendez-vous rapide. »",
-      d_f_details: "Facultatif : téléphone et secteur", d_f_phone: "Téléphone", d_f_industry: "Secteur", d_f_industry_ph: "Ex. garage, coiffeur, restaurant",
-      d_f_submit: "Montrez-moi mon nouveau site →", d_f_building: "Construction du site d'essai…",
-      d_step1: "Lecture de votre site…", d_step2: "Choix du modèle et des couleurs…", d_step3: "Rédaction des textes pour votre secteur…", d_step4: "Création d'images professionnelles…", d_step5: "Assemblage du site d'essai…", d_step6: "Mise en ligne…",
-      d_su_title: "Votre site d'essai est prêt !", d_su_p: "Redirection en cours…", d_su_link: "Ouvrir mon site d'essai →",
-      d_su_small: "En ligne 4 jours. Commandez depuis le site pour le garder — sinon il disparaît tout seul.",
-      d_err_fill: "Indiquez une adresse web ou un nom d'entreprise, et un e-mail valide.", d_err_generic: "Un problème est survenu. Réessayez ou envoyez-nous un e-mail.",
-      d_done: "Terminé ! Redirection vers votre nouveau site…",
-      d_pk_eyebrow: "Tarifs pour garder le site", d_pk_title: "Le site d'essai est gratuit — voici le prix pour le rendre vôtre",
-      d_pk_copy: "Toutes les formules incluent l'installation technique, un design adapté au mobile, l'hébergement, le SSL et un processus clair jusqu'au site approuvé.",
-      d_benefits_t: "Tous les clients DemoSites reçoivent :",
-      d_benefits: "✓ 30 min d'appel gratuit — analyse de votre entreprise et suggestions &nbsp;·&nbsp; ✓ <strong>60&nbsp;% de remise</strong> sur les heures de développement : 596 kr/h (au lieu de 1&nbsp;490 kr/h) &nbsp;·&nbsp; ✓ SEO &amp; optimisation Google en option pour 490 kr (paiement unique)",
-      d_c1_t: "Présence digitale", d_c1_p: "Pour les entreprises qui veulent un site soigné et fiable, vite.",
-      d_setup: "installation", d_permonth: "par mois",
-      d_c1_f1: "One-page complet avec toutes les sections", d_c1_f2: "Logo, couleurs, textes et images", d_c1_f3: "Hébergement, SSL et formulaire de contact", d_c1_f4: "Une petite modification mensuelle",
-      d_c1_cta: "Essayer avec Basis",
-      d_c2_t: "Standard – la machine à prospects", d_c2_p: "Site web + réceptionniste IA ChatGenius qui capte les demandes après la fermeture.",
-      d_c2_f1: "One-page enrichi : services, tarifs et FAQ", d_c2_f2: "Tout Basis", d_c2_f3: "Réceptionniste IA ChatGenius", d_c2_f4: "Collecte des prospects et contacts", d_c2_f5: "SEO local de base",
-      d_c2_cta: "Essayer avec Standard",
-      d_c3_t: "Réceptionniste digitale", d_c3_p: "Pour les entreprises qui veulent plus de structure, d'automatisation et un suivi prioritaire.",
-      d_c3_f1: "One-page sur mesure avec tout le contenu", d_c3_f2: "Bot IA avancé", d_c3_f3: "Prêt pour réservations, tarifs et rendez-vous", d_c3_f4: "Support prioritaire",
-      d_c3_cta: "Essayer avec Premium",
-      d_pr_eyebrow: "Comment ça marche", d_pr_title: "Du formulaire au site vivant en quelques minutes",
-      d_pr_copy: "Pas de réunion, pas d'attente, aucun engagement avant votre accord.",
-      d_pr1_t: "Dites-nous qui vous êtes", d_pr1_p: "Nom d'entreprise et e-mail suffisent. Si vous avez déjà un site, nous récupérons logo, images et contenu automatiquement.",
-      d_pr2_t: "L'IA construit le site d'essai", d_pr2_p: "Textes rédigés pour votre secteur, vos couleurs et des images professionnelles. Le formulaire de contact fonctionne dès la première seconde.",
-      d_pr3_t: "En ligne 4 jours — vous décidez", d_pr3_p: "Partagez le lien, testez sur mobile, recevez de vraies demandes. S'il vous plaît, commandez en un clic et le site est à vous.",
-      d_ct_eyebrow: "Vous préférez parler à un humain ?", d_ct_title: "Nous vous aidons volontiers",
-      d_ct_copy: "Réservez un court appel ou envoyez un e-mail, et nous créons le site d'essai avec vous.",
-      d_ct_book: "Réserver un appel",
-      d_chk_t: "Bon à savoir", d_chk1: "Le site d'essai est gratuit et sans engagement", d_chk2: "Il est en ligne 4 jours et reçoit de vraies demandes", d_chk3: "Changez de design et de style en un clic", d_chk4: "À la commande, le site est publié avec son propre domaine", d_chk5: "Tout le contenu peut être ajusté avant publication",
-      a_title: "Pas des démos — des applis finies par abonnement.",
-      a_copy: "Astro, Family, Spanish et plus : des applis IA en ligne et utilisées au quotidien. Abonnez-vous par carte, résiliez quand vous voulez — sans engagement au-delà du mois.",
-      a_eyebrow: "Applis de ChatGenius.pro", a_header_cta: "Voir les applis",
-      a_banner: "🎉 Abonnement actif ! Consultez votre e-mail pour le reçu et la connexion.",
-      a_note: "Tous les prix incluent gestion, mises à jour et support. Paiement sécurisé par Stripe. Des questions ?",
-      a_loading: "Chargement des applis et tarifs…", a_none: "Aucune appli disponible pour le moment.", a_err: "Impossible de charger les applis. Réessayez plus tard.",
-      a_sub: "S'abonner", a_year: "Prix annuel", a_opening: "Ouverture du paiement…", a_soon_tag: "Bientôt", a_sub_tag: "Abonnez-vous", a_soon_price: "Bientôt disponible", a_notify: "Prévenez-moi", a_live: "Voir l'appli en ligne →", a_permonth: "/mois", a_peryear: "/an", a_or: "ou"
-    },
-    es: {
-      nav_apps: "Apps", nav_trial: "Sitio de prueba", nav_build: "Qué creamos", nav_products: "Productos", nav_articles: "Artículos", nav_contact: "Contacto",
-      header_cta: "Sitio de prueba gratis",
-      hero_eyebrow: "Estudio de IA — apps, webs y automatización",
-      hero_t1: "Productos digitales.", hero_t2: "Impulsados por IA.",
-      hero_copy: "Creamos apps de IA por suscripción y sitios web profesionales con recepcionista de IA integrada. Vea su nueva web totalmente construida — gratis — antes de decidirse.",
-      hero_cta1: "Sitio de prueba gratis en 2 minutos", hero_cta2: "Explorar las apps",
-      stat_ai: "recepcionista, chat y contenido", stat_web: "webs entregadas en minutos", stat_apps: "suscríbase y úselas al instante",
-      band: "Escriba su dirección web — nuestra IA construye un sitio de prueba completo para su empresa mientras espera. Gratis y sin compromiso.",
-      promo_eyebrow: "Planes de sitios web",
-      promo_title: "Sitio de prueba: vea su web terminada antes de pagar",
-      promo_copy: "Para empresas que quieren una web rápida, moderna y adaptada al móvil — con una recepcionista de IA que atiende a sus clientes las 24 horas. Primero la construimos, después usted decide.",
-      promo_cta1: "Crear mi sitio de prueba", promo_cta2: "Hable con nosotros",
-      promo_from: "desde", promo_permonth: "+ 490 kr al mes",
-      sv_eyebrow: "Qué creamos", sv_title: "De la idea al producto final — con la IA en el centro",
-      sv_copy: "Webs, chatbots, dashboards y apps. Construidos rápido, entregados listos y gestionados por nosotros.",
-      sv1_t: "Webs y sitios de prueba", sv1_p: "Webs modernas con precios fijos, hosting, SSL y subdominio propio. Vea el resultado antes de comprar.",
-      sv2_t: "Recepcionista de IA", sv2_p: "Un chat que conoce su empresa, responde a sus clientes día y noche y capta clientes potenciales mientras duerme.",
-      sv3_t: "Dashboards y SaaS", sv3_p: "Sistemas a medida para gestión de proyectos, KPI y operaciones — construidos como productos reales.",
-      sv4_t: "Automatización", sv4_p: "Contenido generado por IA, email marketing y flujos de trabajo que ahorran horas cada semana.",
-      ap_eyebrow: "Productos", ap_title: "Apps a las que puede suscribirse hoy", ap_copy: "Apps de IA listas — suscríbase y empiece de inmediato.",
-      meta_sub: "App · suscripción", meta_custom: "A medida", meta_web: "Planes de sitios web", meta_business: "empresa",
-      app_astro: "Astrología personal con IA: claves diarias y análisis en profundidad.",
-      app_family: "El centro de mando de la familia: tareas, rutinas, listas de la compra y calendario.",
-      app_vm: "El Mundial en su bolsillo: partidos, directos y clasificaciones.",
-      app_spanish: "Aprenda español con microejercicios de IA que se adaptan a usted — 5 min al día.",
-      app_custom_t: "Sistemas a medida", app_custom_p: "Dashboards, CRM y flujos de trabajo hechos para su empresa.",
-      app_trial_t: "Sitio de prueba", app_trial_p: "Vea su web construida por IA antes de comprar. Precios fijos y gestión mensual.",
-      act_subscribe: "Suscribirse →", act_try: "Probar la app", act_contact: "Contactar", act_maketrial: "Crear mi sitio de prueba",
-      ct_eyebrow: "Empiece ya", ct_title: "¿Listo para crear algo inteligente?",
-      ct_copy: "Empiece con un sitio de prueba gratis, suscríbase a una app o cuéntenos qué necesita — respondemos rápido.",
-      ct_cta1: "Sitio de prueba gratis",
-      chk_t: "Por qué ChatGenius", chk1: "Vea el resultado antes de pagar", chk2: "Recepcionista de IA activa 24/7", chk3: "Precios fijos — sin sorpresas", chk4: "Hosting, SSL y gestión incluidos",
-      footer_top: "Arriba",
-      d_nav_trial: "Sitio de prueba", d_nav_prices: "Precios", d_nav_how: "Cómo funciona", d_nav_start: "Empezar", d_cta: "Crear mi sitio de prueba",
-      d_hero_eyebrow: "Sitio de prueba de ChatGenius.pro",
-      d_h1: "Vea su nueva web — antes de pagar un céntimo.",
-      d_copy: "Escriba su dirección web y la IA construye un sitio de prueba real en minutos: sus colores, su logo, textos para su sector e imágenes profesionales. Le llevamos directo a la web terminada — en línea durante 4 días. Si le gusta, se la queda. Si no, desaparece sola.",
-      d_cta1: "Crear mi sitio de prueba ahora", d_cta2: "Ver cuánto cuesta quedársela",
-      d_trust1: "Sin ningún compromiso", d_trust2: "Lista en minutos", d_trust3: "En línea 4 días",
-      d_p1v: "0 kr", d_p1l: "por probar — sin permanencia", d_p2v: "4 días", d_p2l: "su sitio de prueba está en línea y recibe clientes", d_p3l: "por quedársela, desde 490 kr/mes",
-      d_s_eyebrow: "Empezar", d_s_title: "Dirección web + email. Nada más.",
-      d_s_copy: "Sin formularios ni reuniones. La IA obtiene logo, colores y contenido por sí sola — y le lleva directo a su sitio de prueba terminado.",
-      d_f_url_label: "Su dirección web — o el nombre de su empresa si no tiene web *",
-      d_f_url_ph: "Ej. www.suempresa.es o Taller García SL",
-      d_f_email_label: "Su email *", d_f_email_note: "(ahí enviamos el enlace a su web)", d_f_email_ph: "usted@suempresa.es",
-      d_f_tier_label: "Elija nivel — mejor suscripción, web más profesional y con más funciones",
-      d_t_badge: "El más elegido",
-      d_t1_f1: "One-page limpia y profesional", d_t1_f2: "Servicios y formulario de contacto",
-      d_t2_f1: "Todo lo de Basis", d_t2_f2: "+ recepcionista de IA que atiende clientes", d_t2_f3: "+ ofertas, precios y FAQ",
-      d_t3_f1: "Todo lo de Standard", d_t3_f2: "+ equipo con fotos y contacto", d_t3_f3: "+ soporte prioritario",
-      d_f_desc_label: "Cuéntenos sobre su empresa", d_f_desc_note: "(opcional, pero mejora mucho la web)",
-      d_f_desc_ph: "¿Qué es lo más importante? ¿Qué productos, servicios y precios quiere destacar? Ej. «Cambio de neumáticos y guardado, precio fijo 899 kr, cita en la misma semana.»",
-      d_f_details: "Opcional: teléfono y sector", d_f_phone: "Teléfono", d_f_industry: "Sector", d_f_industry_ph: "Ej. taller, peluquería, restaurante",
-      d_f_submit: "Muéstreme mi nueva web →", d_f_building: "Construyendo el sitio de prueba…",
-      d_step1: "Leyendo su web…", d_step2: "Eligiendo plantilla y colores…", d_step3: "Escribiendo textos para su sector…", d_step4: "Creando imágenes profesionales…", d_step5: "Montando el sitio de prueba…", d_step6: "Publicando la web…",
-      d_su_title: "¡Su sitio de prueba está listo!", d_su_p: "Le llevamos allí ahora…", d_su_link: "Abrir mi sitio de prueba →",
-      d_su_small: "En línea 4 días. Pida desde la web si quiere quedársela — si no, desaparece sola.",
-      d_err_fill: "Indique una dirección web o nombre de empresa y un email válido.", d_err_generic: "Algo salió mal. Inténtelo de nuevo o escríbanos.",
-      d_done: "¡Listo! Le llevamos a su nueva web…",
-      d_pk_eyebrow: "Precios por quedarse la web", d_pk_title: "El sitio de prueba es gratis — esto cuesta hacerlo suyo",
-      d_pk_copy: "Todos los planes incluyen configuración técnica, diseño adaptado al móvil, hosting, SSL y un proceso claro hasta la web aprobada.",
-      d_benefits_t: "Todos los clientes de DemoSites reciben:",
-      d_benefits: "✓ 30 min de llamada gratis — analizamos su empresa y proponemos mejoras &nbsp;·&nbsp; ✓ <strong>60&nbsp;% de descuento</strong> en horas de desarrollo: 596 kr/h (tarifa normal 1&nbsp;490 kr/h) &nbsp;·&nbsp; ✓ SEO y optimización Google como extra por 490 kr (pago único)",
-      d_c1_t: "Presencia digital", d_c1_p: "Para empresas que necesitan una web bonita y fiable, rápido.",
-      d_setup: "alta", d_permonth: "al mes",
-      d_c1_f1: "One-page completa con todas las secciones", d_c1_f2: "Logo, colores, textos e imágenes", d_c1_f3: "Hosting, SSL y formulario de contacto", d_c1_f4: "Un pequeño cambio mensual",
-      d_c1_cta: "Probar con Basis",
-      d_c2_t: "Standard – la máquina de clientes", d_c2_p: "Web + recepcionista de IA ChatGenius que capta solicitudes fuera de horario.",
-      d_c2_f1: "One-page ampliada: servicios, precios y FAQ", d_c2_f2: "Todo lo de Basis", d_c2_f3: "Recepcionista de IA ChatGenius", d_c2_f4: "Recoge clientes potenciales y contactos", d_c2_f5: "SEO local básico",
-      d_c2_cta: "Probar con Standard",
-      d_c3_t: "Recepcionista digital", d_c3_p: "Para empresas que quieren más estructura, más automatización y seguimiento prioritario.",
-      d_c3_f1: "One-page a medida con todo el contenido", d_c3_f2: "Bot de IA avanzado", d_c3_f3: "Preparada para reservas, precios y citas", d_c3_f4: "Soporte prioritario",
-      d_c3_cta: "Probar con Premium",
-      d_pr_eyebrow: "Cómo funciona", d_pr_title: "Del formulario a una web viva en minutos",
-      d_pr_copy: "Sin reuniones, sin esperas, sin compromiso hasta que usted diga sí.",
-      d_pr1_t: "Díganos quiénes son", d_pr1_p: "Con el nombre de la empresa y un email basta. Si ya tiene web, obtenemos logo, imágenes y contenido automáticamente.",
-      d_pr2_t: "La IA construye el sitio de prueba", d_pr2_p: "Textos escritos para su sector, sus colores e imágenes profesionales. El formulario de contacto funciona desde el primer segundo.",
-      d_pr3_t: "En línea 4 días — usted decide", d_pr3_p: "Comparta el enlace, pruébela en el móvil, reciba solicitudes reales. Si le gusta, la pide con un clic y la web es suya.",
-      d_ct_eyebrow: "¿Prefiere hablar con una persona?", d_ct_title: "Le ayudamos encantados",
-      d_ct_copy: "Reserve una llamada corta o envíe un email, y creamos el sitio de prueba con usted.",
-      d_ct_book: "Reservar llamada",
-      d_chk_t: "Bueno saberlo", d_chk1: "El sitio de prueba es gratis y sin compromiso", d_chk2: "Está en línea 4 días y recibe solicitudes reales", d_chk3: "Cambie diseño y estilo con un clic", d_chk4: "Al pedirla, la web se publica con dominio propio", d_chk5: "Todo el contenido puede ajustarse antes de publicar",
-      a_title: "No son demos — apps terminadas por suscripción.",
-      a_copy: "Astro, Family, Spanish y más: apps de IA en producción y uso diario. Suscríbase con tarjeta, cancele cuando quiera — sin permanencia más allá del mes.",
-      a_eyebrow: "Apps de ChatGenius.pro", a_header_cta: "Ver las apps",
-      a_banner: "🎉 ¡Suscripción activa! Revise su email para el recibo y el acceso.",
-      a_note: "Todos los precios incluyen gestión, actualizaciones y soporte. Pago seguro con Stripe. ¿Preguntas?",
-      a_loading: "Cargando apps y precios…", a_none: "No hay apps disponibles ahora mismo.", a_err: "No se pudieron cargar las apps. Inténtelo más tarde.",
-      a_sub: "Suscribirse", a_year: "Precio anual", a_opening: "Abriendo el pago…", a_soon_tag: "Próximamente", a_sub_tag: "Suscríbase hoy", a_soon_price: "Muy pronto", a_notify: "Avisarme", a_live: "Ver la app en vivo →", a_permonth: "/mes", a_peryear: "/año", a_or: "o"
-    },
-    de: {
-      nav_apps: "Apps", nav_trial: "Testseite", nav_build: "Was wir bauen", nav_products: "Produkte", nav_articles: "Artikel", nav_contact: "Kontakt",
-      header_cta: "Gratis Testseite",
-      hero_eyebrow: "KI-Studio für Apps, Websites und Automatisierung",
-      hero_t1: "Digitale Produkte.", hero_t2: "Angetrieben von KI.",
-      hero_copy: "Wir bauen KI-Apps im Abo und professionelle Websites mit integrierter KI-Rezeption. Sehen Sie Ihre neue Website fertig gebaut — völlig kostenlos — bevor Sie sich entscheiden.",
-      hero_cta1: "Gratis Testseite in 2 Minuten", hero_cta2: "Apps entdecken",
-      stat_ai: "Rezeption, Chat und Inhalte", stat_web: "Websites in Minuten geliefert", stat_apps: "abonnieren und sofort loslegen",
-      band: "Geben Sie Ihre Webadresse ein — unsere KI baut eine komplette Testseite für Ihr Unternehmen, während Sie warten. Kostenlos und unverbindlich.",
-      promo_eyebrow: "Website-Pakete",
-      promo_title: "Testseite: Sehen Sie Ihre fertige Website, bevor Sie zahlen",
-      promo_copy: "Für Unternehmen, die eine schnelle, moderne und mobilfreundliche Website wollen — mit einer KI-Rezeption, die Ihre Kunden rund um die Uhr betreut. Wir bauen zuerst, Sie bestellen danach.",
-      promo_cta1: "Meine Testseite erstellen", promo_cta2: "Sprechen Sie mit uns",
-      promo_from: "ab", promo_permonth: "+ 490 kr pro Monat",
-      sv_eyebrow: "Was wir bauen", sv_title: "Von der Idee zum fertigen Produkt — mit KI im Kern",
-      sv_copy: "Websites, Chatbots, Dashboards und Apps. Schnell gebaut, fertig geliefert, für Sie betrieben.",
-      sv1_t: "Websites &amp; Testseiten", sv1_p: "Moderne Websites zu Festpreisen, Hosting, SSL und eigene Subdomain. Sie sehen das Ergebnis vor dem Kauf.",
-      sv2_t: "KI-Rezeption", sv2_p: "Ein Chat, der Ihr Unternehmen kennt, Ihre Kunden Tag und Nacht betreut und Leads sammelt, während Sie schlafen.",
-      sv3_t: "Dashboards &amp; SaaS", sv3_p: "Maßgeschneiderte Systeme für Projektsteuerung, KPIs und Betrieb — gebaut wie echte Produkte.",
-      sv4_t: "Automatisierung", sv4_p: "KI-generierte Inhalte, E-Mail-Marketing und Workflows, die jede Woche Stunden sparen.",
-      ap_eyebrow: "Produkte", ap_title: "Apps, die Sie heute abonnieren können", ap_copy: "Fertige KI-Apps — abonnieren und sofort starten.",
-      meta_sub: "App · Abo", meta_custom: "Maßarbeit", meta_web: "Website-Pakete", meta_business: "Unternehmen",
-      app_astro: "Persönliche KI-Astrologie mit täglichen Einsichten und Tiefenanalysen.",
-      app_family: "Die Kommandozentrale der Familie: Aufgaben, Routinen, Einkaufslisten und Kalender.",
-      app_vm: "Die Fußball-WM in der Tasche: Spielplan, Live-Updates und Tabellen.",
-      app_spanish: "Spanisch lernen mit KI-Mikroübungen, die sich Ihnen anpassen — 5 Min. am Tag.",
-      app_custom_t: "Maßgeschneiderte Systeme", app_custom_p: "Dashboards, CRM und Workflows, gebaut für Ihr Unternehmen.",
-      app_trial_t: "Testseite", app_trial_p: "Sehen Sie Ihre von KI gebaute Website vor dem Kauf. Festpreise und monatlicher Betrieb.",
-      act_subscribe: "Abonnieren →", act_try: "App testen", act_contact: "Kontakt aufnehmen", act_maketrial: "Meine Testseite erstellen",
-      ct_eyebrow: "Loslegen", ct_title: "Bereit, etwas Smartes zu bauen?",
-      ct_copy: "Starten Sie mit einer gratis Testseite, abonnieren Sie eine App oder sagen Sie uns, was Sie brauchen — wir antworten schnell.",
-      ct_cta1: "Gratis Testseite",
-      chk_t: "Darum ChatGenius", chk1: "Ergebnis sehen, bevor Sie zahlen", chk2: "KI-Rezeption arbeitet 24/7", chk3: "Festpreise — keine Überraschungen", chk4: "Hosting, SSL und Betrieb inklusive",
-      footer_top: "Nach oben",
-      d_nav_trial: "Testseite", d_nav_prices: "Preise", d_nav_how: "So funktioniert's", d_nav_start: "Loslegen", d_cta: "Meine Testseite erstellen",
-      d_hero_eyebrow: "Testseite von ChatGenius.pro",
-      d_h1: "Sehen Sie Ihre neue Website — bevor Sie einen Cent zahlen.",
-      d_copy: "Geben Sie Ihre Webadresse ein, und die KI baut in Minuten eine echte Testseite: Ihre Farben, Ihr Logo, Texte für Ihre Branche und professionelle Bilder. Sie landen direkt auf der fertigen Seite — 4 Tage lang online. Gefällt sie Ihnen, behalten Sie sie. Wenn nicht, verschwindet sie von selbst.",
-      d_cta1: "Jetzt meine Testseite erstellen", d_cta2: "Preis fürs Behalten ansehen",
-      d_trust1: "Völlig unverbindlich", d_trust2: "In Minuten fertig", d_trust3: "4 Tage online",
-      d_p1v: "0 kr", d_p1l: "zum Testen — keine Bindung", d_p2v: "4 Tage", d_p2l: "Ihre Testseite ist online und empfängt Kunden", d_p3l: "fürs Behalten, ab 490 kr/Monat",
-      d_s_eyebrow: "Loslegen", d_s_title: "Webadresse + E-Mail. Das ist alles.",
-      d_s_copy: "Kein Formular, keine Meetings. Die KI holt Logo, Farben und Inhalte selbst — und Sie landen direkt auf Ihrer fertigen Testseite.",
-      d_f_url_label: "Ihre Webadresse — oder der Firmenname, falls Sie keine Website haben *",
-      d_f_url_ph: "z. B. www.ihrefirma.de oder Autowerkstatt Müller",
-      d_f_email_label: "Ihre E-Mail *", d_f_email_note: "(dorthin senden wir den Link zu Ihrer Seite)", d_f_email_ph: "sie@ihrefirma.de",
-      d_f_tier_label: "Stufe wählen — besseres Abo bedeutet eine professionellere Seite mit mehr Funktionen",
-      d_t_badge: "Meistgewählt",
-      d_t1_f1: "Saubere, professionelle One-Page", d_t1_f2: "Leistungen und Kontaktformular",
-      d_t2_f1: "Alles aus Basis", d_t2_f2: "+ KI-Rezeption, die Kunden antwortet", d_t2_f3: "+ Angebote, Preise und FAQ",
-      d_t3_f1: "Alles aus Standard", d_t3_f2: "+ Team mit Fotos und Kontakt", d_t3_f3: "+ Prioritäts-Support",
-      d_f_desc_label: "Erzählen Sie von Ihrem Unternehmen", d_f_desc_note: "(optional, macht die Seite aber deutlich besser)",
-      d_f_desc_ph: "Was ist Ihnen am wichtigsten? Welche Produkte, Leistungen und Preise wollen Sie zeigen? z. B. „Reifenwechsel und Einlagerung, Festpreis 899 kr, Termin noch diese Woche.“",
-      d_f_details: "Optional: Telefon und Branche", d_f_phone: "Telefon", d_f_industry: "Branche", d_f_industry_ph: "z. B. Werkstatt, Friseur, Restaurant",
-      d_f_submit: "Zeigt mir meine neue Website →", d_f_building: "Testseite wird gebaut…",
-      d_step1: "Ihre Website wird gelesen…", d_step2: "Vorlage und Farben werden gewählt…", d_step3: "Texte für Ihre Branche werden geschrieben…", d_step4: "Professionelle Bilder entstehen…", d_step5: "Testseite wird zusammengesetzt…", d_step6: "Seite geht online…",
-      d_su_title: "Ihre Testseite ist fertig!", d_su_p: "Wir bringen Sie jetzt hin…", d_su_link: "Meine Testseite öffnen →",
-      d_su_small: "4 Tage online. Bestellen Sie direkt auf der Seite, wenn Sie sie behalten wollen — sonst verschwindet sie von selbst.",
-      d_err_fill: "Bitte Webadresse oder Firmenname und eine gültige E-Mail-Adresse angeben.", d_err_generic: "Etwas ist schiefgelaufen. Versuchen Sie es erneut oder schreiben Sie uns.",
-      d_done: "Fertig! Wir bringen Sie zu Ihrer neuen Seite…",
-      d_pk_eyebrow: "Preise fürs Behalten", d_pk_title: "Die Testseite ist gratis — das kostet es, sie zu Ihrer zu machen",
-      d_pk_copy: "Alle Pakete enthalten technisches Setup, mobilfreundliches Design, Hosting, SSL und einen klaren Prozess bis zur freigegebenen Seite.",
-      d_benefits_t: "Alle DemoSites-Kunden erhalten:",
-      d_benefits: "✓ 30 Min. Gratis-Gespräch — wir analysieren Ihr Unternehmen und schlagen Anpassungen vor &nbsp;·&nbsp; ✓ <strong>60&nbsp;% Rabatt</strong> auf Entwicklerstunden: 596 kr/h (regulär 1&nbsp;490 kr/h) &nbsp;·&nbsp; ✓ SEO &amp; Google-Optimierung als Extra für 490 kr (einmalig)",
-      d_c1_t: "Digitale Präsenz", d_c1_p: "Für Unternehmen, die schnell eine schöne, verlässliche Website brauchen.",
-      d_setup: "Einrichtung", d_permonth: "pro Monat",
-      d_c1_f1: "Komplette One-Page mit allen Sektionen", d_c1_f2: "Logo, Farben, Texte und Bilder", d_c1_f3: "Hosting, SSL und Kontaktformular", d_c1_f4: "Eine kleine monatliche Änderung",
-      d_c1_cta: "Mit Basis testen",
-      d_c2_t: "Standard – die Lead-Maschine", d_c2_p: "Website + ChatGenius-KI-Rezeption, die Anfragen nach Feierabend einfängt.",
-      d_c2_f1: "Erweiterte One-Page: Leistungen, Preise und FAQ", d_c2_f2: "Alles aus Basis", d_c2_f3: "ChatGenius KI-Rezeption", d_c2_f4: "Sammelt Leads und Kontaktdaten", d_c2_f5: "Lokales Basis-SEO",
-      d_c2_cta: "Mit Standard testen",
-      d_c3_t: "Digitale Rezeption", d_c3_p: "Für Unternehmen, die mehr Struktur, mehr Automatisierung und bevorzugte Betreuung wollen.",
-      d_c3_f1: "Maßgeschneiderte One-Page mit allen Inhalten", d_c3_f2: "Fortgeschrittener KI-Bot", d_c3_f3: "Vorbereitet für Buchungen, Preise und Termine", d_c3_f4: "Prioritäts-Support",
-      d_c3_cta: "Mit Premium testen",
-      d_pr_eyebrow: "So funktioniert's", d_pr_title: "Vom Formular zur lebendigen Website in Minuten",
-      d_pr_copy: "Keine Meetings, keine Wartezeit, keine Verpflichtung, bevor Sie selbst Ja sagen.",
-      d_pr1_t: "Sagen Sie uns, wer Sie sind", d_pr1_p: "Firmenname und E-Mail genügen. Haben Sie schon eine Website, holen wir Logo, Bilder und Inhalte automatisch.",
-      d_pr2_t: "Die KI baut die Testseite", d_pr2_p: "Texte für Ihre Branche, Ihre Farben und professionelle Bilder. Das Kontaktformular funktioniert ab der ersten Sekunde.",
-      d_pr3_t: "4 Tage online — Sie entscheiden", d_pr3_p: "Teilen Sie den Link, testen Sie mobil, empfangen Sie echte Anfragen. Gefällt sie Ihnen, bestellen Sie mit einem Klick und die Seite gehört Ihnen.",
-      d_ct_eyebrow: "Lieber mit einem Menschen sprechen?", d_ct_title: "Wir helfen Ihnen gern",
-      d_ct_copy: "Buchen Sie ein kurzes Gespräch oder schreiben Sie eine E-Mail — wir bauen die Testseite gemeinsam mit Ihnen.",
-      d_ct_book: "Gespräch buchen",
-      d_chk_t: "Gut zu wissen", d_chk1: "Die Testseite ist gratis und unverbindlich", d_chk2: "Sie ist 4 Tage online und empfängt echte Anfragen", d_chk3: "Design und Stil mit einem Klick wechseln", d_chk4: "Bei Bestellung wird die Seite mit eigener Domain veröffentlicht", d_chk5: "Alle Inhalte können vor Veröffentlichung angepasst werden",
-      a_title: "Keine Demos — fertige Apps im Abo.",
-      a_copy: "Astro, Family, Spanish und mehr: KI-Apps, live und täglich im Einsatz. Per Karte abonnieren, jederzeit kündigen — keine Bindung über den Monat hinaus.",
-      a_eyebrow: "Apps von ChatGenius.pro", a_header_cta: "Apps ansehen",
-      a_banner: "🎉 Abo aktiv! Quittung und Zugang finden Sie in Ihrer E-Mail.",
-      a_note: "Alle Preise inklusive Betrieb, Updates und Support. Sichere Zahlung über Stripe. Fragen?",
-      a_loading: "Apps und Preise werden geladen…", a_none: "Derzeit keine Apps verfügbar.", a_err: "Apps konnten nicht geladen werden. Bitte später erneut versuchen.",
-      a_sub: "Abonnieren", a_year: "Jahrespreis", a_opening: "Zahlung wird geöffnet…", a_soon_tag: "Bald", a_sub_tag: "Jetzt abonnieren", a_soon_price: "Startet bald", a_notify: "Benachrichtigt mich", a_live: "App live ansehen →", a_permonth: "/Monat", a_peryear: "/Jahr", a_or: "oder"
-    },
-    ru: {
-      nav_apps: "Приложения", nav_trial: "Пробный сайт", nav_build: "Что мы делаем", nav_products: "Продукты", nav_articles: "Статьи", nav_contact: "Контакты",
-      header_cta: "Бесплатный пробный сайт",
-      hero_eyebrow: "ИИ-студия: приложения, сайты и автоматизация",
-      hero_t1: "Цифровые продукты.", hero_t2: "На основе ИИ.",
-      hero_copy: "Мы создаём ИИ-приложения по подписке и профессиональные сайты со встроенным ИИ-администратором. Увидьте свой новый сайт полностью готовым — бесплатно — прежде чем принять решение.",
-      hero_cta1: "Пробный сайт за 2 минуты", hero_cta2: "Смотреть приложения",
-      stat_ai: "администратор, чат и контент", stat_web: "сайты за считанные минуты", stat_apps: "подпишитесь и пользуйтесь сразу",
-      band: "Введите адрес вашего сайта — наш ИИ построит полноценный пробный сайт для вашего бизнеса, пока вы ждёте. Бесплатно и без обязательств.",
-      promo_eyebrow: "Пакеты сайтов",
-      promo_title: "Пробный сайт: увидьте готовый сайт до оплаты",
-      promo_copy: "Для компаний, которым нужен быстрый, современный и мобильный сайт — с ИИ-администратором, который отвечает клиентам круглосуточно. Сначала мы строим, потом вы заказываете.",
-      promo_cta1: "Создать мой пробный сайт", promo_cta2: "Связаться с нами",
-      promo_from: "от", promo_permonth: "+ 490 kr в месяц",
-      sv_eyebrow: "Что мы делаем", sv_title: "От идеи до готового продукта — с ИИ в основе",
-      sv_copy: "Сайты, чат-боты, дашборды и приложения. Строим быстро, сдаём готовыми, обслуживаем за вас.",
-      sv1_t: "Сайты и пробные сайты", sv1_p: "Современные сайты по фиксированным ценам: хостинг, SSL и собственный поддомен. Вы видите результат до покупки.",
-      sv2_t: "ИИ-администратор", sv2_p: "Чат, который знает ваш бизнес, отвечает клиентам днём и ночью и собирает заявки, пока вы спите.",
-      sv3_t: "Дашборды и SaaS", sv3_p: "Индивидуальные системы для управления проектами, KPI и операциями — как настоящие продукты.",
-      sv4_t: "Автоматизация", sv4_p: "Контент от ИИ, e-mail-маркетинг и процессы, экономящие часы каждую неделю.",
-      ap_eyebrow: "Продукты", ap_title: "Приложения по подписке уже сегодня", ap_copy: "Готовые ИИ-приложения — подпишитесь и начните сразу.",
-      meta_sub: "Приложение · подписка", meta_custom: "Индивидуально", meta_web: "Пакеты сайтов", meta_business: "бизнес",
-      app_astro: "Персональная ИИ-астрология: ежедневные инсайты и глубокие разборы.",
-      app_family: "Командный центр семьи: задачи, режим, списки покупок и календарь.",
-      app_vm: "Чемпионат мира в кармане: матчи, live-обновления и таблицы.",
-      app_spanish: "Учите испанский с ИИ-микроупражнениями под вас — 5 минут в день.",
-      app_custom_t: "Индивидуальные системы", app_custom_p: "Дашборды, CRM и процессы, созданные под ваш бизнес.",
-      app_trial_t: "Пробный сайт", app_trial_p: "Увидьте сайт, построенный ИИ, до покупки. Фиксированные цены и ежемесячное обслуживание.",
-      act_subscribe: "Подписаться →", act_try: "Попробовать", act_contact: "Связаться", act_maketrial: "Создать пробный сайт",
-      ct_eyebrow: "Начните сейчас", ct_title: "Готовы создать что-то умное?",
-      ct_copy: "Начните с бесплатного пробного сайта, подпишитесь на приложение или расскажите, что вам нужно — мы отвечаем быстро.",
-      ct_cta1: "Бесплатный пробный сайт",
-      chk_t: "Почему ChatGenius", chk1: "Видите результат до оплаты", chk2: "ИИ-администратор работает 24/7", chk3: "Фиксированные цены — без сюрпризов", chk4: "Хостинг, SSL и обслуживание включены",
-      footer_top: "Наверх",
-      d_nav_trial: "Пробный сайт", d_nav_prices: "Цены", d_nav_how: "Как это работает", d_nav_start: "Начать", d_cta: "Создать пробный сайт",
-      d_hero_eyebrow: "Пробный сайт от ChatGenius.pro",
-      d_h1: "Увидьте свой новый сайт — не заплатив ни кроны.",
-      d_copy: "Введите адрес сайта — и ИИ за несколько минут построит настоящий пробный сайт: ваши цвета, ваш логотип, тексты для вашей отрасли и профессиональные изображения. Вы сразу попадёте на готовый сайт — он онлайн 4 дня. Понравился — оставьте себе. Нет — он исчезнет сам.",
-      d_cta1: "Создать пробный сайт сейчас", d_cta2: "Сколько стоит оставить его себе",
-      d_trust1: "Без обязательств", d_trust2: "Готов за минуты", d_trust3: "Онлайн 4 дня",
-      d_p1v: "0 kr", d_p1l: "за попробовать — без привязки", d_p2v: "4 дня", d_p2l: "пробный сайт онлайн и принимает клиентов", d_p3l: "чтобы оставить, от 490 kr/мес",
-      d_s_eyebrow: "Начать", d_s_title: "Адрес сайта + e-mail. И всё.",
-      d_s_copy: "Никаких анкет и встреч. ИИ сам возьмёт логотип, цвета и контент — и вы сразу попадёте на готовый пробный сайт.",
-      d_f_url_label: "Адрес вашего сайта — или название компании, если сайта нет *",
-      d_f_url_ph: "Напр. www.vashafirma.ru или Автосервис Иванов",
-      d_f_email_label: "Ваш e-mail *", d_f_email_note: "(туда придёт ссылка на ваш сайт)", d_f_email_ph: "vy@vashafirma.ru",
-      d_f_tier_label: "Выберите уровень — чем лучше подписка, тем профессиональнее сайт и больше функций",
-      d_t_badge: "Выбор большинства",
-      d_t1_f1: "Аккуратный профессиональный одностраничник", d_t1_f2: "Услуги и форма обратной связи",
-      d_t2_f1: "Всё из Basis", d_t2_f2: "+ ИИ-администратор, отвечающий клиентам", d_t2_f3: "+ акции, цены и FAQ",
-      d_t3_f1: "Всё из Standard", d_t3_f2: "+ команда с фото и контактами", d_t3_f3: "+ приоритетная поддержка",
-      d_f_desc_label: "Расскажите о вашей компании", d_f_desc_note: "(необязательно, но сайт получится намного лучше)",
-      d_f_desc_ph: "Что для вас важнее всего? Какие товары, услуги и цены показать? Напр.: «Шиномонтаж и хранение шин, фикс-цена 899 kr, запись на этой неделе.»",
-      d_f_details: "Необязательно: телефон и отрасль", d_f_phone: "Телефон", d_f_industry: "Отрасль", d_f_industry_ph: "Напр. автосервис, парикмахерская, ресторан",
-      d_f_submit: "Покажите мой новый сайт →", d_f_building: "Строим пробный сайт…",
-      d_step1: "Читаем ваш сайт…", d_step2: "Подбираем шаблон и цвета…", d_step3: "Пишем тексты для вашей отрасли…", d_step4: "Создаём профессиональные изображения…", d_step5: "Собираем пробный сайт…", d_step6: "Публикуем сайт…",
-      d_su_title: "Ваш пробный сайт готов!", d_su_p: "Перенаправляем вас…", d_su_link: "Открыть мой пробный сайт →",
-      d_su_small: "Онлайн 4 дня. Закажите прямо на сайте, если хотите его оставить — иначе он исчезнет сам.",
-      d_err_fill: "Укажите адрес сайта или название компании и корректный e-mail.", d_err_generic: "Что-то пошло не так. Попробуйте ещё раз или напишите нам.",
-      d_done: "Готово! Перенаправляем на ваш новый сайт…",
-      d_pk_eyebrow: "Цены, чтобы оставить сайт", d_pk_title: "Пробный сайт бесплатен — вот сколько стоит сделать его вашим",
-      d_pk_copy: "Все пакеты включают техническую настройку, мобильный дизайн, хостинг, SSL и понятный процесс до утверждённого сайта.",
-      d_benefits_t: "Все клиенты DemoSites получают:",
-      d_benefits: "✓ 30 мин бесплатной консультации — анализ бизнеса и предложения &nbsp;·&nbsp; ✓ <strong>Скидка 60&nbsp;%</strong> на часы разработки: 596 kr/ч (обычно 1&nbsp;490 kr/ч) &nbsp;·&nbsp; ✓ SEO и оптимизация Google — доп. опция за 490 kr (разовый платёж)",
-      d_c1_t: "Цифровое присутствие", d_c1_p: "Для компаний, которым нужен красивый и надёжный сайт — быстро.",
-      d_setup: "запуск", d_permonth: "в месяц",
-      d_c1_f1: "Полный одностраничник со всеми разделами", d_c1_f2: "Логотип, цвета, тексты и изображения", d_c1_f3: "Хостинг, SSL и форма обратной связи", d_c1_f4: "Одно небольшое изменение в месяц",
-      d_c1_cta: "Попробовать Basis",
-      d_c2_t: "Standard — машина лидов", d_c2_p: "Сайт + ИИ-администратор ChatGenius, принимающий заявки после закрытия.",
-      d_c2_f1: "Расширенный одностраничник: услуги, цены и FAQ", d_c2_f2: "Всё из Basis", d_c2_f3: "ИИ-администратор ChatGenius", d_c2_f4: "Собирает лиды и контакты", d_c2_f5: "Базовое локальное SEO",
-      d_c2_cta: "Попробовать Standard",
-      d_c3_t: "Цифровой администратор", d_c3_p: "Для компаний, которым нужно больше структуры, автоматизации и приоритетное сопровождение.",
-      d_c3_f1: "Индивидуальный одностраничник со всем контентом", d_c3_f2: "Продвинутый ИИ-бот", d_c3_f3: "Готов к бронированию, ценам и записи", d_c3_f4: "Приоритетная поддержка",
-      d_c3_cta: "Попробовать Premium",
-      d_pr_eyebrow: "Как это работает", d_pr_title: "От формы до живого сайта за минуты",
-      d_pr_copy: "Без встреч, без ожидания, без обязательств, пока вы сами не скажете «да».",
-      d_pr1_t: "Расскажите, кто вы", d_pr1_p: "Достаточно названия компании и e-mail. Если сайт уже есть, мы автоматически возьмём логотип, изображения и контент.",
-      d_pr2_t: "ИИ строит пробный сайт", d_pr2_p: "Тексты для вашей отрасли, ваши цвета и профессиональные изображения. Форма обратной связи работает с первой секунды.",
-      d_pr3_t: "Онлайн 4 дня — решаете вы", d_pr3_p: "Поделитесь ссылкой, проверьте на телефоне, получайте настоящие заявки. Понравилось — закажите в один клик, и сайт ваш.",
-      d_ct_eyebrow: "Хотите поговорить с человеком?", d_ct_title: "Мы с радостью поможем",
-      d_ct_copy: "Забронируйте короткий звонок или напишите на почту — сделаем пробный сайт вместе с вами.",
-      d_ct_book: "Забронировать звонок",
-      d_chk_t: "Полезно знать", d_chk1: "Пробный сайт бесплатен и ни к чему не обязывает", d_chk2: "Он онлайн 4 дня и принимает настоящие заявки", d_chk3: "Дизайн и стиль меняются в один клик", d_chk4: "При заказе сайт публикуется с собственным доменом", d_chk5: "Весь контент можно поправить до публикации",
-      a_title: "Не демо — готовые приложения по подписке.",
-      a_copy: "Astro, Family, Spanish и другие: ИИ-приложения, которые работают и используются каждый день. Подписка картой, отмена в любой момент — без привязки дольше месяца.",
-      a_eyebrow: "Приложения ChatGenius.pro", a_header_cta: "Смотреть приложения",
-      a_banner: "🎉 Подписка активна! Чек и доступ — в вашей почте.",
-      a_note: "Все цены включают обслуживание, обновления и поддержку. Оплата безопасно через Stripe. Вопросы?",
-      a_loading: "Загружаем приложения и цены…", a_none: "Сейчас нет доступных приложений.", a_err: "Не удалось загрузить приложения. Попробуйте позже.",
-      a_sub: "Подписаться", a_year: "Годовая цена", a_opening: "Открываем оплату…", a_soon_tag: "Скоро", a_sub_tag: "Подпишитесь сегодня", a_soon_price: "Скоро запуск", a_notify: "Сообщить мне", a_live: "Открыть приложение →", a_permonth: "/мес", a_peryear: "/год", a_or: "или"
-    }
-  };
-
+  var dict = window.CG_DICT || {};
   var LANG_NAMES = { no: "Norsk", fr: "Français", es: "Español", de: "Deutsch", ru: "Русский" };
+  var LANG_CODES = ["no", "fr", "es", "de", "ru"];
 
-  function detectLang() {
-    try {
-      var stored = localStorage.getItem("cg_lang");
-      if (stored && (stored === "no" || dict[stored])) return stored;
-    } catch (e) { /* private mode */ }
-    var nav = String((navigator.languages && navigator.languages[0]) || navigator.language || "").slice(0, 2).toLowerCase();
-    if (dict[nav]) return nav;
-    return "no";
+  function pathLang() {
+    var match = location.pathname.match(/^\/(fr|es|de|ru)(\/|$)/);
+    return match ? match[1] : "no";
   }
 
-  function apply(lang) {
-    var d = lang === "no" ? null : dict[lang];
-    document.documentElement.lang = lang;
-    document.querySelectorAll("[data-i18n]").forEach(function (el) {
-      var key = el.getAttribute("data-i18n");
-      if (el.dataset.cgOrig === undefined) el.dataset.cgOrig = el.innerHTML;
-      var value = d ? d[key] : null;
-      el.innerHTML = value != null ? value : el.dataset.cgOrig;
-    });
-    document.querySelectorAll("[data-i18n-ph]").forEach(function (el) {
-      var key = el.getAttribute("data-i18n-ph");
-      if (el.dataset.cgOrigPh === undefined) el.dataset.cgOrigPh = el.getAttribute("placeholder") || "";
-      var value = d ? d[key] : null;
-      el.setAttribute("placeholder", value != null ? value : el.dataset.cgOrigPh);
-    });
-    window.CG_LANG = lang;
-    try { localStorage.setItem("cg_lang", lang); } catch (e) { /* private mode */ }
-    document.querySelectorAll(".lang-switch").forEach(function (sel) { sel.value = lang; });
+  function targetPath(lang) {
+    var path = location.pathname.replace(/^\/(fr|es|de|ru)(?=\/|$)/, "");
+    if (path === "") path = "/";
+    return (lang === "no" ? "" : "/" + lang) + path + location.hash;
   }
+
+  var lang = pathLang();
+  window.CG_LANG = lang;
 
   window.CG_T = function (key, fallback) {
-    var d = window.CG_LANG && window.CG_LANG !== "no" ? dict[window.CG_LANG] : null;
+    var d = window.CG_LANG !== "no" ? dict[window.CG_LANG] : null;
     var value = d ? d[key] : null;
     return value != null ? value : fallback;
   };
@@ -414,16 +33,37 @@
   function init() {
     document.querySelectorAll(".lang-switch").forEach(function (sel) {
       if (sel.options.length === 0) {
-        ["no", "fr", "es", "de", "ru"].forEach(function (code) {
+        LANG_CODES.forEach(function (code) {
           var opt = document.createElement("option");
           opt.value = code;
           opt.textContent = LANG_NAMES[code];
           sel.appendChild(opt);
         });
       }
-      sel.addEventListener("change", function () { apply(sel.value); });
+      sel.value = lang;
+      sel.addEventListener("change", function () {
+        try { localStorage.setItem("cg_lang", sel.value); } catch (e) { /* private mode */ }
+        location.href = targetPath(sel.value);
+      });
     });
-    apply(detectLang());
+
+    // Førstegangsbesøk på norsk side: send til lagret/nettleser-språk hvis
+    // det finnes en egen språkside for det. Eksplisitt valg av «Norsk»
+    // lagres som "no" og stopper videre omdirigering.
+    if (lang === "no") {
+      var stored = null;
+      try { stored = localStorage.getItem("cg_lang"); } catch (e) { /* private mode */ }
+      var pick = stored;
+      if (!pick) {
+        var nav = String((navigator.languages && navigator.languages[0]) || navigator.language || "").slice(0, 2).toLowerCase();
+        if (dict[nav]) pick = nav;
+      }
+      if (pick && pick !== "no" && dict[pick]) {
+        location.replace(targetPath(pick));
+        return;
+      }
+    }
+    try { localStorage.setItem("cg_lang", lang); } catch (e) { /* private mode */ }
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
