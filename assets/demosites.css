@@ -7,10 +7,9 @@
   padding: clamp(96px, 11vw, 148px) clamp(18px, 5vw, 72px) clamp(64px, 7vw, 96px);
   color: #fff;
   background:
-    radial-gradient(circle at 86% 18%, rgba(98, 86, 232, 0.36), transparent 32%),
-    radial-gradient(circle at 18% 78%, rgba(0, 140, 122, 0.26), transparent 34%),
-    linear-gradient(135deg, rgba(21, 21, 26, 0.98), rgba(21, 21, 26, 0.88)),
-    var(--ink);
+    radial-gradient(circle at 86% 18%, rgba(124, 92, 255, 0.34), transparent 34%),
+    radial-gradient(circle at 18% 78%, rgba(34, 211, 238, 0.16), transparent 36%),
+    linear-gradient(135deg, rgba(5, 6, 13, 0.96), rgba(9, 11, 24, 0.88));
 }
 
 .landing-hero h1 {
@@ -24,7 +23,7 @@
 .landing-hero p:not(.eyebrow) {
   max-width: 720px;
   margin: 24px 0 0;
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(238, 241, 255, 0.72);
   font-size: clamp(1.02rem, 2vw, 1.26rem);
 }
 
@@ -32,27 +31,31 @@
   display: grid;
   gap: 1px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.16);
-  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--line);
+  box-shadow: var(--shadow), 0 0 40px rgba(110, 86, 248, 0.16);
 }
 
 .landing-panel div {
   display: grid;
   gap: 8px;
   padding: 24px;
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(19, 23, 52, 0.72);
 }
 
 .landing-panel strong {
   font-size: clamp(2rem, 4vw, 3.4rem);
   line-height: 0.95;
   letter-spacing: -0.06em;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .landing-panel span {
-  color: rgba(255, 255, 255, 0.68);
+  color: rgba(238, 241, 255, 0.68);
 }
 
 .pricing-grid {
@@ -68,18 +71,19 @@
   gap: 16px;
   align-content: start;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 26px;
-  background: var(--surface);
-  box-shadow: 0 18px 48px rgba(21, 21, 26, 0.08);
+  background: linear-gradient(180deg, var(--surface), rgba(11, 14, 28, 0.7));
+  box-shadow: 0 18px 48px rgba(2, 4, 14, 0.4);
 }
 
 .pricing-card.is-featured {
   color: #fff;
-  border-color: rgba(255, 101, 66, 0.34);
+  border-color: rgba(124, 92, 255, 0.5);
   background:
-    radial-gradient(circle at 85% 12%, rgba(255, 101, 66, 0.34), transparent 30%),
-    linear-gradient(135deg, #15151a, #262339);
+    radial-gradient(circle at 85% 12%, rgba(124, 92, 255, 0.4), transparent 34%),
+    linear-gradient(135deg, #0b0e1c, #191436);
+  box-shadow: 0 24px 64px rgba(2, 4, 14, 0.55), 0 0 46px rgba(110, 86, 248, 0.24);
   transform: translateY(-10px);
 }
 
@@ -89,14 +93,15 @@
   padding: 7px 11px;
   color: #fff;
   background: var(--teal);
-  font-size: 0.76rem;
-  font-weight: 850;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.74rem;
+  font-weight: 750;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .pricing-card.is-featured .package-label {
-  background: var(--coral);
+  background: var(--accent-gradient);
 }
 
 .pricing-card h3 {
@@ -114,7 +119,7 @@
 .pricing-card.is-featured p,
 .pricing-card.is-featured li,
 .pricing-card.is-featured .price-line span {
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(238, 241, 255, 0.74);
 }
 
 .price-line {
@@ -127,7 +132,7 @@
 }
 
 .pricing-card.is-featured .price-line {
-  border-color: rgba(255, 255, 255, 0.14);
+  border-color: rgba(148, 163, 255, 0.24);
 }
 
 .price-line strong {
@@ -152,7 +157,7 @@
 
 .landing-checklist {
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 24px;
   background: var(--surface-strong);
 }
@@ -170,10 +175,12 @@
   align-items: center;
   padding: clamp(46px, 7vw, 82px) clamp(18px, 5vw, 72px);
   color: #fff;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
   background:
-    linear-gradient(135deg, rgba(98, 86, 232, 0.28), transparent 40%),
-    linear-gradient(315deg, rgba(0, 140, 122, 0.22), transparent 36%),
-    var(--ink);
+    radial-gradient(circle at 88% 20%, rgba(124, 92, 255, 0.3), transparent 42%),
+    radial-gradient(circle at 8% 88%, rgba(34, 211, 238, 0.14), transparent 38%),
+    rgba(9, 11, 24, 0.7);
 }
 
 .demosites-promo h2 {
@@ -186,26 +193,31 @@
 .demosites-promo p {
   max-width: 760px;
   margin: 18px 0 0;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(238, 241, 255, 0.7);
 }
 
 .promo-price {
   display: grid;
   gap: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 255, 0.28);
+  border-radius: 16px;
   padding: 24px;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(19, 23, 52, 0.66);
+  box-shadow: 0 0 40px rgba(110, 86, 248, 0.16);
 }
 
 .promo-price strong {
   font-size: clamp(2.2rem, 5vw, 4.2rem);
   letter-spacing: -0.07em;
   line-height: 0.95;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .promo-price span {
-  color: rgba(255, 255, 255, 0.66);
+  color: rgba(238, 241, 255, 0.66);
 }
 
 @media (max-width: 900px) {
