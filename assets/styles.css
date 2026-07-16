@@ -149,6 +149,29 @@ textarea {
   background: rgba(110, 86, 248, 0.18);
 }
 
+.header-right {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lang-switch {
+  height: 38px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(12, 14, 28, 0.7);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.lang-switch:focus {
+  outline: 2px solid var(--teal);
+}
+
 .header-action {
   justify-self: end;
   padding: 10px 16px;

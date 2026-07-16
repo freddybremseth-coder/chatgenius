@@ -41,30 +41,33 @@
       <span>ChatGenius.pro</span>
     </a>
     <nav class="site-nav" aria-label="Hovedmeny">
-      <a href="/apper/">Apper</a>
-      <a href="/demosites/">Prøveside</a>
-      <a href="/#contact">Kontakt</a>
+      <a href="/apper/" data-i18n="nav_apps">Apper</a>
+      <a href="/demosites/" data-i18n="nav_trial">Prøveside</a>
+      <a href="/#contact" data-i18n="nav_contact">Kontakt</a>
     </nav>
-    <a class="header-action" href="#apps">Se appene</a>
+    <div class="header-right">
+      <select class="lang-switch" aria-label="Språk / Language"></select>
+      <a class="header-action" href="#apps" data-i18n="a_header_cta">Se appene</a>
+    </div>
   </header>
 
   <main class="apps-wrap" id="apps">
-    <p class="eyebrow">Apper fra ChatGenius.pro</p>
-    <h1 style="margin:6px 0 10px">Ikke demoer — ferdige apper du abonnerer på.</h1>
-    <p style="max-width:640px;color:var(--muted)">
+    <p class="eyebrow" data-i18n="a_eyebrow">Apper fra ChatGenius.pro</p>
+    <h1 style="margin:6px 0 10px" data-i18n="a_title">Ikke demoer — ferdige apper du abonnerer på.</h1>
+    <p style="max-width:640px;color:var(--muted)" data-i18n="a_copy">
       Astro, Family, Spanish og flere: AI-drevne apper som er live og i daglig bruk.
       Abonner med kort, avslutt når du vil — ingen bindingstid utover måneden.
     </p>
 
-    <div class="subscribed-banner" id="subscribed-banner">🎉 Abonnementet er aktivt! Sjekk e-posten din for kvittering og innlogging.</div>
+    <div class="subscribed-banner" id="subscribed-banner" data-i18n="a_banner">🎉 Abonnementet er aktivt! Sjekk e-posten din for kvittering og innlogging.</div>
 
     <div class="apps-grid" id="apps-grid">
-      <div class="apps-loading">Henter apper og priser…</div>
+      <div class="apps-loading" data-i18n="a_loading">Henter apper og priser…</div>
     </div>
 
     <p class="apps-note">
-      Alle priser inkluderer drift, oppdateringer og support. Betaling håndteres sikkert av Stripe.
-      Spørsmål? <a href="mailto:post@chatgenius.pro">post@chatgenius.pro</a>
+      <span data-i18n="a_note">Alle priser inkluderer drift, oppdateringer og support. Betaling håndteres sikkert av Stripe.
+      Spørsmål?</span> <a href="mailto:post@chatgenius.pro">post@chatgenius.pro</a>
     </p>
   </main>
 
@@ -73,9 +76,11 @@
     <a href="#apps">Til toppen</a>
   </footer>
 
+  <script src="../assets/i18n.js"></script>
   <script>
     (function () {
       var API_BASE = "https://realtyflow.chatgenius.pro";
+      var T = window.CG_T || function (key, fallback) { return fallback; };
       var grid = document.getElementById("apps-grid");
 
       // Fallback marketing copy + images when the database rows are sparse.
@@ -101,18 +106,18 @@
           var img = app.screenshot_url || known.img || "../logo.jpeg";
           var desc = app.description || known.desc || "AI-drevet app fra ChatGenius.pro.";
           var priceHtml = app.subscribable
-            ? '<div class="sub-price">' + esc(fmtPrice(app.price_monthly, app.currency)) + '<span>/mnd' + (app.price_yearly ? " · eller " + esc(fmtPrice(app.price_yearly, app.currency)) + "/år" : "") + "</span></div>"
-            : '<div class="sub-price"><span>Lanseres snart</span></div>';
+            ? '<div class="sub-price">' + esc(fmtPrice(app.price_monthly, app.currency)) + "<span>" + esc(T("a_permonth", "/mnd")) + (app.price_yearly ? " · " + esc(T("a_or", "eller")) + " " + esc(fmtPrice(app.price_yearly, app.currency)) + esc(T("a_peryear", "/år")) : "") + "</span></div>"
+            : '<div class="sub-price"><span>' + esc(T("a_soon_price", "Lanseres snart")) + "</span></div>";
           var actions = app.subscribable
-            ? '<div class="sub-actions"><button class="sub-btn" data-app="' + esc(app.slug) + '" data-plan="monthly">Abonner</button>' +
-              (app.price_yearly ? '<button class="sub-btn secondary" data-app="' + esc(app.slug) + '" data-plan="yearly">Årspris</button>' : "") + "</div>"
-            : '<div class="sub-actions"><a class="sub-btn secondary" style="display:flex;align-items:center;justify-content:center;text-decoration:none" href="mailto:post@chatgenius.pro?subject=' + encodeURIComponent(app.name) + '">Gi meg beskjed</a></div>';
-          var openLink = app.live_url ? '<a href="' + esc(app.live_url) + '" target="_blank" rel="noopener" style="font-size:0.82rem">Se appen live →</a>' : "";
+            ? '<div class="sub-actions"><button class="sub-btn" data-app="' + esc(app.slug) + '" data-plan="monthly">' + esc(T("a_sub", "Abonner")) + "</button>" +
+              (app.price_yearly ? '<button class="sub-btn secondary" data-app="' + esc(app.slug) + '" data-plan="yearly">' + esc(T("a_year", "Årspris")) + "</button>" : "") + "</div>"
+            : '<div class="sub-actions"><a class="sub-btn secondary" style="display:flex;align-items:center;justify-content:center;text-decoration:none" href="mailto:post@chatgenius.pro?subject=' + encodeURIComponent(app.name) + '">' + esc(T("a_notify", "Gi meg beskjed")) + "</a></div>";
+          var openLink = app.live_url ? '<a href="' + esc(app.live_url) + '" target="_blank" rel="noopener" style="font-size:0.82rem">' + esc(T("a_live", "Se appen live →")) + "</a>" : "";
           return (
             '<article class="sub-card">' +
               '<img src="' + esc(img) + '" alt="' + esc(app.name) + '" loading="lazy">' +
               '<div class="sub-body">' +
-                '<span class="sub-tag' + (app.subscribable ? "" : " soon") + '">' + (app.subscribable ? "Abonnér i dag" : "Kommer") + "</span>" +
+                '<span class="sub-tag' + (app.subscribable ? "" : " soon") + '">' + esc(app.subscribable ? T("a_sub_tag", "Abonnér i dag") : T("a_soon_tag", "Kommer")) + "</span>" +
                 "<h3>" + esc(app.name) + "</h3>" +
                 '<p class="desc">' + esc(desc) + "</p>" +
                 priceHtml + actions +
@@ -121,12 +126,12 @@
             "</article>"
           );
         }).join("");
-        grid.innerHTML = cards || '<div class="apps-loading">Ingen apper tilgjengelig akkurat nå.</div>';
+        grid.innerHTML = cards || '<div class="apps-loading">' + esc(T("a_none", "Ingen apper tilgjengelig akkurat nå.")) + "</div>";
 
         grid.querySelectorAll("button[data-app]").forEach(function (button) {
           button.addEventListener("click", function () {
             button.disabled = true;
-            button.textContent = "Åpner betaling…";
+            button.textContent = T("a_opening", "Åpner betaling…");
             fetch(API_BASE + "/api/saas/subscribe", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -139,8 +144,8 @@
               })
               .catch(function (err) {
                 button.disabled = false;
-                button.textContent = "Abonner";
-                alert(err && err.message ? err.message : "Kunne ikke starte betalingen.");
+                button.textContent = T("a_sub", "Abonner");
+                alert(err && err.message ? err.message : T("a_err", "Kunne ikke starte betalingen."));
               });
           });
         });
@@ -150,10 +155,18 @@
         document.getElementById("subscribed-banner").style.display = "block";
       }
 
+      // Kortene bygges med oversatte strenger — render på nytt ved språkbytte.
+      var lastApps = null;
+      document.querySelectorAll(".lang-switch").forEach(function (sel) {
+        sel.addEventListener("change", function () {
+          if (lastApps) render(lastApps);
+        });
+      });
+
       fetch(API_BASE + "/api/saas/subscribe")
         .then(function (res) { return res.json(); })
-        .then(function (data) { render(data.apps || []); })
-        .catch(function () { grid.innerHTML = '<div class="apps-loading">Kunne ikke hente appene. Prøv igjen senere.</div>'; });
+        .then(function (data) { lastApps = data.apps || []; render(lastApps); })
+        .catch(function () { grid.innerHTML = '<div class="apps-loading">' + esc(T("a_err", "Kunne ikke hente appene. Prøv igjen senere.")) + "</div>"; });
     })();
   </script>
 </body>
