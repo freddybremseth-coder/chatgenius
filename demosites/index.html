@@ -3,56 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Prøveside – se din nye nettside gratis | ChatGenius.pro</title>
-  <meta name="description" content="Vi bygger en ekte prøveside for bedriften din på minutter — med dine farger, din logo og ditt innhold. Live i 4 dager, helt uforpliktende. Behold den fra 4 900 kr.">
+  <title>Gratis prøveside – se nettsiden før du kjøper | ChatGenius.pro</title>
+  <meta name="description" content="Se fem ekte DemoSites-design, lag en gratis prøveside og se steg for steg hvordan du fyller inn detaljer, velger pakke og kjøper siden sikkert med Stripe.">
   <meta name="theme-color" content="#05060d">
-  <meta property="og:title" content="Prøveside fra ChatGenius.pro — se din nye nettside gratis">
-  <meta property="og:description" content="Skriv inn bedriften din, så bygger AI-en en ekte prøveside på minutter. Live i 4 dager — behold den hvis du liker den.">
+  <meta property="og:title" content="Se din nye nettside før du kjøper | ChatGenius.pro">
+  <meta property="og:description" content="Fem moderne design, gratis prøveside i fire dager og sikker betaling med Stripe.">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="https://image.thum.io/get/width/1400/crop/900/noanimate/https://realtyflow.chatgenius.pro/demosites/preview/showcase-cinematic-2026">
   <link rel="icon" href="../logo.jpeg">
   <link rel="stylesheet" href="../assets/styles.css">
   <link rel="stylesheet" href="../assets/demosites.css">
-  <style>
-    .order-card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); padding: 28px; }
-    .order-card h3 { margin: 0 0 4px; }
-    .order-card p.lead-note { margin: 0 0 18px; color: var(--muted); font-size: 0.95rem; }
-    .order-grid { display: grid; gap: 12px; }
-    @media (min-width: 720px) { .order-grid { grid-template-columns: 1fr 1fr; } .order-grid .full { grid-column: 1 / -1; } }
-    .order-grid label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--ink-soft); }
-    .order-grid input, .order-grid select {
-      margin-top: 6px; width: 100%; height: 46px; border: 1px solid var(--line); border-radius: 12px;
-      padding: 0 14px; font: inherit; background: var(--paper); color: var(--ink); box-sizing: border-box;
-    }
-    .order-grid input:focus, .order-grid select:focus { outline: 2px solid var(--teal); border-color: var(--teal); }
-    .order-submit { margin-top: 16px; width: 100%; height: 54px; border: 0; border-radius: 14px; background: var(--teal); color: #fff; font: inherit; font-weight: 700; font-size: 1.05rem; cursor: pointer; }
-    .order-submit:hover { filter: brightness(1.06); }
-    .order-submit[disabled] { opacity: 0.75; cursor: progress; }
-    .order-progress { display: none; margin-top: 18px; padding: 16px; border-radius: 14px; background: var(--surface-strong); border: 1px solid var(--line); }
-    .order-progress .bar { height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; }
-    .order-progress .bar > span { display: block; height: 100%; width: 8%; border-radius: 99px; background: linear-gradient(90deg, var(--teal), var(--blue)); transition: width 1.1s ease; }
-    .order-progress p { margin: 10px 0 0; font-size: 0.9rem; color: var(--ink-soft); }
-    .order-error { display: none; margin-top: 14px; padding: 12px 14px; border-radius: 12px; background: rgba(248, 81, 73, 0.14); color: #ff9088; font-size: 0.9rem; }
-    .order-success { display: none; margin-top: 4px; text-align: center; padding: 10px 4px; }
-    .order-success .big-check { font-size: 44px; }
-    .order-success a.preview-link { display: inline-block; margin-top: 14px; padding: 15px 26px; border-radius: 14px; background: var(--teal); color: #fff; font-weight: 700; text-decoration: none; }
-    .order-success p.small { color: var(--muted); font-size: 0.9rem; margin-top: 12px; }
-    .trust-row { display: flex; flex-wrap: wrap; gap: 14px 26px; margin-top: 18px; font-size: 0.88rem; color: var(--muted); }
-    .trust-row span::before { content: "✓ "; color: var(--teal); font-weight: 700; }
-    .tier-grid { display: grid; gap: 10px; }
-    @media (min-width: 720px) { .tier-grid { grid-template-columns: 1fr 1fr 1fr; } }
-    .tier-card { display: block; cursor: pointer; border: 2px solid var(--line); border-radius: 14px; padding: 14px; font-size: 0.85rem; background: var(--paper); position: relative; }
-    .tier-card:has(input:checked) { border-color: var(--teal); background: rgba(110, 86, 248, 0.14); }
-    .tier-card input { position: absolute; opacity: 0; }
-    .tier-card strong { display: block; font-size: 0.95rem; }
-    .tier-card strong em { font-style: normal; font-size: 0.68rem; background: var(--teal); color: #fff; border-radius: 99px; padding: 2px 8px; margin-left: 6px; vertical-align: 2px; }
-    .tier-card .tier-price { display: block; color: var(--muted); font-size: 0.78rem; margin: 3px 0 8px; }
-    .tier-card ul { margin: 0; padding-left: 16px; color: var(--ink-soft); }
-    .tier-card ul li { margin-bottom: 2px; }
-    .tier-card.is-featured { border-color: color-mix(in srgb, var(--teal) 45%, var(--line)); }
-    .seller-link { color: inherit; opacity: 0.7; text-decoration: none; }
-    .seller-link:hover { opacity: 1; text-decoration: underline; }
-  </style>
-  <!-- i18n:hreflang -->
   <link rel="canonical" href="https://www.chatgenius.pro/demosites/">
   <link rel="alternate" hreflang="no" href="https://www.chatgenius.pro/demosites/">
   <link rel="alternate" hreflang="fr" href="https://www.chatgenius.pro/fr/demosites/">
@@ -60,269 +20,188 @@
   <link rel="alternate" hreflang="de" href="https://www.chatgenius.pro/de/demosites/">
   <link rel="alternate" hreflang="ru" href="https://www.chatgenius.pro/ru/demosites/">
   <link rel="alternate" hreflang="x-default" href="https://www.chatgenius.pro/demosites/">
-  <!-- /i18n:hreflang -->
+  <style>
+    .order-card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); padding: 28px; }
+    .order-grid { display: grid; gap: 12px; }
+    @media (min-width: 720px) { .order-grid { grid-template-columns: 1fr 1fr; } .order-grid .full { grid-column: 1 / -1; } }
+    .order-grid label { display: block; font-size: .85rem; font-weight: 600; color: var(--ink-soft); }
+    .order-grid input, .order-grid select, .order-card textarea { margin-top: 6px; width: 100%; border: 1px solid var(--line); border-radius: 12px; padding: 0 14px; font: inherit; background: var(--paper); color: var(--ink); box-sizing: border-box; }
+    .order-grid input, .order-grid select { height: 46px; }
+    .order-card textarea { padding: 12px 14px; resize: vertical; }
+    .order-grid input:focus, .order-grid select:focus, .order-card textarea:focus { outline: 2px solid var(--teal); border-color: var(--teal); }
+    .order-submit { margin-top: 16px; width: 100%; min-height: 54px; border: 0; border-radius: 14px; background: var(--teal); color: #fff; font: inherit; font-weight: 800; font-size: 1.05rem; cursor: pointer; }
+    .order-submit:hover { filter: brightness(1.06); }
+    .order-submit[disabled] { opacity: .75; cursor: progress; }
+    .order-progress { display: none; margin-top: 18px; padding: 16px; border-radius: 14px; background: var(--surface-strong); border: 1px solid var(--line); }
+    .order-progress .bar { height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; }
+    .order-progress .bar > span { display: block; height: 100%; width: 8%; border-radius: 99px; background: linear-gradient(90deg, var(--teal), var(--blue)); transition: width 1.1s ease; }
+    .order-progress p { margin: 10px 0 0; font-size: .9rem; color: var(--ink-soft); }
+    .order-error { display: none; margin-top: 14px; padding: 12px 14px; border-radius: 12px; background: rgba(248,81,73,.14); color: #ff9088; font-size: .9rem; }
+    .order-success { display: none; text-align: center; padding: 10px 4px; }
+    .order-success .big-check { font-size: 44px; }
+    .order-success a { display: inline-block; margin-top: 14px; padding: 15px 26px; border-radius: 14px; background: var(--teal); color: #fff; font-weight: 700; text-decoration: none; }
+    .trust-row { display: flex; flex-wrap: wrap; gap: 14px 26px; margin-top: 18px; font-size: .88rem; color: var(--muted); }
+    .trust-row span::before { content: "✓ "; color: var(--teal); font-weight: 700; }
+    .tier-grid { display: grid; gap: 10px; }
+    @media (min-width: 720px) { .tier-grid { grid-template-columns: repeat(3, 1fr); } }
+    .tier-card { display: block; cursor: pointer; border: 2px solid var(--line); border-radius: 14px; padding: 14px; font-size: .85rem; background: var(--paper); position: relative; }
+    .tier-card:has(input:checked) { border-color: var(--teal); background: rgba(110,86,248,.14); }
+    .tier-card input { position: absolute; opacity: 0; }
+    .tier-card strong { display: block; font-size: .95rem; }
+    .tier-card strong em { font-style: normal; font-size: .68rem; background: var(--teal); color: #fff; border-radius: 99px; padding: 2px 8px; margin-left: 6px; }
+    .tier-price { display: block; color: var(--muted); font-size: .78rem; margin: 3px 0 8px; }
+    .tier-card ul { margin: 0; padding-left: 16px; color: var(--ink-soft); }
+    .showcase-grid { display: grid; gap: 22px; }
+    @media (min-width: 760px) { .showcase-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } .showcase-card:first-child { grid-column: 1 / -1; } }
+    .showcase-card { overflow: hidden; border: 1px solid var(--line); border-radius: 22px; background: var(--surface); box-shadow: var(--shadow); }
+    .browser-bar { display: flex; align-items: center; gap: 7px; height: 38px; padding: 0 14px; border-bottom: 1px solid var(--line); background: var(--surface-strong); }
+    .browser-bar i { display: block; width: 9px; height: 9px; border-radius: 50%; background: var(--line); }
+    .browser-bar span { margin-left: 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .72rem; color: var(--muted); }
+    .showcase-shot { display: block; width: 100%; aspect-ratio: 16/9; object-fit: cover; object-position: top; background: #0b1020; }
+    .showcase-copy { padding: 20px; }
+    .showcase-copy h3 { margin: 0 0 6px; }
+    .showcase-copy p { margin: 0 0 16px; color: var(--muted); }
+    .showcase-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 16px; }
+    .showcase-tags span { padding: 5px 9px; border: 1px solid var(--line); border-radius: 999px; font-size: .72rem; color: var(--ink-soft); }
+    .tour-grid { display: grid; gap: 24px; }
+    @media (min-width: 920px) { .tour-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    .tour-card { border: 1px solid var(--line); border-radius: 22px; background: var(--surface); overflow: hidden; box-shadow: var(--shadow); }
+    .tour-shot { width: 100%; aspect-ratio: 16/9; object-fit: cover; object-position: top; display: block; background: #0b1020; }
+    .tour-copy { padding: 22px; }
+    .tour-number { display: inline-flex; width: 38px; height: 38px; align-items: center; justify-content: center; border-radius: 12px; background: var(--teal); color: #fff; font-weight: 900; }
+    .tour-copy h3 { margin: 14px 0 8px; }
+    .tour-copy p { margin: 0; color: var(--muted); }
+    .delivery-grid { display: grid; gap: 18px; }
+    @media (min-width: 800px) { .delivery-grid { grid-template-columns: repeat(3,1fr); } }
+    .delivery-card { padding: 24px; border-radius: 20px; border: 1px solid var(--line); background: var(--surface); }
+    .delivery-card strong { display: block; margin-bottom: 8px; font-size: 1.05rem; }
+    .delivery-card p { margin: 0; color: var(--muted); }
+    .payment-note { margin-top: 22px; padding: 18px 20px; border: 1px solid rgba(34,211,238,.3); border-radius: 16px; background: rgba(34,211,238,.08); color: var(--ink-soft); }
+    .seller-link { color: inherit; opacity: .7; text-decoration: none; }
+  </style>
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="/" aria-label="ChatGenius.pro hjem">
-      <img src="../logo.jpeg" alt="" width="40" height="40">
-      <span>ChatGenius.pro</span>
-    </a>
+    <a class="brand" href="/" aria-label="ChatGenius.pro hjem"><img src="../logo.jpeg" alt="" width="40" height="40"><span>ChatGenius.pro</span></a>
     <nav class="site-nav" aria-label="Hovedmeny">
-      <a href="/demosites/" data-i18n="d_nav_trial">Prøveside</a>
-      <a href="#packages" data-i18n="d_nav_prices">Priser</a>
-      <a href="#process" data-i18n="d_nav_how">Slik fungerer det</a>
-      <a href="#start" data-i18n="d_nav_start">Kom i gang</a>
+      <a href="#showcase">Demoer</a><a href="#start">Lag prøveside</a><a href="#guide">Steg for steg</a><a href="#packages">Priser</a>
     </nav>
-    <div class="header-right">
-      <select class="lang-switch" aria-label="Språk / Language"></select>
-      <a class="header-action" href="#start" data-i18n="d_cta">Lag prøvesiden min</a>
-    </div>
+    <div class="header-right"><select class="lang-switch" aria-label="Språk / Language"></select><a class="header-action" href="#start">Lag prøvesiden min</a></div>
   </header>
 
   <main id="top">
     <section class="landing-hero" aria-labelledby="landing-title">
       <div>
-        <p class="eyebrow" data-i18n="d_hero_eyebrow">Prøveside fra ChatGenius.pro</p>
-        <h1 id="landing-title" data-i18n="d_h1">Se den nye nettsiden din — før du betaler en krone.</h1>
-        <p data-i18n="d_copy">
-          Skriv inn nettadressen din, så bygger AI-en en ekte prøveside på minutter: dine farger, din logo,
-          tekst for din bransje og profesjonelle bilder. Du sendes rett til den ferdige siden — live i 4 dager.
-          Liker du den, beholder du den. Hvis ikke, forsvinner den av seg selv.
-        </p>
-        <div class="hero-actions">
-          <a class="button button-primary" href="#start" data-i18n="d_cta1">Lag prøvesiden min nå</a>
-          <a class="button button-secondary" href="#packages" data-i18n="d_cta2">Se hva det koster å beholde den</a>
-        </div>
-        <div class="trust-row">
-          <span data-i18n="d_trust1">Helt uforpliktende</span>
-          <span data-i18n="d_trust2">Klar på minutter</span>
-          <span data-i18n="d_trust3">Live i 4 dager</span>
-        </div>
+        <p class="eyebrow">Gratis prøveside fra ChatGenius.pro</p>
+        <h1 id="landing-title">Se den nye nettsiden din — før du betaler en krone.</h1>
+        <p>Skriv inn nettadressen eller bedriftsnavnet. Systemet analyserer virksomheten, velger riktig bransje, skriver innhold og finner et godt hero-bilde. Finnes det ikke et godt bilde, lager AI-en et nytt. Du får en ferdig side som er live i fire dager.</p>
+        <div class="hero-actions"><a class="button button-primary" href="#start">Lag prøvesiden min nå</a><a class="button button-secondary" href="#showcase">Se fem ekte demoer</a></div>
+        <div class="trust-row"><span>0 kr å prøve</span><span>Ingen binding</span><span>Sikker betaling med Stripe</span><span>Hosting og SSL inkludert</span></div>
       </div>
       <div class="landing-panel" aria-label="Nøkkeltall">
-        <div>
-          <strong data-i18n="d_p1v">0 kr</strong>
-          <span data-i18n="d_p1l">å prøve — ingen binding</span>
-        </div>
-        <div>
-          <strong data-i18n="d_p2v">4 dager</strong>
-          <span data-i18n="d_p2l">prøvesiden er live og mottar kunder</span>
-        </div>
-        <div>
-          <strong>4 900 kr</strong>
-          <span data-i18n="d_p3l">å beholde den, fra 490 kr/mnd</span>
-        </div>
+        <div><strong>5</strong><span>nye Signature 2026-design</span></div>
+        <div><strong>4 dager</strong><span>prøvesiden er live</span></div>
+        <div><strong>4 900 kr</strong><span>å beholde den, fra 490 kr/mnd</span></div>
+      </div>
+    </section>
+
+    <section id="showcase" class="sales-section" aria-labelledby="showcase-title">
+      <div class="section-heading"><p class="eyebrow">Ekte DemoSites</p><h2 id="showcase-title">Fem moderne uttrykk — samme enkle kjøpsprosess</h2><p>Demoene under er permanente, fiktive eksempler bygget av det samme systemet som lager kundesidene. Åpne dem i full størrelse og test på mobil.</p></div>
+      <div class="showcase-grid">
+        <article class="showcase-card">
+          <div class="browser-bar"><i></i><i></i><i></i><span>Nordlys Tannklinikk · Cinematic</span></div>
+          <img class="showcase-shot" loading="eager" src="https://image.thum.io/get/width/1600/crop/900/noanimate/https://realtyflow.chatgenius.pro/demosites/preview/showcase-cinematic-2026" alt="Skjermbilde av Cinematic DemoSite for en tannklinikk">
+          <div class="showcase-copy"><h3>Cinematic</h3><p>Filmisk fullskjerm, sterk hero og eksklusivt uttrykk for klinikk, rådgivning og premiumtjenester.</p><div class="showcase-tags"><span>Stor hero</span><span>Video-klar</span><span>Premium</span></div><a class="button button-primary" href="https://realtyflow.chatgenius.pro/demosites/preview/showcase-cinematic-2026?present=1" target="_blank" rel="noopener">Åpne Cinematic-demo</a></div>
+        </article>
+        <article class="showcase-card">
+          <div class="browser-bar"><i></i><i></i><i></i><span>Vestfold Bilservice · Bento</span></div>
+          <img class="showcase-shot" loading="lazy" src="https://image.thum.io/get/width/1400/crop/850/noanimate/https://realtyflow.chatgenius.pro/demosites/preview/showcase-bento-2026" alt="Skjermbilde av Bento DemoSite for bilverksted">
+          <div class="showcase-copy"><h3>Bento</h3><p>Modulært og tydelig design som gjør tjenester, priser og kontaktvalg raske å forstå.</p><div class="showcase-tags"><span>Bilverksted</span><span>Lokale tjenester</span><span>Konvertering</span></div><a class="button button-secondary" href="https://realtyflow.chatgenius.pro/demosites/preview/showcase-bento-2026?present=1" target="_blank" rel="noopener">Åpne Bento-demo</a></div>
+        </article>
+        <article class="showcase-card">
+          <div class="browser-bar"><i></i><i></i><i></i><span>Sandefjord Interiørstudio · Atelier</span></div>
+          <img class="showcase-shot" loading="lazy" src="https://image.thum.io/get/width/1400/crop/850/noanimate/https://realtyflow.chatgenius.pro/demosites/preview/showcase-atelier-2026" alt="Skjermbilde av Atelier DemoSite for interiørstudio">
+          <div class="showcase-copy"><h3>Atelier</h3><p>Redaksjonell, rolig og eksklusiv presentasjon for interiør, fotograf, designer og konsulent.</p><div class="showcase-tags"><span>Editorial</span><span>Interiør</span><span>Historiefortelling</span></div><a class="button button-secondary" href="https://realtyflow.chatgenius.pro/demosites/preview/showcase-atelier-2026?present=1" target="_blank" rel="noopener">Åpne Atelier-demo</a></div>
+        </article>
+        <article class="showcase-card">
+          <div class="browser-bar"><i></i><i></i><i></i><span>Momentum Trening · Kinetic</span></div>
+          <img class="showcase-shot" loading="lazy" src="https://image.thum.io/get/width/1400/crop/850/noanimate/https://realtyflow.chatgenius.pro/demosites/preview/showcase-kinetic-2026" alt="Skjermbilde av Kinetic DemoSite for treningssenter">
+          <div class="showcase-copy"><h3>Kinetic</h3><p>Energisk typografi, bevegelse og neonpreg for trening, teknologi og moderne merkevarer.</p><div class="showcase-tags"><span>Energi</span><span>Neon</span><span>Trening</span></div><a class="button button-secondary" href="https://realtyflow.chatgenius.pro/demosites/preview/showcase-kinetic-2026?present=1" target="_blank" rel="noopener">Åpne Kinetic-demo</a></div>
+        </article>
+        <article class="showcase-card">
+          <div class="browser-bar"><i></i><i></i><i></i><span>Fjord &amp; Fasade · Panorama</span></div>
+          <img class="showcase-shot" loading="lazy" src="https://image.thum.io/get/width/1400/crop/850/noanimate/https://realtyflow.chatgenius.pro/demosites/preview/showcase-panorama-2026" alt="Skjermbilde av Panorama DemoSite for tak og fasade">
+          <div class="showcase-copy"><h3>Panorama</h3><p>Bred, arkitektonisk og tillitsskapende presentasjon for bygg, eiendom, tak og fasade.</p><div class="showcase-tags"><span>Bygg</span><span>Arkitektur</span><span>Bred hero</span></div><a class="button button-secondary" href="https://realtyflow.chatgenius.pro/demosites/preview/showcase-panorama-2026?present=1" target="_blank" rel="noopener">Åpne Panorama-demo</a></div>
+        </article>
       </div>
     </section>
 
     <section id="start" class="sales-section" aria-labelledby="start-title">
-      <div class="section-heading">
-        <p class="eyebrow" data-i18n="d_s_eyebrow">Kom i gang</p>
-        <h2 id="start-title" data-i18n="d_s_title">Nettadresse + e-post. Det er alt.</h2>
-        <p data-i18n="d_s_copy">Ikke noe skjema, ingen møter. AI-en henter logo, farger og innhold selv — og du sendes rett til den ferdige prøvesiden.</p>
-      </div>
-
+      <div class="section-heading"><p class="eyebrow">Lag din egen</p><h2 id="start-title">Legg inn detaljene — AI-en gjør resten</h2><p>En eksisterende nettside gir best resultat. Har du ingen side, skriver du bedriftsnavn, bransje og en kort beskrivelse.</p></div>
       <div class="order-card" id="order-card">
         <form id="order-form" novalidate>
           <div class="order-grid">
-            <label><span data-i18n="d_f_url_label">Nettadressen din — eller bedriftsnavnet hvis du ikke har nettside *</span>
-              <input name="site_or_name" required placeholder="F.eks. www.bedriften.no eller Larvik Bilpleie AS" data-i18n-ph="d_f_url_ph">
-            </label>
-            <label><span data-i18n="d_f_email_label">Din e-post *</span> <span style="font-weight:400;color:var(--muted)" data-i18n="d_f_email_note">(hit sender vi lenken til siden din)</span>
-              <input name="customer_email" type="email" required autocomplete="email" placeholder="deg@bedriften.no" data-i18n-ph="d_f_email_ph">
-            </label>
+            <label>Nettadresse eller bedriftsnavn *<input name="site_or_name" required placeholder="www.bedriften.no eller Larvik Bilpleie AS"></label>
+            <label>E-post *<input name="customer_email" type="email" required autocomplete="email" placeholder="deg@bedriften.no"></label>
           </div>
-          <div style="margin-top:16px">
-            <p style="margin:0 0 8px;font-size:0.85rem;font-weight:600;color:var(--ink-soft)" data-i18n="d_f_tier_label">Velg nivå — bedre abonnement gir en mer profesjonell side med flere funksjoner</p>
+          <div style="margin-top:16px"><p style="margin:0 0 8px;font-size:.85rem;font-weight:600;color:var(--ink-soft)">Velg pakken du ønsker dersom du bestemmer deg for å beholde siden</p>
             <div class="tier-grid">
-              <label class="tier-card">
-                <input type="radio" name="package_id" value="basis">
-                <strong>Basis</strong>
-                <span class="tier-price">4 900 kr + 490/mnd</span>
-                <ul>
-                  <li data-i18n="d_t1_f1">Ren, proff one-pager</li>
-                  <li data-i18n="d_t1_f2">Tjenester og kontaktskjema</li>
-                </ul>
-              </label>
-              <label class="tier-card is-featured">
-                <input type="radio" name="package_id" value="standard" checked>
-                <strong>Standard <em data-i18n="d_t_badge">Mest valgt</em></strong>
-                <span class="tier-price">7 900 kr + 990/mnd</span>
-                <ul>
-                  <li data-i18n="d_t2_f1">Alt i Basis</li>
-                  <li data-i18n="d_t2_f2">+ AI-resepsjonist som svarer kunder</li>
-                  <li data-i18n="d_t2_f3">+ tilbud, priser og FAQ</li>
-                </ul>
-              </label>
-              <label class="tier-card">
-                <input type="radio" name="package_id" value="premium">
-                <strong>Premium</strong>
-                <span class="tier-price">14 900 kr + 1 990/mnd</span>
-                <ul>
-                  <li data-i18n="d_t3_f1">Alt i Standard</li>
-                  <li data-i18n="d_t3_f2">+ ansattliste med bilder og kontakt</li>
-                  <li data-i18n="d_t3_f3">+ prioritert support</li>
-                </ul>
-              </label>
+              <label class="tier-card"><input type="radio" name="package_id" value="basis"><strong>Basis</strong><span class="tier-price">4 900 kr + 490 kr/mnd</span><ul><li>Profesjonell one-pager</li><li>Hosting, SSL og kontaktskjema</li></ul></label>
+              <label class="tier-card"><input type="radio" name="package_id" value="standard" checked><strong>Standard <em>Mest valgt</em></strong><span class="tier-price">7 900 kr + 990 kr/mnd</span><ul><li>Alt i Basis</li><li>AI-resepsjonist, priser og FAQ</li></ul></label>
+              <label class="tier-card"><input type="radio" name="package_id" value="premium"><strong>Premium</strong><span class="tier-price">14 900 kr + 1 990 kr/mnd</span><ul><li>Alt i Standard</li><li>Utvidet innhold og prioritert support</li></ul></label>
             </div>
           </div>
-          <label style="display:block;margin-top:14px;font-size:0.85rem;font-weight:600;color:var(--ink-soft)"><span data-i18n="d_f_desc_label">Fortell om bedriften din</span> <span style="font-weight:400;color:var(--muted)" data-i18n="d_f_desc_note">(valgfritt, men gir en mye bedre side)</span>
-            <textarea name="business_description" rows="3" placeholder="Hva er viktigst for dere? Hvilke produkter, tjenester og priser vil dere fronte? F.eks. 'Vi fokuserer på dekkskift og hjulhotell, fastpris 899 kr, rask time samme uke.'" data-i18n-ph="d_f_desc_ph" style="margin-top:6px;width:100%;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;background:var(--paper);color:var(--ink);box-sizing:border-box;resize:vertical"></textarea>
-          </label>
-          <details style="margin-top:12px">
-            <summary style="cursor:pointer;font-size:0.88rem;color:var(--muted)" data-i18n="d_f_details">Valgfritt: telefon og bransje</summary>
-            <div class="order-grid" style="margin-top:12px">
-              <label><span data-i18n="d_f_phone">Telefon</span>
-                <input name="customer_phone" type="tel" autocomplete="tel" placeholder="+47 …">
-              </label>
-              <label><span data-i18n="d_f_industry">Bransje</span>
-                <input name="industry" placeholder="F.eks. bilverksted, frisør, restaurant" data-i18n-ph="d_f_industry_ph">
-              </label>
-            </div>
-          </details>
-          <button class="order-submit" type="submit" id="order-submit" data-i18n="d_f_submit">Vis meg den nye nettsiden min →</button>
+          <label style="display:block;margin-top:14px;font-size:.85rem;font-weight:600;color:var(--ink-soft)">Fortell om bedriften <span style="font-weight:400;color:var(--muted)">(valgfritt, men anbefalt)</span><textarea name="business_description" rows="3" placeholder="Viktigste tjenester, produkter, priser, områder og hva som skiller dere fra konkurrentene."></textarea></label>
+          <details style="margin-top:12px"><summary style="cursor:pointer;font-size:.88rem;color:var(--muted)">Valgfritt: telefon og bransje</summary><div class="order-grid" style="margin-top:12px"><label>Telefon<input name="customer_phone" type="tel" autocomplete="tel" placeholder="+47 …"></label><label>Bransje<input name="industry" placeholder="Tannlege, rådgiver, håndverker …"></label></div></details>
+          <button class="order-submit" type="submit" id="order-submit">Vis meg den nye nettsiden min →</button>
           <div class="order-error" id="order-error"></div>
         </form>
+        <div class="order-progress" id="order-progress" aria-live="polite"><div class="bar"><span id="order-progress-bar"></span></div><p id="order-progress-text">Starter…</p></div>
+        <div class="order-success" id="order-success"><div class="big-check">🎉</div><h3>Prøvesiden din er klar!</h3><p>Sender deg dit nå…</p><a id="order-preview-link" href="#" rel="noopener">Åpne prøvesiden min →</a><p style="color:var(--muted);font-size:.9rem">Live i fire dager. Bestill fra siden dersom du vil beholde den.</p></div>
+      </div>
+    </section>
 
-        <div class="order-progress" id="order-progress" aria-live="polite">
-          <div class="bar"><span id="order-progress-bar"></span></div>
-          <p id="order-progress-text">Starter…</p>
-        </div>
-
-        <div class="order-success" id="order-success">
-          <div class="big-check">🎉</div>
-          <h3 data-i18n="d_su_title">Prøvesiden din er klar!</h3>
-          <p data-i18n="d_su_p">Sender deg dit nå…</p>
-          <a class="preview-link" id="order-preview-link" href="#" rel="noopener" data-i18n="d_su_link">Åpne prøvesiden min →</a>
-          <p class="small" data-i18n="d_su_small">Live i 4 dager. Bestill fra siden hvis du vil beholde den — ellers forsvinner den av seg selv.</p>
-        </div>
+    <section id="guide" class="sales-section" aria-labelledby="guide-title">
+      <div class="section-heading"><p class="eyebrow">Steg for steg</p><h2 id="guide-title">Fra detaljer til ferdig kjøpt nettside</h2><p>Du betaler ingenting før du har sett den ferdige prøvesiden.</p></div>
+      <div class="tour-grid">
+        <article class="tour-card"><img class="tour-shot" loading="lazy" src="https://image.thum.io/get/width/1400/crop/900/noanimate/https://www.chatgenius.pro/demosites/#start" alt="Skjermbilde av skjemaet for å lage prøveside"><div class="tour-copy"><span class="tour-number">1</span><h3>Legg inn nettadresse og e-post</h3><p>Velg pakke og skriv gjerne hva dere vil fremheve. Har dere en gammel nettside, analyserer systemet innhold, bilder, tjenester og kontaktinformasjon.</p></div></article>
+        <article class="tour-card"><img class="tour-shot" loading="lazy" src="https://image.thum.io/get/width/1400/crop/900/noanimate/https://realtyflow.chatgenius.pro/demosites/preview/showcase-bento-2026" alt="Skjermbilde av ferdig DemoSite"><div class="tour-copy"><span class="tour-number">2</span><h3>Se den ferdige prøvesiden</h3><p>AI-en velger riktig bransje, skriver teksten og bruker et ekte kvalitetsbilde eller et nytt AI-bilde som hero. Siden fungerer på mobil og mottar henvendelser.</p></div></article>
+        <article class="tour-card"><img class="tour-shot" loading="lazy" src="https://image.thum.io/get/width/1400/crop/900/noanimate/https://realtyflow.chatgenius.pro/demosites/preview/showcase-cinematic-2026" alt="Skjermbilde av designvalg i DemoSites"><div class="tour-copy"><span class="tour-number">3</span><h3>Test design og innhold</h3><p>Bytt mellom de moderne designene, åpne siden på mobil og kontroller tekst, tjenester og bilder. Prøvesiden er tilgjengelig i fire dager.</p></div></article>
+        <article class="tour-card"><img class="tour-shot" loading="lazy" src="https://image.thum.io/get/width/1400/crop/900/noanimate/https://realtyflow.chatgenius.pro/demosites/claim/showcase-purchase-2026" alt="Skjermbilde av kjøpssiden for DemoSites"><div class="tour-copy"><span class="tour-number">4</span><h3>Kjøp sikkert med Stripe</h3><p>Klikk «Behold siden», kontroller pakken og betal i Stripe Checkout. Oppstartsbeløpet belastes én gang, og valgt månedsabonnement starter automatisk.</p></div></article>
       </div>
     </section>
 
     <section id="packages" class="sales-section" aria-labelledby="packages-title">
-      <div class="section-heading">
-        <p class="eyebrow" data-i18n="d_pk_eyebrow">Priser for å beholde siden</p>
-        <h2 id="packages-title" data-i18n="d_pk_title">Prøvesiden er gratis — dette koster det å gjøre den til din</h2>
-        <p data-i18n="d_pk_copy">Alle pakkene inkluderer teknisk oppsett, mobilvennlig design, hosting, SSL og en ryddig prosess frem til godkjent side.</p>
-      </div>
-
-      <div class="order-card" style="margin-bottom:26px">
-        <div class="order-grid" style="grid-template-columns:1fr;gap:8px">
-          <p style="margin:0;font-weight:700" data-i18n="d_benefits_t">Alle DemoSites-kunder får:</p>
-          <p style="margin:0;color:var(--muted)" data-i18n="d_benefits">✓ 30 min gratis samtale — vi analyserer bedriften din og foreslår tilpasninger &nbsp;·&nbsp; ✓ <strong>60&nbsp;% rabatt</strong> på utviklertimer: 596 kr/t (ordinært 1&nbsp;490 kr/t) &nbsp;·&nbsp; ✓ SEO & Google-optimalisering som tillegg for 490 kr (engangsbeløp)</p>
-        </div>
-      </div>
-
+      <div class="section-heading"><p class="eyebrow">Priser</p><h2 id="packages-title">Gratis å prøve — fast pris dersom du beholder siden</h2><p>Alle pakker inkluderer teknisk oppsett, mobilvennlig design, hosting, SSL og drift.</p></div>
       <div class="pricing-grid">
-        <article class="pricing-card">
-          <span class="package-label">Basis</span>
-          <h3 data-i18n="d_c1_t">Digital Tilstedeværelse</h3>
-          <p data-i18n="d_c1_p">For bedrifter som trenger en pen og trygg nettside raskt.</p>
-          <div class="price-line"><strong>4 900 kr</strong><span data-i18n="d_setup">oppstart</span></div>
-          <div class="price-line"><strong>490 kr</strong><span data-i18n="d_permonth">per måned</span></div>
-          <ul>
-            <li data-i18n="d_c1_f1">Komplett one-pager med alle seksjoner</li>
-            <li data-i18n="d_c1_f2">Logo, farger, tekst og bilder</li>
-            <li data-i18n="d_c1_f3">Hosting, SSL og kontaktskjema</li>
-            <li data-i18n="d_c1_f4">Én liten månedlig endring</li>
-          </ul>
-          <a class="button button-secondary" href="#start" data-package="basis" data-i18n="d_c1_cta">Prøv med Basis</a>
-        </article>
-
-        <article class="pricing-card is-featured">
-          <span class="package-label" data-i18n="d_t_badge">Mest valgt</span>
-          <h3 data-i18n="d_c2_t">Standard – Lead-Maskinen</h3>
-          <p data-i18n="d_c2_p">Nettside + ChatGenius AI-resepsjonist som fanger henvendelser etter stengetid.</p>
-          <div class="price-line"><strong>7 900 kr</strong><span data-i18n="d_setup">oppstart</span></div>
-          <div class="price-line"><strong>990 kr</strong><span data-i18n="d_permonth">per måned</span></div>
-          <ul>
-            <li data-i18n="d_c2_f1">Utvidet one-pager: tjenester, priser og FAQ</li>
-            <li data-i18n="d_c2_f2">Alt i Basis</li>
-            <li data-i18n="d_c2_f3">ChatGenius AI-resepsjonist</li>
-            <li data-i18n="d_c2_f4">Samler inn leads og kontaktinfo</li>
-            <li data-i18n="d_c2_f5">Grunnleggende lokal SEO</li>
-          </ul>
-          <a class="button button-primary" href="#start" data-package="standard" data-i18n="d_c2_cta">Prøv med Standard</a>
-        </article>
-
-        <article class="pricing-card">
-          <span class="package-label">Premium</span>
-          <h3 data-i18n="d_c3_t">Digital Resepsjonist</h3>
-          <p data-i18n="d_c3_p">For bedrifter som vil ha mer struktur, mer automasjon og prioritert oppfølging.</p>
-          <div class="price-line"><strong>14 900 kr</strong><span data-i18n="d_setup">oppstart</span></div>
-          <div class="price-line"><strong>1 990 kr</strong><span data-i18n="d_permonth">per måned</span></div>
-          <ul>
-            <li data-i18n="d_c3_f1">Skreddersydd one-pager med alt innhold</li>
-            <li data-i18n="d_c3_f2">Avansert AI-bot</li>
-            <li data-i18n="d_c3_f3">Klargjort for booking, priser og avtaler</li>
-            <li data-i18n="d_c3_f4">Prioritert support</li>
-          </ul>
-          <a class="button button-secondary" href="#start" data-package="premium" data-i18n="d_c3_cta">Prøv med Premium</a>
-        </article>
+        <article class="pricing-card"><span class="package-label">Basis</span><h3>Digital tilstedeværelse</h3><p>For bedrifter som trenger en pen og trygg nettside raskt.</p><div class="price-line"><strong>4 900 kr</strong><span>oppstart</span></div><div class="price-line"><strong>490 kr</strong><span>per måned</span></div><ul><li>Komplett one-pager</li><li>Logo, farger, tekst og bilder</li><li>Hosting, SSL og kontaktskjema</li><li>Én liten månedlig endring</li></ul><a class="button button-secondary" href="#start" data-package="basis">Prøv Basis</a></article>
+        <article class="pricing-card is-featured"><span class="package-label">Mest valgt</span><h3>Standard – Lead-maskinen</h3><p>Nettside og AI-resepsjonist som fanger henvendelser etter stengetid.</p><div class="price-line"><strong>7 900 kr</strong><span>oppstart</span></div><div class="price-line"><strong>990 kr</strong><span>per måned</span></div><ul><li>Alt i Basis</li><li>Tjenester, priser og FAQ</li><li>ChatGenius AI-resepsjonist</li><li>Samler inn leads og kontaktinfo</li><li>Grunnleggende lokal SEO</li></ul><a class="button button-primary" href="#start" data-package="standard">Prøv Standard</a></article>
+        <article class="pricing-card"><span class="package-label">Premium</span><h3>Digital resepsjonist</h3><p>For bedrifter som vil ha mer innhold, struktur og prioritert oppfølging.</p><div class="price-line"><strong>14 900 kr</strong><span>oppstart</span></div><div class="price-line"><strong>1 990 kr</strong><span>per måned</span></div><ul><li>Alt i Standard</li><li>Utvidet og skreddersydd innhold</li><li>Avansert AI-bot</li><li>Klargjort for booking og avtaler</li><li>Prioritert support</li></ul><a class="button button-secondary" href="#start" data-package="premium">Prøv Premium</a></article>
       </div>
+      <div class="payment-note"><strong>Betaling:</strong> Stripe belaster oppstartsbeløpet ved kjøpet og oppretter samtidig månedsabonnementet. SEO og Google-optimalisering kan velges som et engangstillegg på 490 kr.</div>
     </section>
 
-    <section id="process" class="method-section" aria-labelledby="process-title">
-      <div class="section-heading">
-        <p class="eyebrow" data-i18n="d_pr_eyebrow">Slik fungerer det</p>
-        <h2 id="process-title" data-i18n="d_pr_title">Fra skjema til levende nettside på minutter</h2>
-        <p data-i18n="d_pr_copy">Ingen møter, ingen ventetid, ingen forpliktelser før du selv sier ja.</p>
-      </div>
-      <div class="method-grid">
-        <div>
-          <span>01</span>
-          <h3 data-i18n="d_pr1_t">Fortell oss hvem dere er</h3>
-          <p data-i18n="d_pr1_p">Bedriftsnavn og e-post holder. Har du en nettside fra før, henter vi logo, bilder og innhold automatisk.</p>
-        </div>
-        <div>
-          <span>02</span>
-          <h3 data-i18n="d_pr2_t">AI-en bygger prøvesiden</h3>
-          <p data-i18n="d_pr2_p">Tekst skrevet for din bransje, dine farger og profesjonelle bilder. Kontaktskjemaet virker fra første sekund.</p>
-        </div>
-        <div>
-          <span>03</span>
-          <h3 data-i18n="d_pr3_t">Live i 4 dager — du bestemmer</h3>
-          <p data-i18n="d_pr3_p">Del lenken, test den på mobilen, motta ekte henvendelser. Liker du den, bestiller du med ett klikk og siden blir din.</p>
-        </div>
+    <section class="sales-section" aria-labelledby="delivery-title">
+      <div class="section-heading"><p class="eyebrow">Etter kjøpet</p><h2 id="delivery-title">Publisering, hosting og kundens eget domene</h2><p>Dette er vanlig domenepeking — ikke cloaking. Kunden ser alltid sitt eget domene i adressefeltet.</p></div>
+      <div class="delivery-grid">
+        <div class="delivery-card"><strong>1. Siden publiseres automatisk</strong><p>Når Stripe bekrefter betalingen, publiserer systemet siden og sender kunden live-lenken.</p></div>
+        <div class="delivery-card"><strong>2. Midlertidig ChatGenius-adresse</strong><p>Siden kan få en adresse som <em>bedriften.chatgenius.pro</em>, med SSL og drift inkludert.</p></div>
+        <div class="delivery-card"><strong>3. Kundens eget domene</strong><p>Kundens domene kobles direkte til Vercel med DNS. Det anbefales fremfor maskering eller iframe-cloaking.</p></div>
       </div>
     </section>
 
     <section id="contact" class="contact-section" aria-labelledby="contact-title">
-      <div>
-        <p class="eyebrow" data-i18n="d_ct_eyebrow">Heller snakke med et menneske?</p>
-        <h2 id="contact-title" data-i18n="d_ct_title">Vi hjelper deg gjerne i gang</h2>
-        <p data-i18n="d_ct_copy">Book en kort samtale eller send en e-post, så lager vi prøvesiden sammen med deg.</p>
-        <div class="contact-actions">
-          <a class="button button-primary" href="https://appointment.chatgenius.pro/booking.html?brand=chat" target="_blank" rel="noopener" data-i18n="d_ct_book">Book samtale</a>
-          <a class="button button-secondary" href="mailto:post@chatgenius.pro?subject=Pr%C3%B8veside">post@chatgenius.pro</a>
-        </div>
-      </div>
-      <div class="landing-checklist">
-        <h3 data-i18n="d_chk_t">Godt å vite</h3>
-        <ul>
-          <li data-i18n="d_chk1">Prøvesiden er gratis og uforpliktende</li>
-          <li data-i18n="d_chk2">Den er live i 4 dager og mottar ekte henvendelser</li>
-          <li data-i18n="d_chk3">Du kan bytte design og stil med ett klikk</li>
-          <li data-i18n="d_chk4">Bestiller du, publiseres siden med eget domene</li>
-          <li data-i18n="d_chk5">Alt innhold kan justeres før publisering</li>
-        </ul>
-      </div>
+      <div><p class="eyebrow">Heller snakke med et menneske?</p><h2 id="contact-title">Vi hjelper deg gjerne i gang</h2><p>Book en kort samtale eller send en e-post, så lager vi prøvesiden sammen med deg.</p><div class="contact-actions"><a class="button button-primary" href="https://appointment.chatgenius.pro/booking.html?brand=chat" target="_blank" rel="noopener">Book samtale</a><a class="button button-secondary" href="mailto:post@chatgenius.pro?subject=Pr%C3%B8veside">post@chatgenius.pro</a></div></div>
+      <div class="landing-checklist"><h3>Godt å vite</h3><ul><li>Prøvesiden er gratis og uforpliktende</li><li>Den er live i fire dager</li><li>Du kan bytte design og stil</li><li>Stripe håndterer sikker betaling</li><li>Eget domene kan kobles til uten cloaking</li></ul></div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <p>© 2026 ChatGenius.pro</p>
-    <p><a class="seller-link" href="/selger/">Selgerportal</a></p>
-    <a href="#top">Til toppen</a>
-  </footer>
-
+  <footer class="site-footer"><p>© 2026 ChatGenius.pro</p><p><a class="seller-link" href="/selger/">Selgerportal</a></p><a href="#top">Til toppen</a></footer>
   <script src="../assets/i18n-dict.js"></script>
   <script src="../assets/i18n.js"></script>
   <script>
     (function () {
       var API_BASE = "https://realtyflow.chatgenius.pro";
-      var T = window.CG_T || function (key, fallback) { return fallback; };
       var form = document.getElementById("order-form");
       var submitBtn = document.getElementById("order-submit");
       var progress = document.getElementById("order-progress");
@@ -331,8 +210,6 @@
       var errorBox = document.getElementById("order-error");
       var successBox = document.getElementById("order-success");
       var previewLink = document.getElementById("order-preview-link");
-
-      // Pricing cards scroll to the start form; remember the chosen package.
       var chosenPackage = "standard";
       document.querySelectorAll("[data-package]").forEach(function (link) {
         link.addEventListener("click", function () {
@@ -341,99 +218,48 @@
           if (radio) radio.checked = true;
         });
       });
-
-      // One field for both: URL when it looks like one, company name otherwise.
       function parseSiteOrName(value) {
         var input = String(value || "").trim();
         var looksLikeUrl = /^(https?:\/\/)?[a-z0-9æøå-]+(\.[a-z0-9æøå-]+)+([\/?#].*)?$/i.test(input) && input.indexOf(" ") < 0;
         if (!looksLikeUrl) return { companyName: input, websiteUrl: null };
         var url = /^https?:\/\//i.test(input) ? input : "https://" + input;
-        var host = "";
-        try { host = new URL(url).hostname.replace(/^www\./i, ""); } catch (e) { return { companyName: input, websiteUrl: null }; }
-        var base = host.split(".")[0].replace(/[-_]+/g, " ").trim();
-        var companyName = base.replace(/\b[a-zæøå]/g, function (ch) { return ch.toUpperCase(); }) || host;
-        return { companyName: companyName, websiteUrl: url };
+        try {
+          var host = new URL(url).hostname.replace(/^www\./i, "");
+          var base = host.split(".")[0].replace(/[-_]+/g, " ").trim();
+          return { companyName: base.replace(/\b[a-zæøå]/g, function (ch) { return ch.toUpperCase(); }) || host, websiteUrl: url };
+        } catch (e) { return { companyName: input, websiteUrl: null }; }
       }
-
-      function buildSteps() {
-        return [
-          T("d_step1", "Leser nettsiden din…"),
-          T("d_step2", "Velger mal og farger…"),
-          T("d_step3", "Skriver tekster for bransjen din…"),
-          T("d_step4", "Lager profesjonelle bilder…"),
-          T("d_step5", "Setter sammen prøvesiden…"),
-          T("d_step6", "Gjør siden live…")
-        ];
-      }
-
-      function showError(message) {
-        errorBox.textContent = message;
-        errorBox.style.display = "block";
-      }
-
+      function showError(message) { errorBox.textContent = message; errorBox.style.display = "block"; }
       form.addEventListener("submit", function (event) {
         event.preventDefault();
         errorBox.style.display = "none";
-
         var data = new FormData(form);
         var parsed = parseSiteOrName(data.get("site_or_name"));
         var email = String(data.get("customer_email") || "").trim();
-        if (!parsed.companyName || !email || email.indexOf("@") < 0) {
-          showError(T("d_err_fill", "Fyll inn nettadresse eller bedriftsnavn, og en gyldig e-postadresse."));
-          return;
-        }
-
-        submitBtn.disabled = true;
-        submitBtn.textContent = T("d_f_building", "Bygger prøvesiden…");
-        progress.style.display = "block";
-
-        var steps = buildSteps();
-        var stepIndex = 0;
-        progressText.textContent = steps[0];
-        progressBar.style.width = "10%";
-        var ticker = setInterval(function () {
-          stepIndex = Math.min(stepIndex + 1, steps.length - 1);
-          progressText.textContent = steps[stepIndex];
-          var pct = 10 + (stepIndex / (steps.length - 1)) * 78;
-          progressBar.style.width = pct + "%";
-        }, 9000);
-
+        if (!parsed.companyName || !email || email.indexOf("@") < 0) { showError("Fyll inn nettadresse eller bedriftsnavn, og en gyldig e-postadresse."); return; }
+        submitBtn.disabled = true; submitBtn.textContent = "Bygger prøvesiden…"; progress.style.display = "block";
+        var steps = ["Leser nettsiden din…","Velger bransje og design…","Skriver tekster…","Kontrollerer bilder og lager hero…","Setter sammen prøvesiden…","Gjør siden live…"];
+        var stepIndex = 0; progressText.textContent = steps[0]; progressBar.style.width = "10%";
+        var ticker = setInterval(function () { stepIndex = Math.min(stepIndex + 1, steps.length - 1); progressText.textContent = steps[stepIndex]; progressBar.style.width = (10 + (stepIndex / (steps.length - 1)) * 78) + "%"; }, 9000);
         fetch(API_BASE + "/api/saas/demosites/request", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            company_name: parsed.companyName,
-            customer_email: email,
+          method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({
+            company_name: parsed.companyName, customer_email: email,
             customer_phone: String(data.get("customer_phone") || "").trim() || undefined,
             website_url: parsed.websiteUrl || undefined,
             industry: String(data.get("industry") || "").trim() || undefined,
             notes: String(data.get("business_description") || "").trim() || undefined,
             package_id: String(data.get("package_id") || chosenPackage || "standard")
           })
-        })
-          .then(function (res) { return res.json().then(function (body) { return { ok: res.ok, body: body }; }); })
+        }).then(function (res) { return res.json().then(function (body) { return { ok: res.ok, body: body }; }); })
           .then(function (result) {
             clearInterval(ticker);
-            if (!result.ok || !result.body.previewUrl) {
-              throw new Error(result.body && result.body.error ? result.body.error : T("d_err_generic", "Noe gikk galt. Prøv igjen."));
-            }
-            progressBar.style.width = "100%";
-            progressText.textContent = T("d_done", "Ferdig! Sender deg til den nye siden din…");
-            form.style.display = "none";
-            previewLink.href = result.body.previewUrl;
-            successBox.style.display = "block";
-            // Straight to the finished trial site — countdown, order button
-            // and the working contact form live there.
-            setTimeout(function () {
-              window.location.href = result.body.previewUrl;
-            }, 1200);
-          })
-          .catch(function (err) {
-            clearInterval(ticker);
-            progress.style.display = "none";
-            submitBtn.disabled = false;
-            submitBtn.textContent = T("d_f_submit", "Vis meg den nye nettsiden min →");
-            showError(err && err.message ? err.message : T("d_err_generic", "Noe gikk galt. Prøv igjen, eller send oss en e-post."));
+            if (!result.ok || !result.body.previewUrl) throw new Error(result.body && result.body.error ? result.body.error : "Noe gikk galt. Prøv igjen.");
+            progressBar.style.width = "100%"; progressText.textContent = "Ferdig! Sender deg til den nye siden din…";
+            form.style.display = "none"; previewLink.href = result.body.previewUrl; successBox.style.display = "block";
+            setTimeout(function () { window.location.href = result.body.previewUrl; }, 1200);
+          }).catch(function (err) {
+            clearInterval(ticker); progress.style.display = "none"; submitBtn.disabled = false; submitBtn.textContent = "Vis meg den nye nettsiden min →";
+            showError(err && err.message ? err.message : "Noe gikk galt. Prøv igjen, eller send oss en e-post.");
           });
       });
     })();
