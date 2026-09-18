@@ -1,6 +1,10 @@
 {
   "routes": [
     {
+      "src": "/sitemap.xml",
+      "dest": "/api/sitemap"
+    },
+    {
       "src": "/artikler/([^./]+)",
       "dest": "/artikler/index.html"
     },
