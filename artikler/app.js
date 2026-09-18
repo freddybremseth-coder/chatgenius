@@ -115,6 +115,11 @@
       const description = activeSlug ? (active.summary || "Artikkel fra ChatGenius.pro om AI og digitale arbeidsflyter.") : "Artikler, case og ressurser fra ChatGenius.pro om AI, automatisering og digitale arbeidsflyter.";
       document.title = pageTitle;
 
+      var heroHeading = document.querySelector(".articles-hero h1");
+      var heroCopy = document.querySelector(".articles-hero .hero-copy");
+      if (activeSlug && heroHeading) heroHeading.textContent = active.displayTitle;
+      if (activeSlug && heroCopy) heroCopy.textContent = description;
+
       function ensureMeta(selector, attrs) {
         var element = document.head.querySelector(selector);
         if (!element) {
