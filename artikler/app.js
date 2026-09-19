@@ -104,7 +104,45 @@
     });
 
     const active = preparedItems.find(function (item) { return item.slug === getSlug(); }) || preparedItems[0];
-    const detailOnlyClass = getSlug() ? " is-detail-only" : "";
+    const activeSlug = getSlug();
+    const detailOnlyClass = activeSlug ? " is-detail-only" : "";
+
+    if (active) {
+      const canonicalUrl = activeSlug
+        ? "https://www.chatgenius.pro/artikler/" + encodeURIComponent(active.slug)
+        : "https://www.chatgenius.pro/artikler/";
+      const pageTitle = activeSlug ? active.displayTitle + " | ChatGenius.pro" : "Artikler | ChatGenius.pro";
+      const description = activeSlug ? (active.summary || "Artikkel fra ChatGenius.pro om AI og digitale arbeidsflyter.") : "Artikler, case og ressurser fra ChatGenius.pro om AI, automatisering og digitale arbeidsflyter.";
+      document.title = pageTitle;
+
+      var heroHeading = document.querySelector(".articles-hero h1");
+      var heroCopy = document.querySelector(".articles-hero .hero-copy");
+      if (activeSlug && heroHeading) heroHeading.textContent = active.displayTitle;
+      if (activeSlug && heroCopy) heroCopy.textContent = description;
+
+      function ensureMeta(selector, attrs) {
+        var element = document.head.querySelector(selector);
+        if (!element) {
+          element = document.createElement("meta");
+          document.head.appendChild(element);
+        }
+        Object.keys(attrs).forEach(function (key) { element.setAttribute(key, attrs[key]); });
+      }
+
+      ensureMeta('meta[name="description"]', { name: "description", content: description });
+      ensureMeta('meta[property="og:title"]', { property: "og:title", content: pageTitle });
+      ensureMeta('meta[property="og:description"]', { property: "og:description", content: description });
+      ensureMeta('meta[property="og:url"]', { property: "og:url", content: canonicalUrl });
+      ensureMeta('meta[property="og:type"]', { property: "og:type", content: activeSlug ? "article" : "website" });
+
+      var canonical = document.head.querySelector('link[rel="canonical"]');
+      if (!canonical) {
+        canonical = document.createElement("link");
+        canonical.setAttribute("rel", "canonical");
+        document.head.appendChild(canonical);
+      }
+      canonical.setAttribute("href", canonicalUrl);
+    }
 
     mount.innerHTML =
       '<div class="articles-layout">' +
