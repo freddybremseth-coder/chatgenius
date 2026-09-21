@@ -1,0 +1,34 @@
+name: ChatGenius search discovery privacy validation
+on:
+  pull_request:
+    paths:
+      - 'assets/search-discovery.js'
+      - 'scripts/test-search-discovery.mjs'
+      - 'index.html'
+      - 'es/index.html'
+      - 'fr/index.html'
+      - 'de/index.html'
+      - 'ru/index.html'
+      - '.github/workflows/seo-discovery-validation.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'assets/search-discovery.js'
+      - 'scripts/test-search-discovery.mjs'
+      - 'index.html'
+      - 'es/index.html'
+      - 'fr/index.html'
+      - 'de/index.html'
+      - 'ru/index.html'
+      - '.github/workflows/seo-discovery-validation.yml'
+jobs:
+  privacy-and-durable-receipt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate public multilingual ChatGenius SEO arrival attribution
+        run: node --test scripts/test-search-discovery.mjs
