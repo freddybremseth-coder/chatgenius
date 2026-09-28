@@ -1,6 +1,10 @@
 {
   "routes": [
     {
+      "src": "/privacy-policy/?",
+      "dest": "/privacy-policy.html"
+    },
+    {
       "src": "/artikler/?",
       "dest": "/api/articles"
     },
