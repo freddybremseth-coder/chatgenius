@@ -144,6 +144,20 @@
             <label>Nettadresse eller bedriftsnavn *<input name="site_or_name" required placeholder="www.bedriften.no eller Larvik Bilpleie AS"></label>
             <label>E-post *<input name="customer_email" type="email" required autocomplete="email" placeholder="deg@bedriften.no"></label>
           </div>
+          <div class="order-grid" style="margin-top:12px">
+            <label class="full">Språk på nettsiden
+              <select name="site_language" aria-label="Språk på nettsiden">
+                <option value="nb" selected>Norsk</option>
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="de">Deutsch</option>
+                <option value="fr">Français</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="da">Dansk</option>
+              </select>
+            </label>
+          </div>
           <div style="margin-top:16px"><p style="margin:0 0 8px;font-size:.85rem;font-weight:600;color:var(--ink-soft)">Velg pakken du ønsker dersom du bestemmer deg for å beholde siden</p>
             <div class="tier-grid">
               <label class="tier-card"><input type="radio" name="package_id" value="basis"><strong>Basis</strong><span class="tier-price">4 900 kr + 490 kr/mnd</span><ul><li>Profesjonell one-pager</li><li>Hosting, SSL og kontaktskjema</li></ul></label>
@@ -248,7 +262,8 @@
             website_url: parsed.websiteUrl || undefined,
             industry: String(data.get("industry") || "").trim() || undefined,
             notes: String(data.get("business_description") || "").trim() || undefined,
-            package_id: String(data.get("package_id") || chosenPackage || "standard")
+            package_id: String(data.get("package_id") || chosenPackage || "standard"),
+            site_language: String(data.get("site_language") || "nb").trim()
           })
         }).then(function (res) { return res.json().then(function (body) { return { ok: res.ok, body: body }; }); })
           .then(function (result) {
