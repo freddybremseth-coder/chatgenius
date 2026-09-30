@@ -129,6 +129,20 @@
               <input name="customer_email" type="email" required autocomplete="email" placeholder="vous@entreprise.fr" data-i18n-ph="d_f_email_ph">
             </label>
           </div>
+          <div class="order-grid" style="margin-top:12px">
+            <label class="full">Langue du site
+              <select name="site_language" aria-label="Langue du site">
+                <option value="nb">Norsk</option>
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="de">Deutsch</option>
+                <option value="fr" selected>Français</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="da">Dansk</option>
+              </select>
+            </label>
+          </div>
           <div style="margin-top:16px">
             <p style="margin:0 0 8px;font-size:0.85rem;font-weight:600;color:var(--ink-soft)" data-i18n="d_f_tier_label">Choisissez un niveau — un meilleur abonnement donne un site plus professionnel avec plus de fonctions</p>
             <div class="tier-grid">
@@ -404,7 +418,8 @@
             website_url: parsed.websiteUrl || undefined,
             industry: String(data.get("industry") || "").trim() || undefined,
             notes: String(data.get("business_description") || "").trim() || undefined,
-            package_id: String(data.get("package_id") || chosenPackage || "standard")
+            package_id: String(data.get("package_id") || chosenPackage || "standard"),
+            site_language: String(data.get("site_language") || "fr").trim()
           })
         })
           .then(function (res) { return res.json().then(function (body) { return { ok: res.ok, body: body }; }); })
