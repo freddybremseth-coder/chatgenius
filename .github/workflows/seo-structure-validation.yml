@@ -1,0 +1,47 @@
+name: ChatGenius SEO structure validation
+
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'ai-*/**'
+      - 'nettsider-med-ai/**'
+      - 'skreddersydde-ai-systemer/**'
+      - 'bruksomrader/**'
+      - 'api/sitemap.js'
+      - 'api/article.js'
+      - 'api/articles.js'
+      - 'assets/styles.css'
+      - 'scripts/test-seo-structure.mjs'
+      - '.github/workflows/seo-structure-validation.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'ai-*/**'
+      - 'nettsider-med-ai/**'
+      - 'skreddersydde-ai-systemer/**'
+      - 'bruksomrader/**'
+      - 'api/sitemap.js'
+      - 'api/article.js'
+      - 'api/articles.js'
+      - 'assets/styles.css'
+      - 'scripts/test-seo-structure.mjs'
+      - '.github/workflows/seo-structure-validation.yml'
+
+jobs:
+  seo-structure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax-check dynamic SEO routes
+        run: |
+          node --check api/sitemap.js
+          node --check api/article.js
+          node --check api/articles.js
+      - name: Validate SEO/AEO/GEO page structure
+        run: node --test scripts/test-seo-structure.mjs
