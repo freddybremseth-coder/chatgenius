@@ -1,7 +1,7 @@
 export default async function handler(_req, res) {
   const base = "https://www.chatgenius.pro";
   const locales = ["no", "fr", "es", "de", "ru"];
-  const localizedRoutes = ["/", "/demo/", "/demosites/", "/demosites/demo/", "/apper/"];
+  const localizedRoutes = ["/", "/demosites/", "/apper/"];
   const localizedPaths = new Set(
     localizedRoutes.flatMap(route => locales.map(lang =>
       lang === "no" ? route : "/" + lang + (route === "/" ? "/" : route)
@@ -9,12 +9,14 @@ export default async function handler(_req, res) {
   );
   const staticUrls = [
     "/", "/fr/", "/es/", "/de/", "/ru/",
+    "/demo/", "/demosites/demo/",
     "/demosites/", "/fr/demosites/", "/es/demosites/", "/de/demosites/", "/ru/demosites/",
     "/apper/", "/fr/apper/", "/es/apper/", "/de/apper/", "/ru/apper/",
     "/ai-opplaering/", "/ai-resepsjonist/", "/nettsider-med-ai/", "/ai-automatisering/", "/skreddersydde-ai-systemer/",
     "/bruksomrader/", "/ai-for-sma-bedrifter/", "/ai-for-kundeservice/", "/ai-for-markedsforing/", "/ai-for-salg/", "/ai-for-eiendomsmeglere/",
     "/guider/", "/guider/slik-kommer-bedriften-i-gang-med-ai/", "/guider/hva-er-en-ai-agent/", "/guider/ai-automatisering-eksempler/", "/guider/chatgpt-claude-gemini-perplexity-bedrift/",
     "/case/", "/case/realtyflow/", "/case/demosites/", "/case/familyhub/", "/case/remaster-reels/", "/integrasjoner/",
+    "/om-chatgenius/", "/slik-jobber-vi/",
     "/artikler/", "/privacy-policy"
   ];
 
