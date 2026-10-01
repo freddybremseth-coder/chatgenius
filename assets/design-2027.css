@@ -284,21 +284,21 @@ body.home-2027::before {
   top: 10%;
   right: 6%;
   width: min(39vw, 610px);
-  transform: translate3d(calc(var(--mx,0) * 8px), calc(var(--my,0) * 8px), 0) rotate(-1.4deg);
+  transform: translate3d(var(--hero-a-x, 0px), var(--hero-a-y, 0px), 0) rotate(-1.4deg);
 }
 
 .home-2027 .hero-shot-b {
   top: 43%;
   right: 32%;
   width: min(31vw, 455px);
-  transform: translate3d(calc(var(--mx,0) * -11px), calc(var(--my,0) * -7px), 36px) rotate(2.4deg);
+  transform: translate3d(var(--hero-b-x, 0px), var(--hero-b-y, 0px), 36px) rotate(2.4deg);
 }
 
 .home-2027 .hero-shot-c {
   top: 58%;
   right: 2%;
   width: min(26vw, 385px);
-  transform: translate3d(calc(var(--mx,0) * 12px), calc(var(--my,0) * -10px), 64px) rotate(-2deg);
+  transform: translate3d(var(--hero-c-x, 0px), var(--hero-c-y, 0px), 64px) rotate(-2deg);
 }
 
 .home-2027 .hero-shot-d {
@@ -306,7 +306,7 @@ body.home-2027::before {
   right: 48%;
   width: min(24vw, 350px);
   opacity: .84;
-  transform: translate3d(calc(var(--mx,0) * -7px), calc(var(--my,0) * 11px), -18px) rotate(3deg);
+  transform: translate3d(var(--hero-d-x, 0px), var(--hero-d-y, 0px), -18px) rotate(3deg);
 }
 
 .home-2027 .hero-stats {
@@ -640,8 +640,14 @@ body.home-2027::before {
 .home-2027 .motion-card {
   --tilt-x: 0deg;
   --tilt-y: 0deg;
-  transform: perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  --lift: 0px;
+  transform: perspective(900px) translateY(var(--lift)) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
   transform-style: preserve-3d;
+}
+
+.home-2027 .solution-card.motion-card:hover {
+  --lift: -6px;
+  transform: perspective(900px) translateY(var(--lift)) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
 }
 
 @media (max-width: 1160px) {
