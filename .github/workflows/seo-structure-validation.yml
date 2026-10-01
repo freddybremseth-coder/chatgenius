@@ -15,8 +15,11 @@ on:
       - 'api/article.js'
       - 'api/articles.js'
       - 'assets/styles.css'
+      - 'assets/design-2027.css'
+      - 'assets/design-2027.js'
       - 'scripts/test-seo-structure.mjs'
       - 'scripts/test-article-rendering.mjs'
+      - 'scripts/test-design-2027.mjs'
       - '.github/workflows/seo-structure-validation.yml'
   push:
     branches: [main]
@@ -33,8 +36,11 @@ on:
       - 'api/article.js'
       - 'api/articles.js'
       - 'assets/styles.css'
+      - 'assets/design-2027.css'
+      - 'assets/design-2027.js'
       - 'scripts/test-seo-structure.mjs'
       - 'scripts/test-article-rendering.mjs'
+      - 'scripts/test-design-2027.mjs'
       - '.github/workflows/seo-structure-validation.yml'
 
 jobs:
@@ -51,5 +57,6 @@ jobs:
           node --check api/sitemap.js
           node --check api/article.js
           node --check api/articles.js
+          node --check assets/design-2027.js
       - name: Validate SEO/AEO/GEO page structure
-        run: node --test scripts/test-seo-structure.mjs scripts/test-article-rendering.mjs
+        run: node --test scripts/test-seo-structure.mjs scripts/test-article-rendering.mjs scripts/test-design-2027.mjs
