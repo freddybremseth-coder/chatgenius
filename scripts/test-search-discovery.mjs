@@ -23,7 +23,9 @@ test("ChatGenius strips private Google/AI search and conversation URLs",async()=
  assert.deepEqual(JSON.parse(calls[0].options.body),{path:"/",referrer:"https://www.google.com/"});
  assert.ok(!calls[0].options.body.includes("private"));
  await tick();
- assert.equal(stored.size,1);
+ assert.equal(stored.size,3);
+ assert.equal(stored.get("chatgenius:discovery-source"),"google_search");
+ assert.equal(stored.get("chatgenius:discovery-landing"),"/");
  assert.equal(visit({stored}).calls.length,0);
  assert.equal(visit({stored,pathname:"/es/"}).calls.length,1);
  assert.deepEqual(JSON.parse(visit({referrer:"https://gemini.google.com/app/private"}).calls[0].options.body),{path:"/",referrer:"https://gemini.google.com/"});
@@ -46,4 +48,48 @@ test("all public ChatGenius homepage locales plus public articles load a single 
  const body=readFileSync(resolve(root,file),"utf8");
  assert.equal(body.split("search-discovery.js").length-1,1,file);
  }
+});
+
+
+test("conversion tracker sends only coarse CTA categories", async () => {
+  const stored = new Map([
+    ["chatgenius:discovery-source", "chatgpt"],
+    ["chatgenius:discovery-landing", "/guider/hva-er-en-ai-agent/"],
+  ]);
+  const calls = [];
+  let clickHandler = null;
+  const documentMock = {
+    referrer: "",
+    addEventListener: (name, handler) => { if (name === "click") clickHandler = handler; },
+  };
+  const windowMock = {
+    location: { protocol: "https:", hostname: "www.chatgenius.pro", pathname: "/ai-for-salg/", origin: "https://www.chatgenius.pro" },
+    sessionStorage: { getItem: k => stored.get(k) || null, setItem: (k,v) => stored.set(k,v) },
+  };
+  vm.runInNewContext(script, {
+    window: windowMock,
+    document: documentMock,
+    URL,
+    JSON,
+    fetch: (url, options) => {
+      calls.push({ url, options });
+      return Promise.resolve({ status: 204 });
+    },
+  });
+  assert.equal(typeof clickHandler, "function");
+  const anchor = { getAttribute: () => "https://realtyflow.chatgenius.pro/demo/" };
+  clickHandler({ target: { closest: () => anchor } });
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0].url, "https://realtyflow.chatgenius.pro/api/public/conversion-event");
+  const payload = JSON.parse(calls[0].options.body);
+  assert.deepEqual(payload, {
+    eventType: "demo",
+    target: "realtyflow_demo",
+    path: "/ai-for-salg/",
+    discoverySource: "chatgpt",
+    landingPath: "/guider/hva-er-en-ai-agent/",
+  });
+  assert.ok(!calls[0].options.body.includes("appointment.chatgenius.pro"));
+  await tick();
+  assert.equal(stored.get("chatgenius:conversion:/ai-for-salg/:realtyflow_demo"), "1");
 });
