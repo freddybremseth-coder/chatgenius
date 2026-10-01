@@ -25,10 +25,11 @@ export default async function handler(_req, res) {
     return;
   }
 
-  const articles = items.filter(item =>
-    item && typeof item.slug === "string" &&
-    /^[a-z0-9][a-z0-9-]{0,99}$/.test(item.slug) && item.title
-  );
+  const articles = items.filter(item => {
+    if (!item || typeof item.slug !== "string" || !/^[a-z0-9][a-z0-9-]{0,99}$/.test(item.slug) || !item.title) return false;
+    const title = String(item.title);
+    return !/(privacy policy|personvernerklæring|\barticle \((instagram|facebook|nettside)\))/i.test(title);
+  });
   const cards = articles.map(item => {
     const url = "/artikler/" + encodeURIComponent(item.slug);
     const title = escapeHtml(item.title);
