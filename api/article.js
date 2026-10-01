@@ -116,7 +116,7 @@ export default async function handler(req, res) {
     '<link rel="stylesheet" href="/artikler/styles.css">' +
     '</head><body>' +
     '<header class="site-header"><a class="brand" href="/">ChatGenius.pro</a>' +
-    '<nav class="site-nav" aria-label="Hovedmeny"><a href="/">Forside</a><a href="/artikler/">Artikler</a></nav></header>' +
+    '<nav class="site-nav" aria-label="Hovedmeny"><a href="/">Forside</a><a href="/artikler/">Artikler</a><a href="/demo/">Demoer</a><a href="/case/">Case</a><a href="/kom-i-gang/">Kom i gang</a></nav></header>' +
     '<main><section class="articles-shell"><article class="detail-panel" style="max-width:860px;margin:4rem auto;padding:2rem">' +
     '<div class="detail-body"><a class="detail-back" href="/artikler/">← Tilbake til artikler</a>' +
     '<h1>' + escapeHtml(title) + '</h1>' +
@@ -125,6 +125,7 @@ export default async function handler(req, res) {
     (image ? '<img class="detail-cover" src="' + escapeHtml(image) + '" alt="' + escapeHtml(title) + '" loading="eager">' : '') +
     '<div class="markdown">' + markdownToHtml(article.markdown) + '</div>' +
     '<section class="author-box" style="margin-top:2rem"><strong>Videre lesing</strong><p>Se også <a href="/ai-opplaering/">AI-opplæring</a>, <a href="/ai-automatisering/">AI-automatisering</a>, <a href="/ai-resepsjonist/">AI-resepsjonist</a> og <a href="/nettsider-med-ai/">nettsider med AI</a>.</p></section>' +
+    '<section class="author-box" style="margin-top:1rem"><strong>Velg neste steg</strong><p><a href="/demo/">Se løsningene på 15 sekunder</a>, <a href="/case/">les faktiske case</a> eller <a href="/kom-i-gang/">velg demo, prøveside, opplæring eller samtale</a>.</p></section>' +
     '</div></article></section></main>' +
     '<script src="/assets/search-discovery.js" defer></script></body></html>';
 
