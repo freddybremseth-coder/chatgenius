@@ -131,3 +131,13 @@ test("strategic journey pages expose a next-step path", () => {
     assert.match(html, /href=["']\/kom-i-gang\/["']/, file + " should link to /kom-i-gang/");
   }
 });
+
+
+test("dynamic article surfaces expose conversion journey", () => {
+  for (const file of ["api/article.js", "api/articles.js"]) {
+    const source = fs.readFileSync(file, "utf8");
+    assert.match(source, /\/kom-i-gang\//, file + " should link to /kom-i-gang/");
+    assert.match(source, /\/demo\//, file + " should link to /demo/");
+    assert.match(source, /search-discovery\.js/, file + " should load privacy-safe discovery/conversion tracker");
+  }
+});
