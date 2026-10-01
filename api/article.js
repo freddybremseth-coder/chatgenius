@@ -152,8 +152,9 @@ export default async function handler(req, res) {
     (image ? '<meta property="og:image" content="' + escapeHtml(image) + '">' : '') +
     '<script type="application/ld+json">' + JSON.stringify(schema).replace(/</g, "\\u003c") + '</script>' +
     '<link rel="stylesheet" href="/assets/styles.css">' +
+    '<link rel="stylesheet" href="/assets/design-2027.css">' +
     '<link rel="stylesheet" href="/artikler/styles.css">' +
-    '</head><body>' +
+    '</head><body class="design-2027 content-2027">' +
     '<header class="site-header"><a class="brand" href="/">ChatGenius.pro</a>' +
     '<nav class="site-nav" aria-label="Hovedmeny"><a href="/">Forside</a><a href="/artikler/">Artikler</a><a href="/demo/">Demoer</a><a href="/case/">Case</a><a href="/kom-i-gang/">Kom i gang</a></nav></header>' +
     '<main><section class="articles-shell"><article class="detail-panel" style="max-width:860px;margin:4rem auto;padding:2rem">' +
@@ -166,6 +167,7 @@ export default async function handler(req, res) {
     '<section class="author-box" style="margin-top:2rem"><strong>Videre lesing</strong><p>Se også <a href="/ai-opplaering/">AI-opplæring</a>, <a href="/ai-automatisering/">AI-automatisering</a>, <a href="/ai-resepsjonist/">AI-resepsjonist</a> og <a href="/nettsider-med-ai/">nettsider med AI</a>.</p></section>' +
     '<section class="author-box" style="margin-top:1rem"><strong>Velg neste steg</strong><p><a href="/demo/">Se løsningene på 15 sekunder</a>, <a href="/case/">les faktiske case</a> eller <a href="/kom-i-gang/">velg demo, prøveside, opplæring eller samtale</a>.</p></section>' +
     '</div></article></section></main>' +
+    '<script src="/assets/design-2027.js" defer></script>' +
     '<script src="/assets/search-discovery.js" defer></script></body></html>';
 
   res.setHeader("Content-Type", "text/html; charset=utf-8");
