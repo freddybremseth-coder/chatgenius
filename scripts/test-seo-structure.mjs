@@ -19,6 +19,8 @@ const pages = [
   ["case/familyhub/index.html", "https://www.chatgenius.pro/case/familyhub/"],
   ["case/remaster-reels/index.html", "https://www.chatgenius.pro/case/remaster-reels/"],
   ["integrasjoner/index.html", "https://www.chatgenius.pro/integrasjoner/"],
+  ["om-chatgenius/index.html", "https://www.chatgenius.pro/om-chatgenius/"],
+  ["slik-jobber-vi/index.html", "https://www.chatgenius.pro/slik-jobber-vi/"],
   ["ai-opplaering/index.html", "https://www.chatgenius.pro/ai-opplaering/"],
   ["ai-resepsjonist/index.html", "https://www.chatgenius.pro/ai-resepsjonist/"],
   ["nettsider-med-ai/index.html", "https://www.chatgenius.pro/nettsider-med-ai/"],
@@ -78,10 +80,23 @@ test("sitemap source includes all strategic cluster paths", () => {
     "/ai-for-markedsforing/",
     "/ai-for-salg/",
     "/ai-for-eiendomsmeglere/",
+    "/demo/",
+    "/demosites/demo/",
     "/guider/",
     "/guider/slik-kommer-bedriften-i-gang-med-ai/",
     "/guider/hva-er-en-ai-agent/",
     "/guider/ai-automatisering-eksempler/",
-    "/guider/chatgpt-claude-gemini-perplexity-bedrift/"
+    "/guider/chatgpt-claude-gemini-perplexity-bedrift/",
+    "/om-chatgenius/",
+    "/slik-jobber-vi/"
   ]) assert.ok(source.includes('"' + path + '"'), "missing sitemap path " + path);
+});
+
+
+test("demo pages do not advertise nonexistent localized alternates", () => {
+  const source = fs.readFileSync("api/sitemap.js", "utf8");
+  const localizedMatch = source.match(/const localizedRoutes = \[([^\]]+)\]/);
+  assert.ok(localizedMatch, "localizedRoutes declaration missing");
+  assert.ok(!localizedMatch[1].includes('"/demo/"'), "demo hub has no translated routes yet");
+  assert.ok(!localizedMatch[1].includes('"/demosites/demo/"'), "DemoSites walkthrough has no translated routes yet");
 });
