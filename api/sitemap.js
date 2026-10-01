@@ -37,7 +37,11 @@ export default async function handler(_req, res) {
       if (alternates.length) alternates.push({ lang: "x-default", url: base + route });
       return { loc: base + path, lastmod: "", alternates };
     }),
-    ...items.filter(item => item && item.slug).map(item => ({
+    ...items.filter(item => {
+      if (!item || !item.slug) return false;
+      const title = String(item.title || "");
+      return !/(privacy policy|personvernerklæring|\barticle \((instagram|facebook|nettside)\))/i.test(title);
+    }).map(item => ({
       loc: base + "/artikler/" + encodeURIComponent(item.slug),
       lastmod: item.updated_at || item.published_at || item.created_at || ""
     }))
