@@ -1,7 +1,7 @@
 export default async function handler(_req, res) {
   const base = "https://www.chatgenius.pro";
   const locales = ["no", "fr", "es", "de", "ru"];
-  const localizedRoutes = ["/", "/demosites/", "/demosites/demo/", "/apper/"];
+  const localizedRoutes = ["/", "/demo/", "/demosites/", "/demosites/demo/", "/apper/"];
   const localizedPaths = new Set(
     localizedRoutes.flatMap(route => locales.map(lang =>
       lang === "no" ? route : "/" + lang + (route === "/" ? "/" : route)
