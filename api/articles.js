@@ -63,9 +63,10 @@ export default async function handler(_req, res) {
     '<meta property="og:url" content="' + SITE + '/artikler/">' +
     '<script type="application/ld+json">' + JSON.stringify(schema).replace(/</g, "\\u003c") + '</script>' +
     '<link rel="stylesheet" href="/assets/styles.css">' +
+    '<link rel="stylesheet" href="/assets/design-2027.css">' +
     '<link rel="stylesheet" href="/artikler/styles.css">' +
     '<style>.article-list{grid-template-columns:repeat(auto-fit,minmax(min(100%,310px),1fr));margin:2rem auto;max-width:1200px}.article-card a{color:var(--blue)}.article-card h2{line-height:1.3}</style>' +
-    '</head><body>' +
+    '</head><body class="design-2027 content-2027">' +
     '<header class="site-header"><a class="brand" href="/">ChatGenius.pro</a>' +
     '<nav class="site-nav" aria-label="Hovedmeny"><a href="/">Forside</a><a href="/artikler/" aria-current="page">Artikler</a><a href="/guider/">Guider</a><a href="/demo/">Demoer</a><a href="/kom-i-gang/">Kom i gang</a></nav>' +
     '<a class="header-action" href="/#contact">Kontakt</a></header>' +
@@ -75,6 +76,7 @@ export default async function handler(_req, res) {
     (cards ? '<div class="article-list">' + cards + '</div>' : '<p class="articles-state">Ingen publiserte artikler ennå.</p>') +
     '<section class="author-box" style="max-width:1200px;margin:2rem auto"><strong>Hva vil du gjøre videre?</strong><p><a href="/demo/">Se fire AI-produkter på 15 sekunder</a>, <a href="/guider/">les guidene</a>, <a href="/case/">se hva som er bygget</a> eller <a href="/kom-i-gang/">velg neste steg</a>.</p></section>' +
     '</section></main>' +
+    '<script src="/assets/design-2027.js" defer></script>' +
     '<script src="/assets/search-discovery.js" defer></script></body></html>';
 
   res.setHeader("Content-Type", "text/html; charset=utf-8");

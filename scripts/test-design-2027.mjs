@@ -36,3 +36,76 @@ test("2027 palette avoids legacy neon glow as the primary visual language", () =
   assert.match(css, /--ds27-cobalt:/);
   assert.doesNotMatch(css, /text-shadow:\s*0\s+0\s+[2-9][0-9]px/i);
 });
+
+
+const contentPages = [
+  "demo/index.html",
+  "guider/index.html",
+  "guider/slik-kommer-bedriften-i-gang-med-ai/index.html",
+  "guider/hva-er-en-ai-agent/index.html",
+  "guider/ai-automatisering-eksempler/index.html",
+  "guider/chatgpt-claude-gemini-perplexity-bedrift/index.html",
+  "case/index.html",
+  "case/realtyflow/index.html",
+  "case/demosites/index.html",
+  "case/familyhub/index.html",
+  "case/remaster-reels/index.html",
+  "integrasjoner/index.html",
+  "om-chatgenius/index.html",
+  "slik-jobber-vi/index.html",
+  "kom-i-gang/index.html",
+  "ai-opplaering/index.html",
+  "ai-resepsjonist/index.html",
+  "nettsider-med-ai/index.html",
+  "ai-automatisering/index.html",
+  "skreddersydde-ai-systemer/index.html",
+  "bruksomrader/index.html",
+  "ai-for-sma-bedrifter/index.html",
+  "ai-for-kundeservice/index.html",
+  "ai-for-markedsforing/index.html",
+  "ai-for-salg/index.html",
+  "ai-for-eiendomsmeglere/index.html"
+];
+
+test("strategic content pages use the shared 2027 design layer", () => {
+  for (const file of contentPages) {
+    const page = fs.readFileSync(file, "utf8");
+    assert.match(page, /<body class="[^"]*design-2027[^"]*"/, file + " should opt into design-2027");
+    assert.match(page, /href="\/assets\/design-2027\.css"/, file + " should load shared 2027 CSS");
+    assert.match(page, /src="\/assets\/design-2027\.js"/, file + " should load progressive motion layer");
+  }
+});
+
+test("dynamic article surfaces use the shared 2027 design layer", () => {
+  for (const file of ["api/article.js", "api/articles.js"]) {
+    const source = fs.readFileSync(file, "utf8");
+    assert.match(source, /design-2027 content-2027/, file + " should emit 2027 body classes");
+    assert.match(source, /\/assets\/design-2027\.css/, file + " should emit 2027 CSS");
+    assert.match(source, /\/assets\/design-2027\.js/, file + " should emit 2027 motion layer");
+  }
+});
+
+
+const localizedHomePages = ["fr/index.html", "es/index.html", "de/index.html", "ru/index.html"];
+test("localized homepages share the 2027 visual system without changing language content", () => {
+  for (const file of localizedHomePages) {
+    const page = fs.readFileSync(file, "utf8");
+    assert.match(page, /<body class="design-2027 home-2027">/);
+    assert.match(page, /href="\/assets\/design-2027\.css"/);
+    assert.match(page, /src="\/assets\/design-2027\.js"/);
+    assert.match(page, /<html lang="(?:fr|es|de|ru)">/);
+  }
+});
+
+const commercialPages = [
+  "apper/index.html", "fr/apper/index.html", "es/apper/index.html", "de/apper/index.html", "ru/apper/index.html",
+  "demosites/index.html", "fr/demosites/index.html", "es/demosites/index.html", "de/demosites/index.html", "ru/demosites/index.html"
+];
+test("commercial app and DemoSites pages use the shared 2027 visual system", () => {
+  for (const file of commercialPages) {
+    const page = fs.readFileSync(file, "utf8");
+    assert.match(page, /<body class="[^"]*design-2027[^"]*commercial-2027[^"]*"/, file + " should opt into commercial 2027 design");
+    assert.match(page, /href="\/assets\/design-2027\.css"/, file + " should load 2027 CSS");
+    assert.match(page, /src="\/assets\/design-2027\.js"/, file + " should load 2027 JS");
+  }
+});

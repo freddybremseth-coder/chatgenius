@@ -2,7 +2,7 @@
   "use strict";
 
   const root = document.body;
-  if (!root.classList.contains("home-2027")) return;
+  if (!root.classList.contains("design-2027") && !root.classList.contains("home-2027")) return;
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const header = document.querySelector(".site-header");
@@ -17,9 +17,10 @@
 
   if (reducedMotion) return;
 
-  const revealTargets = document.querySelectorAll(
-    ".solution-hub, .usecase-band, .demosites-promo, .sales-section, .training-section, .portfolio-section, .contact-section"
-  );
+  const revealSelector = root.classList.contains("home-2027")
+    ? ".solution-hub, .usecase-band, .demosites-promo, .sales-section, .training-section, .portfolio-section, .contact-section"
+    : ".content-hero, .content-main > section, .content-aside, .solution-hub";
+  const revealTargets = document.querySelectorAll(revealSelector);
   revealTargets.forEach((node) => node.classList.add("motion-reveal"));
 
   if ("IntersectionObserver" in window) {
@@ -57,7 +58,9 @@
       hero.style.setProperty("--spot-y", String((y * 100).toFixed(1)) + "%");
     });
   };
-  if (hero) hero.addEventListener("pointermove", onPointerMove, { passive: true });
+  if (hero && root.classList.contains("home-2027")) {
+    hero.addEventListener("pointermove", onPointerMove, { passive: true });
+  }
 
   const tiltCards = document.querySelectorAll(".solution-card");
   tiltCards.forEach((card) => {
