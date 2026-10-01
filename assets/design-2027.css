@@ -1044,3 +1044,102 @@ body.design-2027:not(.home-2027)::before {
     transform: none;
   }
 }
+
+
+/* Dynamic editorial surfaces */
+.design-2027 .articles-shell {
+  width: min(100%, 1240px);
+  margin: 0 auto;
+  padding: clamp(96px, 10vw, 132px) clamp(18px, 4vw, 42px) clamp(72px, 9vw, 118px);
+}
+
+.design-2027 .articles-shell .hero-content {
+  max-width: 900px;
+  margin: 0 0 48px;
+}
+
+.design-2027 .articles-shell .hero-content h1 {
+  margin: 0;
+  font-size: clamp(3rem, 7vw, 6.6rem);
+  line-height: .94;
+  letter-spacing: -.07em;
+  font-weight: 760;
+}
+
+.design-2027 .articles-shell .hero-copy {
+  color: #a7a8a4;
+  line-height: 1.62;
+}
+
+.design-2027 .article-list {
+  gap: 16px !important;
+}
+
+.design-2027 .article-card {
+  border: 1px solid rgba(245,242,235,.10);
+  border-radius: var(--ds27-radius, 24px);
+  background: linear-gradient(145deg, rgba(245,242,235,.06), rgba(245,242,235,.025));
+  overflow: hidden;
+  transition: transform .35s cubic-bezier(.2,.75,.2,1), border-color .35s cubic-bezier(.2,.75,.2,1), background .35s cubic-bezier(.2,.75,.2,1);
+}
+
+.design-2027 .article-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(245,242,235,.18);
+  background: linear-gradient(145deg, rgba(245,242,235,.085), rgba(113,135,255,.04));
+}
+
+.design-2027 .article-card .article-body {
+  padding: 24px;
+}
+
+.design-2027 .article-card h2 {
+  margin-top: 4px;
+  letter-spacing: -.045em;
+}
+
+.design-2027 .article-card p,
+.design-2027 .article-meta {
+  color: #979995;
+}
+
+.design-2027 .detail-panel {
+  border: 1px solid rgba(245,242,235,.10);
+  border-radius: var(--ds27-radius-lg, 36px);
+  background: linear-gradient(145deg, rgba(245,242,235,.058), rgba(245,242,235,.022));
+  box-shadow: 0 24px 72px rgba(0,0,0,.22);
+}
+
+.design-2027 .detail-body h1 {
+  font-size: clamp(2.8rem, 6.5vw, 5.7rem);
+  line-height: .96;
+  letter-spacing: -.065em;
+}
+
+.design-2027 .detail-summary {
+  color: #b2b2ad;
+  font-size: 1.08rem;
+  line-height: 1.65;
+}
+
+.design-2027 .markdown {
+  color: #aaa9a4;
+  line-height: 1.72;
+}
+
+.design-2027 .markdown h2,
+.design-2027 .markdown h3 {
+  color: #f1eee7;
+  letter-spacing: -.04em;
+}
+
+.design-2027 .markdown a {
+  color: #c7ceff;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(199,206,255,.34);
+}
+
+.design-2027 .detail-cover {
+  border-radius: 18px;
+  border: 1px solid rgba(245,242,235,.10);
+}
