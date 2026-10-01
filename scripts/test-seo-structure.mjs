@@ -6,6 +6,11 @@ const pages = [
   ["index.html", "https://www.chatgenius.pro/"],
   ["apper/index.html", "https://www.chatgenius.pro/apper/"],
   ["demosites/index.html", "https://www.chatgenius.pro/demosites/"],
+  ["guider/index.html", "https://www.chatgenius.pro/guider/"],
+  ["guider/slik-kommer-bedriften-i-gang-med-ai/index.html", "https://www.chatgenius.pro/guider/slik-kommer-bedriften-i-gang-med-ai/"],
+  ["guider/hva-er-en-ai-agent/index.html", "https://www.chatgenius.pro/guider/hva-er-en-ai-agent/"],
+  ["guider/ai-automatisering-eksempler/index.html", "https://www.chatgenius.pro/guider/ai-automatisering-eksempler/"],
+  ["guider/chatgpt-claude-gemini-perplexity-bedrift/index.html", "https://www.chatgenius.pro/guider/chatgpt-claude-gemini-perplexity-bedrift/"],
   ["ai-opplaering/index.html", "https://www.chatgenius.pro/ai-opplaering/"],
   ["ai-resepsjonist/index.html", "https://www.chatgenius.pro/ai-resepsjonist/"],
   ["nettsider-med-ai/index.html", "https://www.chatgenius.pro/nettsider-med-ai/"],
@@ -64,6 +69,11 @@ test("sitemap source includes all strategic cluster paths", () => {
     "/ai-for-kundeservice/",
     "/ai-for-markedsforing/",
     "/ai-for-salg/",
-    "/ai-for-eiendomsmeglere/"
+    "/ai-for-eiendomsmeglere/",
+    "/guider/",
+    "/guider/slik-kommer-bedriften-i-gang-med-ai/",
+    "/guider/hva-er-en-ai-agent/",
+    "/guider/ai-automatisering-eksempler/",
+    "/guider/chatgpt-claude-gemini-perplexity-bedrift/"
   ]) assert.ok(source.includes('"' + path + '"'), "missing sitemap path " + path);
 });
