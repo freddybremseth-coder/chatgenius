@@ -84,3 +84,28 @@ test("dynamic article surfaces use the shared 2027 design layer", () => {
     assert.match(source, /\/assets\/design-2027\.js/, file + " should emit 2027 motion layer");
   }
 });
+
+
+const localizedHomePages = ["fr/index.html", "es/index.html", "de/index.html", "ru/index.html"];
+test("localized homepages share the 2027 visual system without changing language content", () => {
+  for (const file of localizedHomePages) {
+    const page = fs.readFileSync(file, "utf8");
+    assert.match(page, /<body class="design-2027 home-2027">/);
+    assert.match(page, /href="\/assets\/design-2027\.css"/);
+    assert.match(page, /src="\/assets\/design-2027\.js"/);
+    assert.match(page, /<html lang="(?:fr|es|de|ru)">/);
+  }
+});
+
+const commercialPages = [
+  "apper/index.html", "fr/apper/index.html", "es/apper/index.html", "de/apper/index.html", "ru/apper/index.html",
+  "demosites/index.html", "fr/demosites/index.html", "es/demosites/index.html", "de/demosites/index.html", "ru/demosites/index.html"
+];
+test("commercial app and DemoSites pages use the shared 2027 visual system", () => {
+  for (const file of commercialPages) {
+    const page = fs.readFileSync(file, "utf8");
+    assert.match(page, /<body class="[^"]*design-2027[^"]*commercial-2027[^"]*"/, file + " should opt into commercial 2027 design");
+    assert.match(page, /href="\/assets\/design-2027\.css"/, file + " should load 2027 CSS");
+    assert.match(page, /src="\/assets\/design-2027\.js"/, file + " should load 2027 JS");
+  }
+});
