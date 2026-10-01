@@ -16,7 +16,7 @@ export default async function handler(_req, res) {
     "/bruksomrader/", "/ai-for-sma-bedrifter/", "/ai-for-kundeservice/", "/ai-for-markedsforing/", "/ai-for-salg/", "/ai-for-eiendomsmeglere/",
     "/guider/", "/guider/slik-kommer-bedriften-i-gang-med-ai/", "/guider/hva-er-en-ai-agent/", "/guider/ai-automatisering-eksempler/", "/guider/chatgpt-claude-gemini-perplexity-bedrift/",
     "/case/", "/case/realtyflow/", "/case/demosites/", "/case/familyhub/", "/case/remaster-reels/", "/integrasjoner/",
-    "/om-chatgenius/", "/slik-jobber-vi/",
+    "/om-chatgenius/", "/slik-jobber-vi/", "/kom-i-gang/",
     "/artikler/", "/privacy-policy"
   ];
 

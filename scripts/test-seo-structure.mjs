@@ -21,6 +21,7 @@ const pages = [
   ["integrasjoner/index.html", "https://www.chatgenius.pro/integrasjoner/"],
   ["om-chatgenius/index.html", "https://www.chatgenius.pro/om-chatgenius/"],
   ["slik-jobber-vi/index.html", "https://www.chatgenius.pro/slik-jobber-vi/"],
+  ["kom-i-gang/index.html", "https://www.chatgenius.pro/kom-i-gang/"],
   ["ai-opplaering/index.html", "https://www.chatgenius.pro/ai-opplaering/"],
   ["ai-resepsjonist/index.html", "https://www.chatgenius.pro/ai-resepsjonist/"],
   ["nettsider-med-ai/index.html", "https://www.chatgenius.pro/nettsider-med-ai/"],
@@ -88,7 +89,8 @@ test("sitemap source includes all strategic cluster paths", () => {
     "/guider/ai-automatisering-eksempler/",
     "/guider/chatgpt-claude-gemini-perplexity-bedrift/",
     "/om-chatgenius/",
-    "/slik-jobber-vi/"
+    "/slik-jobber-vi/",
+    "/kom-i-gang/"
   ]) assert.ok(source.includes('"' + path + '"'), "missing sitemap path " + path);
 });
 
@@ -99,4 +101,33 @@ test("demo pages do not advertise nonexistent localized alternates", () => {
   assert.ok(localizedMatch, "localizedRoutes declaration missing");
   assert.ok(!localizedMatch[1].includes('"/demo/"'), "demo hub has no translated routes yet");
   assert.ok(!localizedMatch[1].includes('"/demosites/demo/"'), "DemoSites walkthrough has no translated routes yet");
+});
+
+
+test("strategic journey pages expose a next-step path", () => {
+  const files = [
+    "ai-for-sma-bedrifter/index.html",
+    "ai-for-kundeservice/index.html",
+    "ai-for-markedsforing/index.html",
+    "ai-for-salg/index.html",
+    "ai-for-eiendomsmeglere/index.html",
+    "ai-opplaering/index.html",
+    "ai-resepsjonist/index.html",
+    "nettsider-med-ai/index.html",
+    "ai-automatisering/index.html",
+    "skreddersydde-ai-systemer/index.html",
+    "guider/slik-kommer-bedriften-i-gang-med-ai/index.html",
+    "guider/hva-er-en-ai-agent/index.html",
+    "guider/ai-automatisering-eksempler/index.html",
+    "guider/chatgpt-claude-gemini-perplexity-bedrift/index.html",
+    "case/realtyflow/index.html",
+    "case/demosites/index.html",
+    "case/familyhub/index.html",
+    "case/remaster-reels/index.html",
+    "demo/index.html"
+  ];
+  for (const file of files) {
+    const html = fs.readFileSync(file, "utf8");
+    assert.match(html, /href=["']\/kom-i-gang\/["']/, file + " should link to /kom-i-gang/");
+  }
 });
