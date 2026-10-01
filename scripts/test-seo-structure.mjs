@@ -141,3 +141,18 @@ test("dynamic article surfaces expose conversion journey", () => {
     assert.match(source, /search-discovery\.js/, file + " should load privacy-safe discovery/conversion tracker");
   }
 });
+
+
+test("all static strategic JSON-LD blocks parse as valid JSON", () => {
+  for (const [file] of pages) {
+    const html = fs.readFileSync(file, "utf8");
+    const blocks = [...html.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)];
+    assert.ok(blocks.length > 0, file + " should include JSON-LD");
+    for (const block of blocks) {
+      assert.doesNotThrow(
+        () => JSON.parse(block[1]),
+        file + " contains invalid JSON-LD"
+      );
+    }
+  }
+});
