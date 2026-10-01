@@ -1309,3 +1309,36 @@ body.design-2027:not(.home-2027)::before {
   border-color: rgba(174,185,255,.34) !important;
   box-shadow: 0 26px 76px rgba(0,0,0,.26) !important;
 }
+
+
+/* Progressive cross-document transitions.
+   Unsupported browsers ignore these rules and keep normal navigation. */
+@view-transition {
+  navigation: auto;
+}
+
+.home-2027 .brand,
+.design-2027 .brand {
+  view-transition-name: cg-brand;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 280ms;
+  animation-timing-function: cubic-bezier(.2,.75,.2,1);
+}
+
+::view-transition-old(cg-brand),
+::view-transition-new(cg-brand) {
+  animation-duration: 320ms;
+  animation-timing-function: cubic-bezier(.2,.75,.2,1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  ::view-transition-old(cg-brand),
+  ::view-transition-new(cg-brand) {
+    animation-duration: 0.001ms !important;
+  }
+}
