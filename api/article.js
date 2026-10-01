@@ -7,7 +7,46 @@ function escapeHtml(value) {
   })[ch]);
 }
 
-function markdownToHtml(markdown) {
+function safeLinkHref(value) {
+  const raw = String(value || "").trim();
+  if (!raw) return null;
+  if (raw.startsWith("/") && !raw.startsWith("//")) return raw;
+  try {
+    const url = new URL(raw, SITE);
+    if (url.protocol !== "https:") return null;
+    return url.href;
+  } catch {
+    return null;
+  }
+}
+
+export function renderInlineMarkdown(value) {
+  const raw = String(value || "");
+  const re = /\[([^\]]+)\]\(([^)\s]+)\)/g;
+  let html = "";
+  let last = 0;
+  let match;
+  while ((match = re.exec(raw)) !== null) {
+    html += escapeHtml(raw.slice(last, match.index));
+    const href = safeLinkHref(match[2]);
+    if (!href) {
+      html += escapeHtml(match[0]);
+    } else {
+      let external = false;
+      try {
+        external = new URL(href, SITE).origin !== SITE;
+      } catch {}
+      html += '<a href="' + escapeHtml(href) + '"' +
+        (external ? ' target="_blank" rel="noopener noreferrer"' : '') +
+        '>' + escapeHtml(match[1]) + '</a>';
+    }
+    last = re.lastIndex;
+  }
+  html += escapeHtml(raw.slice(last));
+  return html;
+}
+
+export function markdownToHtml(markdown) {
   const lines = String(markdown || "").split(/\r?\n/);
   const html = [];
   let list = [];
@@ -16,7 +55,7 @@ function markdownToHtml(markdown) {
   function flushList() {
     if (!list.length) return;
     const tag = listType === "ol" ? "ol" : "ul";
-    html.push("<" + tag + ">" + list.map(item => "<li>" + escapeHtml(item) + "</li>").join("") + "</" + tag + ">");
+    html.push("<" + tag + ">" + list.map(item => "<li>" + renderInlineMarkdown(item) + "</li>").join("") + "</" + tag + ">");
     list = [];
     listType = "";
   }
@@ -37,10 +76,10 @@ function markdownToHtml(markdown) {
     if (heading) {
       if (isFirstHeading) { isFirstHeading = false; continue; }
       const level = Math.min(3, Math.max(2, heading[1].length));
-      html.push("<h" + level + ">" + escapeHtml(heading[2]) + "</h" + level + ">");
+      html.push("<h" + level + ">" + renderInlineMarkdown(heading[2]) + "</h" + level + ">");
     } else {
       isFirstHeading = false;
-      html.push("<p>" + escapeHtml(line) + "</p>");
+      html.push("<p>" + renderInlineMarkdown(line) + "</p>");
     }
   }
   flushList();
