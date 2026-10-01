@@ -1143,3 +1143,169 @@ body.design-2027:not(.home-2027)::before {
   border-radius: 18px;
   border: 1px solid rgba(245,242,235,.10);
 }
+
+
+/* Commercial product surfaces */
+.design-2027 .apps-wrap {
+  max-width: 1240px !important;
+  padding-top: clamp(100px, 11vw, 142px) !important;
+}
+
+.design-2027 .apps-wrap > h1 {
+  max-width: 900px;
+  font-size: clamp(3rem, 7vw, 6.4rem);
+  line-height: .94;
+  letter-spacing: -.068em;
+}
+
+.design-2027 .sub-card,
+.design-2027 .showcase-card,
+.design-2027 .tour-card,
+.design-2027 .delivery-card,
+.design-2027 .pricing-card,
+.design-2027 .order-card {
+  border-color: rgba(245,242,235,.10) !important;
+  border-radius: 24px !important;
+  background: linear-gradient(145deg, rgba(245,242,235,.06), rgba(245,242,235,.025)) !important;
+  box-shadow: 0 18px 54px rgba(0,0,0,.20) !important;
+}
+
+.design-2027 .sub-card,
+.design-2027 .showcase-card,
+.design-2027 .tour-card,
+.design-2027 .pricing-card {
+  transition: transform .35s cubic-bezier(.2,.75,.2,1), border-color .35s cubic-bezier(.2,.75,.2,1), background .35s cubic-bezier(.2,.75,.2,1) !important;
+}
+
+.design-2027 .sub-card:hover,
+.design-2027 .showcase-card:hover,
+.design-2027 .tour-card:hover,
+.design-2027 .pricing-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(245,242,235,.18) !important;
+  background: linear-gradient(145deg, rgba(245,242,235,.085), rgba(113,135,255,.04)) !important;
+}
+
+.design-2027 .sub-card img,
+.design-2027 .showcase-shot,
+.design-2027 .tour-shot {
+  background: #171a1d !important;
+}
+
+.design-2027 .sub-tag {
+  color: #d7d3ca !important;
+  background: rgba(212,162,115,.10) !important;
+  border: 1px solid rgba(212,162,115,.16);
+}
+
+.design-2027 .sub-tag.soon {
+  color: #979995 !important;
+  background: rgba(245,242,235,.045) !important;
+  border-color: rgba(245,242,235,.09);
+}
+
+.design-2027 .sub-btn,
+.design-2027 .order-submit,
+.design-2027 .order-success a {
+  color: #111315 !important;
+  background: #f3f0e9 !important;
+  box-shadow: none !important;
+}
+
+.design-2027 .sub-btn.secondary {
+  color: #d9d7d0 !important;
+  background: rgba(245,242,235,.055) !important;
+  border-color: rgba(245,242,235,.12) !important;
+}
+
+.design-2027 .landing-hero {
+  position: relative;
+  width: min(100%, 1280px);
+  margin: 0 auto;
+  padding-top: clamp(116px, 12vw, 160px);
+  padding-bottom: clamp(72px, 8vw, 112px);
+}
+
+.design-2027 .landing-hero h1 {
+  max-width: 900px;
+  font-size: clamp(3.2rem, 7.6vw, 7rem);
+  line-height: .92;
+  letter-spacing: -.072em;
+  font-weight: 760;
+}
+
+.design-2027 .landing-hero > div:first-child > p:not(.eyebrow) {
+  color: #aaa9a4;
+  line-height: 1.65;
+}
+
+.design-2027 .landing-panel {
+  border-color: rgba(245,242,235,.10) !important;
+  border-radius: 28px !important;
+  background: rgba(245,242,235,.045) !important;
+  box-shadow: 0 24px 70px rgba(0,0,0,.22) !important;
+}
+
+.design-2027 .browser-bar {
+  border-bottom-color: rgba(245,242,235,.08) !important;
+  background: rgba(245,242,235,.045) !important;
+}
+
+.design-2027 .browser-bar i {
+  background: rgba(245,242,235,.18) !important;
+}
+
+.design-2027 .tour-number {
+  color: #111315 !important;
+  background: #f3f0e9 !important;
+}
+
+.design-2027 .order-grid input,
+.design-2027 .order-grid select,
+.design-2027 .order-card textarea {
+  border-color: rgba(245,242,235,.12) !important;
+  background: rgba(245,242,235,.035) !important;
+}
+
+.design-2027 .order-grid input:focus,
+.design-2027 .order-grid select:focus,
+.design-2027 .order-card textarea:focus {
+  outline-color: var(--ds27-cobalt) !important;
+  border-color: rgba(113,135,255,.55) !important;
+}
+
+.design-2027 .tier-card {
+  border-color: rgba(245,242,235,.10) !important;
+  background: rgba(245,242,235,.035) !important;
+}
+
+.design-2027 .tier-card:has(input:checked) {
+  border-color: rgba(174,185,255,.55) !important;
+  background: rgba(113,135,255,.07) !important;
+}
+
+.design-2027 .tier-card strong em {
+  color: #111315 !important;
+  background: #f3f0e9 !important;
+}
+
+.design-2027 .showcase-tags span {
+  border-color: rgba(245,242,235,.11) !important;
+  background: rgba(245,242,235,.025);
+}
+
+.design-2027 .payment-note {
+  border-color: rgba(145,170,160,.22) !important;
+  background: rgba(145,170,160,.055) !important;
+}
+
+.design-2027 .sales-section {
+  border-color: transparent;
+  background: transparent;
+}
+
+.design-2027 .pricing-card.is-featured,
+.design-2027 .pricing-card.featured {
+  border-color: rgba(174,185,255,.34) !important;
+  box-shadow: 0 26px 76px rgba(0,0,0,.26) !important;
+}
