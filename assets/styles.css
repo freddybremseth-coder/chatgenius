@@ -1313,3 +1313,32 @@ textarea {
     padding: 20px;
   }
 }
+
+
+/* SEO use-case cluster */
+.compact-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  margin-top: 18px;
+}
+.usecase-band {
+  padding: clamp(56px, 8vw, 96px) clamp(18px, 5vw, 72px);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: rgba(7, 9, 20, 0.45);
+}
+.usecase-band .solution-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+@media (max-width: 1080px) {
+  .usecase-band .solution-grid,
+  .compact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 620px) {
+  .usecase-band .solution-grid,
+  .compact-grid {
+    grid-template-columns: 1fr;
+  }
+}
