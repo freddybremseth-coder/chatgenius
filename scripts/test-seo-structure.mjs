@@ -4,6 +4,8 @@ import fs from "node:fs";
 
 const pages = [
   ["index.html", "https://www.chatgenius.pro/"],
+  ["apper/index.html", "https://www.chatgenius.pro/apper/"],
+  ["demosites/index.html", "https://www.chatgenius.pro/demosites/"],
   ["ai-opplaering/index.html", "https://www.chatgenius.pro/ai-opplaering/"],
   ["ai-resepsjonist/index.html", "https://www.chatgenius.pro/ai-resepsjonist/"],
   ["nettsider-med-ai/index.html", "https://www.chatgenius.pro/nettsider-med-ai/"],
@@ -43,4 +45,22 @@ test("homepage links to solution and use-case hubs", () => {
   assert.match(html, /href=["']\/ai-opplaering\/["']/);
   assert.match(html, /href=["']\/ai-automatisering\/["']/);
   assert.match(html, /href=["']\/nettsider-med-ai\/["']/);
+});
+
+
+test("sitemap source includes all strategic cluster paths", () => {
+  const source = fs.readFileSync("api/sitemap.js", "utf8");
+  for (const path of [
+    "/ai-opplaering/",
+    "/ai-resepsjonist/",
+    "/nettsider-med-ai/",
+    "/ai-automatisering/",
+    "/skreddersydde-ai-systemer/",
+    "/bruksomrader/",
+    "/ai-for-sma-bedrifter/",
+    "/ai-for-kundeservice/",
+    "/ai-for-markedsforing/",
+    "/ai-for-salg/",
+    "/ai-for-eiendomsmeglere/"
+  ]) assert.ok(source.includes('"' + path + '"'), "missing sitemap path " + path);
 });
