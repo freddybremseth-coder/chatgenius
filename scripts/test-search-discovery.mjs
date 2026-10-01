@@ -23,7 +23,9 @@ test("ChatGenius strips private Google/AI search and conversation URLs",async()=
  assert.deepEqual(JSON.parse(calls[0].options.body),{path:"/",referrer:"https://www.google.com/"});
  assert.ok(!calls[0].options.body.includes("private"));
  await tick();
- assert.equal(stored.size,3);\n assert.equal(stored.get("chatgenius:discovery-source"),"google_search");\n assert.equal(stored.get("chatgenius:discovery-landing"),"/");
+ assert.equal(stored.size,3);
+ assert.equal(stored.get("chatgenius:discovery-source"),"google_search");
+ assert.equal(stored.get("chatgenius:discovery-landing"),"/");
  assert.equal(visit({stored}).calls.length,0);
  assert.equal(visit({stored,pathname:"/es/"}).calls.length,1);
  assert.deepEqual(JSON.parse(visit({referrer:"https://gemini.google.com/app/private"}).calls[0].options.body),{path:"/",referrer:"https://gemini.google.com/"});
