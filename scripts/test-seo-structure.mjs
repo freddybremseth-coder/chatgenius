@@ -5,6 +5,7 @@ import fs from "node:fs";
 const pages = [
   ["index.html", "https://www.chatgenius.pro/"],
   ["apper/index.html", "https://www.chatgenius.pro/apper/"],
+  ["demo/index.html", "https://www.chatgenius.pro/demo/"],
   ["demosites/index.html", "https://www.chatgenius.pro/demosites/"],
   ["demosites/demo/index.html", "https://www.chatgenius.pro/demosites/demo/"],
   ["guider/index.html", "https://www.chatgenius.pro/guider/"],
