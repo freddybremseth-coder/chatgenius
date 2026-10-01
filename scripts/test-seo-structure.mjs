@@ -26,7 +26,10 @@ for (const [file, canonical] of pages) {
     assert.equal((html.match(/<title\b/gi) || []).length, 1, "expected exactly one title");
     assert.equal((html.match(/<meta\s+name=["']description["']/gi) || []).length, 1, "expected exactly one meta description");
     assert.equal((html.match(/rel=["']canonical["']/gi) || []).length, 1, "expected exactly one canonical");
-    assert.match(html, new RegExp('href=["\\']' + canonical.replace(/[.*+?^$\{\}()|[\]\\]/g, "\\$&") + '["\\']'));
+    assert.ok(
+      html.includes('href="' + canonical + '"') || html.includes("href='" + canonical + "'"),
+      "expected canonical href " + canonical
+    );
     assert.ok(!/noindex/i.test(html), "pillar/use-case pages should be indexable");
     assert.ok(/application\/ld\+json/i.test(html), "expected structured data");
   });
