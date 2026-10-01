@@ -109,3 +109,17 @@ test("commercial app and DemoSites pages use the shared 2027 visual system", () 
     assert.match(page, /src="\/assets\/design-2027\.js"/, file + " should load 2027 JS");
   }
 });
+
+
+test("design layer stays within a small performance budget", () => {
+  const cssBytes = fs.statSync("assets/design-2027.css").size;
+  const jsBytes = fs.statSync("assets/design-2027.js").size;
+  assert.ok(cssBytes <= 48000, "2027 CSS should stay <= 48 KB, got " + cssBytes);
+  assert.ok(jsBytes <= 6000, "2027 JS should stay <= 6 KB, got " + jsBytes);
+});
+
+test("cross-page transitions remain progressive and reduced-motion safe", () => {
+  assert.match(css, /@view-transition\s*\{[\s\S]*navigation:\s*auto/);
+  assert.match(css, /view-transition-name:\s*cg-brand/);
+  assert.match(css, /prefers-reduced-motion:\s*reduce[\s\S]*::view-transition-old/);
+});
