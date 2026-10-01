@@ -20,7 +20,7 @@ function safeLinkHref(value) {
   }
 }
 
-function renderInlineMarkdown(value) {
+export function renderInlineMarkdown(value) {
   const raw = String(value || "");
   const re = /\[([^\]]+)\]\(([^)\s]+)\)/g;
   let html = "";
@@ -46,7 +46,7 @@ function renderInlineMarkdown(value) {
   return html;
 }
 
-function markdownToHtml(markdown) {
+export function markdownToHtml(markdown) {
   const lines = String(markdown || "").split(/\r?\n/);
   const html = [];
   let list = [];
