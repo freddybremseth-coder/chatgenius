@@ -11,7 +11,8 @@ export default async function handler(_req, res) {
     "/", "/fr/", "/es/", "/de/", "/ru/",
     "/demosites/", "/fr/demosites/", "/es/demosites/", "/de/demosites/", "/ru/demosites/",
     "/apper/", "/fr/apper/", "/es/apper/", "/de/apper/", "/ru/apper/",
-    "/ai-opplaering/", "/ai-resepsjonist/", "/nettsider-med-ai/", "/ai-automatisering/", "/skreddersydde-ai-systemer/",\n    "/artikler/", "/privacy-policy"
+    "/ai-opplaering/", "/ai-resepsjonist/", "/nettsider-med-ai/", "/ai-automatisering/", "/skreddersydde-ai-systemer/",
+    "/artikler/", "/privacy-policy"
   ];
 
   let items = [];
