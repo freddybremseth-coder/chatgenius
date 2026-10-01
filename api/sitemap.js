@@ -13,6 +13,7 @@ export default async function handler(_req, res) {
     "/apper/", "/fr/apper/", "/es/apper/", "/de/apper/", "/ru/apper/",
     "/ai-opplaering/", "/ai-resepsjonist/", "/nettsider-med-ai/", "/ai-automatisering/", "/skreddersydde-ai-systemer/",
     "/bruksomrader/", "/ai-for-sma-bedrifter/", "/ai-for-kundeservice/", "/ai-for-markedsforing/", "/ai-for-salg/", "/ai-for-eiendomsmeglere/",
+    "/guider/", "/guider/slik-kommer-bedriften-i-gang-med-ai/", "/guider/hva-er-en-ai-agent/", "/guider/ai-automatisering-eksempler/", "/guider/chatgpt-claude-gemini-perplexity-bedrift/",
     "/artikler/", "/privacy-policy"
   ];
 
