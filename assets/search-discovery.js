@@ -53,7 +53,11 @@
     keepalive: true
   }).then(function (response) {
     if (response.status !== 204) return;
-    try {\n      window.sessionStorage.setItem(storageKey, "1");\n      window.sessionStorage.setItem("chatgenius:discovery-source", source);\n      window.sessionStorage.setItem("chatgenius:discovery-landing", path);\n    } catch (_) {}
+    try {
+      window.sessionStorage.setItem(storageKey, "1");
+      window.sessionStorage.setItem("chatgenius:discovery-source", source);
+      window.sessionStorage.setItem("chatgenius:discovery-landing", path);
+    } catch (_) {}
   }).catch(function () {});
 })();
 
