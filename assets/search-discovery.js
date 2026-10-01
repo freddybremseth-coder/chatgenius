@@ -53,6 +53,98 @@
     keepalive: true
   }).then(function (response) {
     if (response.status !== 204) return;
-    try { window.sessionStorage.setItem(storageKey, "1"); } catch (_) {}
+    try {\n      window.sessionStorage.setItem(storageKey, "1");\n      window.sessionStorage.setItem("chatgenius:discovery-source", source);\n      window.sessionStorage.setItem("chatgenius:discovery-landing", path);\n    } catch (_) {}
   }).catch(function () {});
+})();
+
+
+/* Website conversion tracking.
+ * Records only coarse CTA categories and optional known search/AI attribution
+ * already captured by the arrival tracker. No user IDs, IPs, email addresses,
+ * query strings or raw external URLs are sent.
+ */
+(function () {
+  "use strict";
+  var current = window.location;
+  if (current.protocol !== "https:" ||
+      !/^(?:www\.)?chatgenius\.pro$/i.test(current.hostname)) return;
+  if (!document || typeof document.addEventListener !== "function") return;
+
+  function cleanPath(value) {
+    if (!value || typeof value !== "string") return "";
+    try {
+      var u = new URL(value, current.origin);
+      if (u.origin !== current.origin) return u.pathname || "";
+      return u.pathname || "/";
+    } catch (_) {
+      return "";
+    }
+  }
+
+  function classifyLink(anchor) {
+    var href = anchor.getAttribute("href") || "";
+    if (!href) return null;
+
+    if (/^mailto:post@chatgenius\.pro(?:\?|$)/i.test(href)) {
+      return { eventType: "email", target: "email_contact" };
+    }
+    if (/^https:\/\/appointment\.chatgenius\.pro\/booking\.html(?:\?|$)/i.test(href)) {
+      return { eventType: "booking", target: "booking" };
+    }
+    if (/^https:\/\/realtyflow\.chatgenius\.pro\/demo\/?(?:\?|$)/i.test(href)) {
+      return { eventType: "demo", target: "realtyflow_demo" };
+    }
+    if (/^https:\/\/family\.chatgenius\.pro\/demo\/?(?:\?|$)/i.test(href)) {
+      return { eventType: "demo", target: "family_demo" };
+    }
+    if (/^https:\/\/remaster\.freddybremseth\.com\/demo\/?(?:\?|$)/i.test(href)) {
+      return { eventType: "demo", target: "remaster_demo" };
+    }
+
+    var path = cleanPath(href);
+    if (path === "/kom-i-gang/" || path === "/kom-i-gang") return { eventType: "next_step", target: "getting_started" };
+    if (path === "/demo/" || path === "/demo") return { eventType: "demo", target: "demo_hub" };
+    if (path === "/demosites/demo/" || path === "/demosites/demo") return { eventType: "demo", target: "demosites_demo" };
+    if (path === "/demosites/" || path === "/demosites") return { eventType: "trial", target: "demosites_trial" };
+    if (href === "#contact" || href === "/#contact") return { eventType: "contact", target: "contact_section" };
+    return null;
+  }
+
+  document.addEventListener("click", function (event) {
+    var node = event.target;
+    if (!node || typeof node.closest !== "function") return;
+    var anchor = node.closest("a[href]");
+    if (!anchor) return;
+    var classified = classifyLink(anchor);
+    if (!classified) return;
+
+    var pagePath = current.pathname || "/";
+    var dedupeKey = "chatgenius:conversion:" + pagePath + ":" + classified.target;
+    try {
+      if (window.sessionStorage.getItem(dedupeKey)) return;
+    } catch (_) {}
+
+    var discoverySource = null;
+    var landingPath = null;
+    try {
+      discoverySource = window.sessionStorage.getItem("chatgenius:discovery-source") || null;
+      landingPath = window.sessionStorage.getItem("chatgenius:discovery-landing") || null;
+    } catch (_) {}
+
+    void fetch("https://realtyflow.chatgenius.pro/api/public/conversion-event", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        eventType: classified.eventType,
+        target: classified.target,
+        path: pagePath,
+        discoverySource: discoverySource,
+        landingPath: landingPath
+      }),
+      keepalive: true
+    }).then(function (response) {
+      if (response.status !== 204) return;
+      try { window.sessionStorage.setItem(dedupeKey, "1"); } catch (_) {}
+    }).catch(function () {});
+  }, { passive: true });
 })();
