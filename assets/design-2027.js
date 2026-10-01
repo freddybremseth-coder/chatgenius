@@ -43,8 +43,16 @@
       const rect = hero.getBoundingClientRect();
       const x = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
       const y = Math.max(0, Math.min(1, (event.clientY - rect.top) / rect.height));
-      hero.style.setProperty("--mx", String(((x - 0.5) * 2).toFixed(3)));
-      hero.style.setProperty("--my", String(((y - 0.5) * 2).toFixed(3)));
+      const mx = (x - 0.5) * 2;
+      const my = (y - 0.5) * 2;
+      hero.style.setProperty("--hero-a-x", (mx * 8).toFixed(2) + "px");
+      hero.style.setProperty("--hero-a-y", (my * 8).toFixed(2) + "px");
+      hero.style.setProperty("--hero-b-x", (mx * -11).toFixed(2) + "px");
+      hero.style.setProperty("--hero-b-y", (my * -7).toFixed(2) + "px");
+      hero.style.setProperty("--hero-c-x", (mx * 12).toFixed(2) + "px");
+      hero.style.setProperty("--hero-c-y", (my * -10).toFixed(2) + "px");
+      hero.style.setProperty("--hero-d-x", (mx * -7).toFixed(2) + "px");
+      hero.style.setProperty("--hero-d-y", (my * 11).toFixed(2) + "px");
       hero.style.setProperty("--spot-x", String((x * 100).toFixed(1)) + "%");
       hero.style.setProperty("--spot-y", String((y * 100).toFixed(1)) + "%");
     });
