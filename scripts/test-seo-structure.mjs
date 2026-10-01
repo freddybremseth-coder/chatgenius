@@ -6,6 +6,7 @@ const pages = [
   ["index.html", "https://www.chatgenius.pro/"],
   ["apper/index.html", "https://www.chatgenius.pro/apper/"],
   ["demosites/index.html", "https://www.chatgenius.pro/demosites/"],
+  ["demosites/demo/index.html", "https://www.chatgenius.pro/demosites/demo/"],
   ["guider/index.html", "https://www.chatgenius.pro/guider/"],
   ["guider/slik-kommer-bedriften-i-gang-med-ai/index.html", "https://www.chatgenius.pro/guider/slik-kommer-bedriften-i-gang-med-ai/"],
   ["guider/hva-er-en-ai-agent/index.html", "https://www.chatgenius.pro/guider/hva-er-en-ai-agent/"],
