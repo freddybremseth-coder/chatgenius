@@ -43,19 +43,19 @@
     }
     nav.setAttribute("aria-label", labels.menu);
     nav.innerHTML =
-      '<a href="' + path("/bruksomrader/") + '">' + labels.solutions + '</a>' +
+      '<a href="/bruksomrader/">' + labels.solutions + '</a>' +
       '<a href="' + path("/apper/", "/apper/") + '">' + labels.apps + '</a>' +
       '<a href="' + path("/demosites/", "/demosites/") + '">' + labels.trial + '</a>' +
       '<div class="cg-nav-dropdown">' +
         '<button class="cg-nav-trigger" type="button" aria-expanded="false">' + labels.menu + ' <span aria-hidden="true">⌄</span></button>' +
         '<div class="cg-nav-panel">' +
-          '<a href="' + path("/bruksomrader/") + '">' + labels.usecases + '</a>' +
+          '<a href="/bruksomrader/">' + labels.usecases + '</a>' +
           '<a href="/guider/">' + labels.guides + '</a>' +
           '<a href="/case/">' + labels.cases + '</a>' +
           '<a href="/demo/">' + labels.demos + '</a>' +
           '<a href="/integrasjoner/">' + labels.integrations + '</a>' +
-          '<a href="' + path("/ai-opplaering/") + '">' + labels.training + '</a>' +
-          '<a href="' + path("/seo-aeo-geo/") + '">' + labels.seo + '</a>' +
+          '<a href="/ai-opplaering/">' + labels.training + '</a>' +
+          '<a href="/seo-aeo-geo/">' + labels.seo + '</a>' +
           '<a href="/om-chatgenius/">' + labels.about + '</a>' +
           '<a href="/#contact">' + labels.contact + '</a>' +
         '</div>' +
