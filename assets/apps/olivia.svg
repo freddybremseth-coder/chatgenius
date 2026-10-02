@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="t d">
+<title id="t">Olivia gårdsdrift</title><desc id="d">Stilisert oversikt over gårdsdrift, skifter og produksjon.</desc>
+<defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#10231b"/><stop offset="1" stop-color="#173c2a"/></linearGradient></defs>
+<rect width="1200" height="675" rx="36" fill="url(#g)"/>
+<circle cx="1020" cy="120" r="180" fill="#84cc16" opacity=".08"/>
+<circle cx="110" cy="600" r="230" fill="#22c55e" opacity=".08"/>
+<text x="72" y="108" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="#d9f99d">OLIVIA</text>
+<text x="72" y="154" font-family="Arial,sans-serif" font-size="22" fill="#bbf7d0">Gårdsdrift samlet på ett sted</text>
+<g transform="translate(72 210)">
+<rect width="680" height="350" rx="26" fill="#0b1511" stroke="#315b43"/>
+<text x="34" y="52" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#f0fdf4">Dagens drift</text>
+<g font-family="Arial,sans-serif" font-size="16">
+<rect x="34" y="84" width="180" height="96" rx="18" fill="#14251b"/><text x="54" y="118" fill="#86efac">SKIFTER</text><text x="54" y="153" font-size="30" font-weight="700" fill="#fff">8</text>
+<rect x="232" y="84" width="180" height="96" rx="18" fill="#14251b"/><text x="252" y="118" fill="#86efac">OPPGAVER</text><text x="252" y="153" font-size="30" font-weight="700" fill="#fff">12</text>
+<rect x="430" y="84" width="216" height="96" rx="18" fill="#14251b"/><text x="450" y="118" fill="#86efac">PRODUKSJON</text><text x="450" y="153" font-size="30" font-weight="700" fill="#fff">18,4 t</text>
+</g>
+<path d="M50 284 C120 220 170 310 240 250 S360 205 430 270 S540 315 625 220" fill="none" stroke="#84cc16" stroke-width="7" stroke-linecap="round"/>
+<line x1="50" y1="310" x2="625" y2="310" stroke="#315b43"/>
+</g>
+<g transform="translate(790 210)">
+<rect width="338" height="350" rx="26" fill="#effbe7"/>
+<text x="28" y="48" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#173c2a">Neste oppgaver</text>
+<g font-family="Arial,sans-serif" font-size="15" fill="#244534">
+<rect x="28" y="78" width="282" height="62" rx="14" fill="#fff"/><text x="48" y="115">Sjekk vanning · Nordjordet</text>
+<rect x="28" y="154" width="282" height="62" rx="14" fill="#fff"/><text x="48" y="191">Service traktor · fredag</text>
+<rect x="28" y="230" width="282" height="62" rx="14" fill="#fff"/><text x="48" y="267">Registrer innhøsting · Felt 4</text>
+</g></g></svg>
