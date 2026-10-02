@@ -4,6 +4,102 @@
   const root = document.body;
   if (!root.classList.contains("design-2027") && !root.classList.contains("home-2027")) return;
 
+  const localeMatch = location.pathname.match(/^\/(de|es|fr|ru)(?:\/|$)/);
+  const locale = localeMatch ? localeMatch[1] : "no";
+  const prefix = locale === "no" ? "" : "/" + locale;
+  const labels = {
+    no: { solutions:"Løsninger", apps:"Apper", trial:"Prøveside", menu:"Meny", start:"Kom i gang", usecases:"Bruksområder", guides:"Guider", cases:"Case", demos:"Demoer", integrations:"Integrasjoner", training:"AI-opplæring", seo:"SEO, AEO og GEO", about:"Om ChatGenius", contact:"Kontakt" },
+    de: { solutions:"Lösungen", apps:"Apps", trial:"Testseite", menu:"Menü", start:"Loslegen", usecases:"Anwendungsfälle", guides:"Ratgeber", cases:"Cases", demos:"Demos", integrations:"Integrationen", training:"AI-Schulung", seo:"SEO, AEO & GEO", about:"Über ChatGenius", contact:"Kontakt" },
+    es: { solutions:"Soluciones", apps:"Apps", trial:"Sitio de prueba", menu:"Menú", start:"Empezar", usecases:"Casos de uso", guides:"Guías", cases:"Casos", demos:"Demos", integrations:"Integraciones", training:"Formación en IA", seo:"SEO, AEO y GEO", about:"Sobre ChatGenius", contact:"Contacto" },
+    fr: { solutions:"Solutions", apps:"Apps", trial:"Site d’essai", menu:"Menu", start:"Commencer", usecases:"Cas d’usage", guides:"Guides", cases:"Cas", demos:"Démos", integrations:"Intégrations", training:"Formation IA", seo:"SEO, AEO & GEO", about:"À propos", contact:"Contact" },
+    ru: { solutions:"Решения", apps:"Приложения", trial:"Пробный сайт", menu:"Меню", start:"Начать", usecases:"Сценарии", guides:"Гайды", cases:"Кейсы", demos:"Демо", integrations:"Интеграции", training:"AI-обучение", seo:"SEO, AEO и GEO", about:"О ChatGenius", contact:"Контакты" }
+  }[locale];
+
+  const path = (noPath, localizedPath = noPath) => locale === "no" ? noPath : prefix + localizedPath;
+  const ensureUnifiedHeader = () => {
+    let siteHeader = document.querySelector(".site-header");
+    if (!siteHeader) {
+      siteHeader = document.createElement("header");
+      siteHeader.className = "site-header";
+      siteHeader.innerHTML = '<a class="brand" href="' + prefix + '/" aria-label="ChatGenius.pro"><img src="/logo.jpeg" alt="" width="40" height="40"><span>ChatGenius.pro</span></a><nav class="site-nav" aria-label="Hovedmeny"></nav><div class="header-right"></div>';
+      document.body.insertBefore(siteHeader, document.body.firstChild);
+    }
+
+    let brand = siteHeader.querySelector(".brand");
+    if (!brand) {
+      brand = document.createElement("a");
+      brand.className = "brand";
+      siteHeader.insertBefore(brand, siteHeader.firstChild);
+    }
+    brand.setAttribute("href", prefix + "/");
+    brand.setAttribute("aria-label", "ChatGenius.pro");
+    brand.innerHTML = '<img src="/logo.jpeg" alt="" width="40" height="40"><span>ChatGenius.pro</span>';
+
+    let nav = siteHeader.querySelector(".site-nav");
+    if (!nav) {
+      nav = document.createElement("nav");
+      nav.className = "site-nav";
+      siteHeader.appendChild(nav);
+    }
+    nav.setAttribute("aria-label", labels.menu);
+    nav.innerHTML =
+      '<a href="/bruksomrader/">' + labels.solutions + '</a>' +
+      '<a href="' + path("/apper/", "/apper/") + '">' + labels.apps + '</a>' +
+      '<a href="' + path("/demosites/", "/demosites/") + '">' + labels.trial + '</a>' +
+      '<div class="cg-nav-dropdown">' +
+        '<button class="cg-nav-trigger" type="button" aria-expanded="false">' + labels.menu + ' <span aria-hidden="true">⌄</span></button>' +
+        '<div class="cg-nav-panel">' +
+          '<a href="/bruksomrader/">' + labels.usecases + '</a>' +
+          '<a href="/guider/">' + labels.guides + '</a>' +
+          '<a href="/case/">' + labels.cases + '</a>' +
+          '<a href="/demo/">' + labels.demos + '</a>' +
+          '<a href="/integrasjoner/">' + labels.integrations + '</a>' +
+          '<a href="/ai-opplaering/">' + labels.training + '</a>' +
+          '<a href="/seo-aeo-geo/">' + labels.seo + '</a>' +
+          '<a href="/om-chatgenius/">' + labels.about + '</a>' +
+          '<a href="/#contact">' + labels.contact + '</a>' +
+        '</div>' +
+      '</div>';
+
+    let right = siteHeader.querySelector(".header-right");
+    if (!right) {
+      right = document.createElement("div");
+      right.className = "header-right";
+      siteHeader.appendChild(right);
+    }
+    const lang = right.querySelector(".lang-switch");
+    right.innerHTML = "";
+    if (lang) right.appendChild(lang);
+    const cta = document.createElement("a");
+    cta.className = "header-action";
+    cta.href = "/kom-i-gang/";
+    cta.textContent = labels.start;
+    right.appendChild(cta);
+
+    const dropdown = nav.querySelector(".cg-nav-dropdown");
+    const trigger = dropdown && dropdown.querySelector(".cg-nav-trigger");
+    const close = () => {
+      if (!dropdown || !trigger) return;
+      dropdown.classList.remove("open");
+      trigger.setAttribute("aria-expanded", "false");
+    };
+    if (trigger) {
+      trigger.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const open = dropdown.classList.toggle("open");
+        trigger.setAttribute("aria-expanded", String(open));
+      });
+    }
+    document.addEventListener("click", (event) => {
+      if (dropdown && !dropdown.contains(event.target)) close();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") close();
+    });
+  };
+
+  ensureUnifiedHeader();
+
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const header = document.querySelector(".site-header");
   const hero = document.querySelector(".hero");

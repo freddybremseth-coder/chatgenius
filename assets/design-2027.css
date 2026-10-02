@@ -1372,3 +1372,111 @@ body.design-2027:not(.home-2027)::before {
   text-decoration:underline;
   text-underline-offset:3px;
 }
+
+
+/* Unified ChatGenius navigation */
+.design-2027 .site-header,
+.home-2027 .site-header {
+  position: sticky;
+  z-index: 1000;
+}
+.design-2027 .site-nav,
+.home-2027 .site-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.design-2027 .cg-nav-dropdown,
+.home-2027 .cg-nav-dropdown {
+  position: relative;
+}
+.design-2027 .cg-nav-trigger,
+.home-2027 .cg-nav-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  background: transparent;
+  color: var(--ink, #f5f2eb);
+  font: inherit;
+  font-size: .88rem;
+  font-weight: 650;
+  padding: 8px 11px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.design-2027 .cg-nav-trigger:hover,
+.design-2027 .cg-nav-dropdown.open .cg-nav-trigger,
+.home-2027 .cg-nav-trigger:hover,
+.home-2027 .cg-nav-dropdown.open .cg-nav-trigger {
+  background: rgba(245,242,235,.08);
+}
+.design-2027 .cg-nav-panel,
+.home-2027 .cg-nav-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  display: none;
+  width: min(320px, calc(100vw - 28px));
+  padding: 9px;
+  border: 1px solid rgba(245,242,235,.14);
+  border-radius: 16px;
+  background: rgba(17,19,21,.98);
+  box-shadow: 0 22px 60px rgba(0,0,0,.35);
+  backdrop-filter: blur(22px);
+}
+.design-2027 .cg-nav-dropdown.open .cg-nav-panel,
+.home-2027 .cg-nav-dropdown.open .cg-nav-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+}
+.design-2027 .cg-nav-panel a,
+.home-2027 .cg-nav-panel a {
+  display: block;
+  padding: 10px 11px;
+  border-radius: 10px;
+  color: #d9d8d3;
+  text-decoration: none;
+  font-size: .88rem;
+}
+.design-2027 .cg-nav-panel a:hover,
+.home-2027 .cg-nav-panel a:hover {
+  background: rgba(245,242,235,.08);
+  color: #fff;
+}
+@media (max-width: 860px) {
+  .design-2027 .site-header,
+  .home-2027 .site-header {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .design-2027 .site-nav,
+  .home-2027 .site-nav {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: 3px;
+  }
+  .design-2027 .site-nav > a,
+  .design-2027 .cg-nav-trigger,
+  .home-2027 .site-nav > a,
+  .home-2027 .cg-nav-trigger {
+    white-space: nowrap;
+  }
+  .design-2027 .cg-nav-panel,
+  .home-2027 .cg-nav-panel {
+    position: fixed;
+    left: 14px;
+    right: 14px;
+    top: 118px;
+    width: auto;
+    max-height: calc(100vh - 138px);
+    overflow: auto;
+  }
+  .design-2027 .cg-nav-dropdown.open .cg-nav-panel,
+  .home-2027 .cg-nav-dropdown.open .cg-nav-panel {
+    grid-template-columns: 1fr;
+  }
+}
