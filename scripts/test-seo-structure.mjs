@@ -173,3 +173,9 @@ test("ChatGenius about page exposes a restrained Freddy Bremseth project network
   assert.match(html, /"@type":"ItemList"/);
   assert.match(html, /id="project-network"/);
 });
+
+
+test("homepage branded Freddy link points to the authority hub", () => {
+  const html = fs.readFileSync("index.html", "utf8");
+  assert.match(html, /href=["']https:\/\/www\.freddybremseth\.com\/["'][^>]*>Freddy Bremseth<\/a>/);
+});
