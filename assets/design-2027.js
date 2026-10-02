@@ -99,6 +99,7 @@
   };
 
   ensureUnifiedHeader();
+  document.documentElement.classList.add("cg-nav-ready");
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const header = document.querySelector(".site-header");
