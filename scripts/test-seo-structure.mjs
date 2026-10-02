@@ -156,3 +156,20 @@ test("all static strategic JSON-LD blocks parse as valid JSON", () => {
     }
   }
 });
+
+
+test("ChatGenius about page exposes a restrained Freddy Bremseth project network", () => {
+  const html = fs.readFileSync("om-chatgenius/index.html", "utf8");
+  assert.match(html, /https:\/\/www\.freddybremseth\.com\/#person/);
+  for (const url of [
+    "https://www.freddybremseth.com/",
+    "https://www.zenecohomes.com/",
+    "https://www.pinosoecolife.com/",
+    "https://www.donaanna.com/",
+    "https://remaster.freddybremseth.com/",
+    "https://books.freddybremseth.com/",
+    "https://art.freddybremseth.com/"
+  ]) assert.ok(html.includes(url), "missing contextual project link " + url);
+  assert.match(html, /"@type":"ItemList"/);
+  assert.match(html, /id="project-network"/);
+});
