@@ -1342,3 +1342,33 @@ body.design-2027:not(.home-2027)::before {
     animation-duration: 0.001ms !important;
   }
 }
+
+/* Visible cross-brand entity navigation. Kept quiet so product intent remains primary. */
+.freddy-network{
+  width:100%;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:.55rem 1rem;
+  margin-top:1rem;
+  padding-top:1rem;
+  border-top:1px solid rgba(255,255,255,.09);
+  font-size:.72rem;
+  line-height:1.5;
+}
+.freddy-network strong{
+  color:var(--signal,#b8ff3d);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.freddy-network a{
+  color:inherit;
+  opacity:.58;
+  text-decoration:none;
+}
+.freddy-network a:hover,
+.freddy-network a:focus-visible{
+  opacity:1;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
