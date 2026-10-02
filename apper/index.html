@@ -102,11 +102,37 @@
       // Fallback marketing copy + images when the database rows are sparse.
       var KNOWN = {
         astro:   { desc: "Personlig AI-astrologi: daglige innsikter, dybdeanalyser og varsler — alltid oppdatert for deg.", img: "../assets/apps/astro.jpg" },
-        family:  { desc: "Hele familiens kommandosentral: oppgaver, rutiner, handlelister og kalender som alle faktisk bruker.", img: "../assets/apps/family.jpg" },
+        family:  { desc: "Hele familiens kommandosentral: oppgaver, rutiner, handlelister, dokumenter og kalender samlet.", img: "../assets/apps/family.jpg" },
         spanish: { desc: "Lær spansk med AI-mikroøvelser som tilpasser seg deg — 5 minutter om dagen er nok.", img: "../assets/apps/spanish.jpg" },
         vm2026:  { desc: "Fotball-VM 2026 i lomma: kampoversikt, live-oppdateringer og tabeller.", img: "../assets/apps/vm2026.jpg" },
-        olivia:  { desc: "Olivia AI — din personlige assistent for hverdagen.", img: "../assets/apps/olivia.jpg" }
+        demosites:{ desc: "Lag en komplett prøveside med AI og se resultatet før du bestiller nettsidepakken.", img: "../assets/apps/demosites.svg" }
       };
+
+      // Public product catalog. Database pricing enriches these rows, but the
+      // product page must never collapse to only the rows that happen to be
+      // marked live/beta in the SaaS database.
+      var PUBLIC_CATALOG = [
+        { slug: "astro", name: "Astro", live_url: "https://astro.chatgenius.pro/", catalog_status: "demo" },
+        { slug: "family", name: "FamilieHub", live_url: "https://family.chatgenius.pro/", catalog_status: "live" },
+        { slug: "spanish", name: "Spanish", live_url: "https://spanish.chatgenius.pro/", catalog_status: "live" },
+        { slug: "vm2026", name: "VM2026", live_url: "https://vm2026.chatgenius.pro/", catalog_status: "demo" },
+        { slug: "demosites", name: "DemoSites", live_url: "https://www.chatgenius.pro/demosites/", catalog_status: "live" }
+      ];
+
+      function mergeCatalog(apiApps) {
+        var bySlug = {};
+        (apiApps || []).forEach(function (app) { if (app && app.slug) bySlug[app.slug] = app; });
+        return PUBLIC_CATALOG.map(function (base) {
+          var api = bySlug[base.slug] || {};
+          return Object.assign({}, base, api, {
+            slug: base.slug,
+            name: api.name || base.name,
+            live_url: api.live_url || base.live_url,
+            catalog_status: base.catalog_status,
+            subscribable: Boolean(api.subscribable)
+          });
+        });
+      }
 
       function esc(v) { var d = document.createElement("div"); d.textContent = String(v == null ? "" : v); return d.innerHTML; }
 
@@ -127,13 +153,15 @@
           var actions = app.subscribable
             ? '<div class="sub-actions"><button class="sub-btn" data-app="' + esc(app.slug) + '" data-plan="monthly">' + esc(T("a_sub", "Abonner")) + "</button>" +
               (app.price_yearly ? '<button class="sub-btn secondary" data-app="' + esc(app.slug) + '" data-plan="yearly">' + esc(T("a_year", "Årspris")) + "</button>" : "") + "</div>"
-            : '<div class="sub-actions"><a class="sub-btn secondary" style="display:flex;align-items:center;justify-content:center;text-decoration:none" href="mailto:post@chatgenius.pro?subject=' + encodeURIComponent(app.name) + '">' + esc(T("a_notify", "Gi meg beskjed")) + "</a></div>";
-          var openLink = app.live_url ? '<a href="' + esc(app.live_url) + '" target="_blank" rel="noopener" style="font-size:0.82rem">' + esc(T("a_live", "Se appen live →")) + "</a>" : "";
+            : app.live_url
+              ? '<div class="sub-actions"><a class="sub-btn secondary" style="display:flex;align-items:center;justify-content:center;text-decoration:none" href="' + esc(app.live_url) + '" target="_blank" rel="noopener">' + esc(T("a_open", "Åpne appen")) + "</a></div>"
+              : '<div class="sub-actions"><a class="sub-btn secondary" style="display:flex;align-items:center;justify-content:center;text-decoration:none" href="mailto:post@chatgenius.pro?subject=' + encodeURIComponent(app.name) + '">' + esc(T("a_notify", "Gi meg beskjed")) + "</a></div>";
+          var openLink = app.subscribable && app.live_url ? '<a href="' + esc(app.live_url) + '" target="_blank" rel="noopener" style="font-size:0.82rem">' + esc(T("a_live", "Se appen live →")) + "</a>" : "";
           return (
             '<article class="sub-card">' +
               '<img src="' + esc(img) + '" alt="' + esc(app.name) + '" loading="lazy">' +
               '<div class="sub-body">' +
-                '<span class="sub-tag' + (app.subscribable ? "" : " soon") + '">' + esc(app.subscribable ? T("a_sub_tag", "Abonnér i dag") : T("a_soon_tag", "Kommer")) + "</span>" +
+                '<span class="sub-tag' + (app.subscribable ? "" : " soon") + '">' + esc(app.subscribable ? T("a_sub_tag", "Abonnér i dag") : (app.catalog_status === "live" ? T("a_live_tag", "Live") : T("a_demo_tag", "Demo"))) + "</span>" +
                 "<h3>" + esc(app.name) + "</h3>" +
                 '<p class="desc">' + esc(desc) + "</p>" +
                 priceHtml + actions +
@@ -179,10 +207,15 @@
         });
       });
 
+      // Render the complete public catalog immediately. The API only enriches
+      // pricing/subscription state, so a database status change cannot hide apps.
+      lastApps = mergeCatalog([]);
+      render(lastApps);
+
       fetch(API_BASE + "/api/saas/subscribe")
-        .then(function (res) { return res.json(); })
-        .then(function (data) { lastApps = data.apps || []; render(lastApps); })
-        .catch(function () { grid.innerHTML = '<div class="apps-loading">' + esc(T("a_err", "Kunne ikke hente appene. Prøv igjen senere.")) + "</div>"; });
+        .then(function (res) { return res.ok ? res.json() : { apps: [] }; })
+        .then(function (data) { lastApps = mergeCatalog(data.apps || []); render(lastApps); })
+        .catch(function () { lastApps = mergeCatalog([]); render(lastApps); });
     })();
   </script>
   <script src="/assets/design-2027.js" defer></script>
