@@ -1480,3 +1480,33 @@ body.design-2027:not(.home-2027)::before {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* Prevent legacy-nav flash and remove link underlines */
+html:not(.cg-nav-ready) .design-2027 .site-header .site-nav,
+html:not(.cg-nav-ready) .design-2027 .site-header .header-right,
+html:not(.cg-nav-ready) .home-2027 .site-header .site-nav,
+html:not(.cg-nav-ready) .home-2027 .site-header .header-right {
+  visibility: hidden;
+}
+
+.design-2027 .site-header .site-nav a,
+.design-2027 .site-header .header-action,
+.design-2027 .cg-nav-trigger,
+.design-2027 .cg-nav-panel a,
+.home-2027 .site-header .site-nav a,
+.home-2027 .site-header .header-action,
+.home-2027 .cg-nav-trigger,
+.home-2027 .cg-nav-panel a {
+  text-decoration: none !important;
+  border-bottom: 0 !important;
+  box-shadow: none;
+}
+
+.design-2027 .site-header .site-nav a::after,
+.design-2027 .site-header .site-nav a::before,
+.home-2027 .site-header .site-nav a::after,
+.home-2027 .site-header .site-nav a::before {
+  text-decoration: none !important;
+  border-bottom: 0 !important;
+}
