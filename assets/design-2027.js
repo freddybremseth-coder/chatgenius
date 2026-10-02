@@ -8,6 +8,22 @@
   const header = document.querySelector(".site-header");
   const hero = document.querySelector(".hero");
 
+  const footer = document.querySelector(".site-footer");
+  if (footer && !footer.querySelector(".freddy-network")) {
+    const network = document.createElement("nav");
+    network.className = "freddy-network";
+    network.setAttribute("aria-label", "Freddy Bremseth prosjektnettverk");
+    network.innerHTML = '<strong>Freddy Bremseth network</strong>' +
+      '<a href="https://www.freddybremseth.com/">FreddyBremseth.com</a>' +
+      '<a href="https://www.zenecohomes.com/">Zen Eco Homes</a>' +
+      '<a href="https://www.pinosoecolife.com/">Pinoso Eco Life</a>' +
+      '<a href="https://www.donaanna.com/">Doña Anna</a>' +
+      '<a href="https://books.freddybremseth.com/">Books</a>' +
+      '<a href="https://art.freddybremseth.com/">Art</a>' +
+      '<a href="https://remaster.freddybremseth.com/">Re-Master Freddy</a>';
+    footer.appendChild(network);
+  }
+
   const updateHeader = () => {
     if (!header) return;
     header.classList.toggle("is-scrolled", window.scrollY > 18);
