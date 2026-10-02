@@ -179,3 +179,16 @@ test("homepage branded Freddy link points to the authority hub", () => {
   const html = fs.readFileSync("index.html", "utf8");
   assert.match(html, /href=["']https:\/\/www\.freddybremseth\.com\/["'][^>]*>Freddy Bremseth<\/a>/);
 });
+
+
+test("apps page keeps the complete public catalog visible", () => {
+  const html = fs.readFileSync("apper/index.html", "utf8");
+  for (const slug of ["astro", "family", "spanish", "vm2026", "demosites"]) {
+    assert.ok(html.includes('slug: "' + slug + '"'), "missing public app " + slug);
+  }
+  assert.match(html, /function mergeCatalog\(apiApps\)/);
+  assert.match(html, /lastApps = mergeCatalog\(\[\]\);\s*render\(lastApps\);/);
+  assert.match(html, /https:\/\/family\.chatgenius\.pro\//);
+  assert.match(html, /https:\/\/spanish\.chatgenius\.pro\//);
+  assert.match(html, /https:\/\/vm2026\.chatgenius\.pro\//);
+});
