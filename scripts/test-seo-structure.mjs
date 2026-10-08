@@ -15,6 +15,8 @@ const pages = [
   ["guider/chatgpt-claude-gemini-perplexity-bedrift/index.html", "https://www.chatgenius.pro/guider/chatgpt-claude-gemini-perplexity-bedrift/"],
   ["case/index.html", "https://www.chatgenius.pro/case/"],
   ["case/realtyflow/index.html", "https://www.chatgenius.pro/case/realtyflow/"],
+  ["case/olivia/index.html", "https://www.chatgenius.pro/case/olivia/"],
+  ["case/corporate-intelligence/index.html", "https://www.chatgenius.pro/case/corporate-intelligence/"],
   ["case/demosites/index.html", "https://www.chatgenius.pro/case/demosites/"],
   ["case/familyhub/index.html", "https://www.chatgenius.pro/case/familyhub/"],
   ["case/remaster-reels/index.html", "https://www.chatgenius.pro/case/remaster-reels/"],
@@ -88,6 +90,8 @@ test("sitemap source includes all strategic cluster paths", () => {
     "/guider/hva-er-en-ai-agent/",
     "/guider/ai-automatisering-eksempler/",
     "/guider/chatgpt-claude-gemini-perplexity-bedrift/",
+    "/case/olivia/",
+    "/case/corporate-intelligence/",
     "/om-chatgenius/",
     "/slik-jobber-vi/",
     "/kom-i-gang/"
@@ -121,6 +125,8 @@ test("strategic journey pages expose a next-step path", () => {
     "guider/ai-automatisering-eksempler/index.html",
     "guider/chatgpt-claude-gemini-perplexity-bedrift/index.html",
     "case/realtyflow/index.html",
+    "case/olivia/index.html",
+    "case/corporate-intelligence/index.html",
     "case/demosites/index.html",
     "case/familyhub/index.html",
     "case/remaster-reels/index.html",
@@ -191,4 +197,24 @@ test("apps page keeps the complete public catalog visible", () => {
   assert.match(html, /https:\/\/family\.chatgenius\.pro\//);
   assert.match(html, /https:\/\/spanish\.chatgenius\.pro\//);
   assert.match(html, /https:\/\/vm2026\.chatgenius\.pro\//);
+});
+
+
+test("vertical product strategy stays explicit and evidence-led", () => {
+  const homepage = fs.readFileSync("index.html", "utf8");
+  const about = fs.readFileSync("om-chatgenius/index.html", "utf8");
+  const cases = fs.readFileSync("case/index.html", "utf8");
+  assert.match(homepage, /RealtyFlow \+ Nexus/);
+  assert.match(homepage, /Olivia/);
+  assert.match(homepage, /Corporate Intelligence/);
+  assert.match(about, /produktiser/i);
+  assert.match(cases, /produktretning|under utvikling/i);
+});
+
+test("apps availability is separate from checkout availability", () => {
+  const html = fs.readFileSync("apper/index.html", "utf8");
+  assert.match(html, /var isLive = app\.catalog_status === "live"/);
+  assert.match(html, /a_available/);
+  assert.match(html, /a_demo_price/);
+  assert.match(html, /app\.subscribable/);
 });

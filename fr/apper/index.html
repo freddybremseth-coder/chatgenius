@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Applis de ChatGenius.pro — abonnez-vous aujourd'hui</title>
-  <meta name="description" content="Astro, Family, Spanish et plus : des applis IA de ChatGenius.pro. Abonnez-vous par carte et démarrez en quelques minutes.">
+  <title>Applications, démos et produits | ChatGenius.pro</title>
+  <meta name="description" content="Découvrez les applications et produits ChatGenius.pro. Voyez ce qui est disponible, en démo ou par abonnement, avec un statut clair pour chaque produit.">
   <meta name="theme-color" content="#0d0f11">
-  <meta property="og:title" content="Applis de ChatGenius.pro — abonnez-vous aujourd'hui">
-  <meta property="og:description" content="Astro, Family, Spanish et plus : des applis IA de ChatGenius.pro. Abonnez-vous par carte et démarrez en quelques minutes.">
+  <meta property="og:title" content="Applications, démos et produits | ChatGenius.pro">
+  <meta property="og:description" content="Découvrez les applications et produits ChatGenius.pro. Voyez ce qui est disponible, en démo ou par abonnement, avec un statut clair pour chaque produit.">
   <meta property="og:type" content="website">
   <link rel="icon" href="/logo.jpeg">
   <link rel="stylesheet" href="/assets/styles.css">
@@ -63,8 +63,8 @@
 
   <main class="apps-wrap" id="apps">
     <p class="eyebrow" data-i18n="a_eyebrow">Applis de ChatGenius.pro</p>
-    <h1 style="margin:6px 0 10px" data-i18n="a_title">Pas des démos — des applis finies par abonnement.</h1>
-    <p style="max-width:640px;color:var(--muted)" data-i18n="a_copy">Astro, Family, Spanish et plus : des applis IA en ligne et utilisées au quotidien. Abonnez-vous par carte, résiliez quand vous voulez — sans engagement au-delà du mois.</p>
+    <h1 style="margin:6px 0 10px" data-i18n="a_title">Applications, démos et produits ChatGenius.pro</h1>
+    <p style="max-width:640px;color:var(--muted)" data-i18n="a_copy">Découvrez ce que chaque produit fait, ouvrez les produits disponibles et choisissez un abonnement uniquement lorsqu'il est réellement proposé.</p>
 
     <div class="subscribed-banner" id="subscribed-banner" data-i18n="a_banner">🎉 Abonnement actif ! Consultez votre e-mail pour le reçu et la connexion.</div>
 
@@ -112,19 +112,34 @@
           var known = KNOWN[app.slug] || {};
           var img = app.screenshot_url || known.img || "../logo.jpeg";
           var desc = app.description || known.desc || "AI-drevet app fra ChatGenius.pro.";
+          var isLive = app.catalog_status === "live";
+          var isDemo = app.catalog_status === "demo";
+          var statusLabel = app.subscribable
+            ? T("a_sub_tag", "Abonnement")
+            : isLive
+              ? T("a_live_tag", "Live")
+              : isDemo
+                ? T("a_demo_tag", "Demo")
+                : T("a_soon_tag", "Kommer snart");
           var priceHtml = app.subscribable
             ? '<div class="sub-price">' + esc(fmtPrice(app.price_monthly, app.currency)) + "<span>" + esc(T("a_permonth", "/mnd")) + (app.price_yearly ? " · " + esc(T("a_or", "eller")) + " " + esc(fmtPrice(app.price_yearly, app.currency)) + esc(T("a_peryear", "/år")) : "") + "</span></div>"
-            : '<div class="sub-price"><span>' + esc(T("a_soon_price", "Lanseres snart")) + "</span></div>";
+            : isLive
+              ? '<div class="sub-price"><span>' + esc(T("a_available", "Tilgjengelig nå")) + "</span></div>"
+              : isDemo
+                ? '<div class="sub-price"><span>' + esc(T("a_demo_price", "Demo / under utvikling")) + "</span></div>"
+                : '<div class="sub-price"><span>' + esc(T("a_soon_price", "Kommer snart")) + "</span></div>";
           var actions = app.subscribable
             ? '<div class="sub-actions"><button class="sub-btn" data-app="' + esc(app.slug) + '" data-plan="monthly">' + esc(T("a_sub", "Abonner")) + "</button>" +
               (app.price_yearly ? '<button class="sub-btn secondary" data-app="' + esc(app.slug) + '" data-plan="yearly">' + esc(T("a_year", "Årspris")) + "</button>" : "") + "</div>"
-            : '<div class="sub-actions"><a class="sub-btn secondary" style="display:flex;align-items:center;justify-content:center;text-decoration:none" href="mailto:post@chatgenius.pro?subject=' + encodeURIComponent(app.name) + '">' + esc(T("a_notify", "Gi meg beskjed")) + "</a></div>";
-          var openLink = app.live_url ? '<a href="' + esc(app.live_url) + '" target="_blank" rel="noopener" style="font-size:0.82rem">' + esc(T("a_live", "Se appen live →")) + "</a>" : "";
+            : app.live_url
+              ? '<div class="sub-actions"><a class="sub-btn secondary" style="display:flex;align-items:center;justify-content:center;text-decoration:none" href="' + esc(app.live_url) + '" target="_blank" rel="noopener">' + esc(isLive ? T("a_open", "Åpne appen") : T("a_view_demo", "Se demo")) + "</a></div>"
+              : '<div class="sub-actions"><a class="sub-btn secondary" style="display:flex;align-items:center;justify-content:center;text-decoration:none" href="mailto:post@chatgenius.pro?subject=' + encodeURIComponent(app.name) + '">' + esc(T("a_notify", "Gi meg beskjed")) + "</a></div>";
+          var openLink = app.subscribable && app.live_url ? '<a href="' + esc(app.live_url) + '" target="_blank" rel="noopener" style="font-size:0.82rem">' + esc(T("a_live", "Se appen live →")) + "</a>" : "";
           return (
             '<article class="sub-card">' +
               '<img src="' + esc(img) + '" alt="' + esc(app.name) + '" loading="lazy">' +
               '<div class="sub-body">' +
-                '<span class="sub-tag' + (app.subscribable ? "" : " soon") + '">' + esc(app.subscribable ? T("a_sub_tag", "Abonnér i dag") : T("a_soon_tag", "Kommer")) + "</span>" +
+                '<span class="sub-tag' + (app.subscribable || isLive ? "" : " soon") + '">' + esc(statusLabel) + "</span>" +
                 "<h3>" + esc(app.name) + "</h3>" +
                 '<p class="desc">' + esc(desc) + "</p>" +
                 priceHtml + actions +
