@@ -40,6 +40,12 @@ test("2027 palette avoids legacy neon glow as the primary visual language", () =
 
 const contentPages = [
   "demo/index.html",
+  "demo/realtyflow/index.html",
+  "demo/familyhub/index.html",
+  "demo/olivia/index.html",
+  "demo/remaster/index.html",
+  "demo/corporate-intelligence/index.html",
+  "demosites/demo/index.html",
   "guider/index.html",
   "guider/slik-kommer-bedriften-i-gang-med-ai/index.html",
   "guider/hva-er-en-ai-agent/index.html",
@@ -124,4 +130,14 @@ test("cross-page transitions remain progressive and reduced-motion safe", () => 
   assert.match(css, /@view-transition\s*\{[\s\S]*navigation:\s*auto/);
   assert.match(css, /view-transition-name:\s*cg-brand/);
   assert.match(css, /prefers-reduced-motion:\s*reduce[\s\S]*::view-transition-old/);
+});
+
+
+test("rich demo layer is lightweight and reduced-motion safe", () => {
+  const demoCss = fs.readFileSync("assets/product-demo.css", "utf8");
+  const demoJs = fs.readFileSync("assets/product-demo.js", "utf8");
+  assert.match(demoCss, /prefers-reduced-motion:\s*reduce/);
+  assert.match(demoJs, /prefers-reduced-motion:\s*reduce/);
+  assert.ok(fs.statSync("assets/product-demo.css").size <= 16000, "product demo CSS should stay <= 16 KB");
+  assert.ok(fs.statSync("assets/product-demo.js").size <= 6000, "product demo JS should stay <= 6 KB");
 });
