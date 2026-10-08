@@ -218,3 +218,48 @@ test("apps availability is separate from checkout availability", () => {
   assert.match(html, /a_demo_price/);
   assert.match(html, /app\.subscribable/);
 });
+
+
+test("strategic content pages do not repeat H2 headings", () => {
+  const files = [
+    "guider/slik-kommer-bedriften-i-gang-med-ai/index.html",
+    "guider/hva-er-en-ai-agent/index.html",
+    "guider/ai-automatisering-eksempler/index.html",
+    "guider/chatgpt-claude-gemini-perplexity-bedrift/index.html",
+    "integrasjoner/index.html",
+    "ai-for-sma-bedrifter/index.html",
+    "ai-for-kundeservice/index.html",
+    "ai-for-markedsforing/index.html",
+    "ai-for-salg/index.html",
+    "ai-for-eiendomsmeglere/index.html",
+    "ai-opplaering/index.html",
+    "ai-resepsjonist/index.html",
+    "nettsider-med-ai/index.html",
+    "ai-automatisering/index.html",
+    "skreddersydde-ai-systemer/index.html"
+  ];
+  for (const file of files) {
+    const html = fs.readFileSync(file, "utf8");
+    const headings = [...html.matchAll(/<h2\b[^>]*>([\s\S]*?)<\/h2>/gi)]
+      .map((match) => match[1].replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().toLowerCase());
+    const duplicates = headings.filter((heading, index) => headings.indexOf(heading) !== index);
+    assert.deepEqual([...new Set(duplicates)], [], file + " has duplicate H2 headings");
+  }
+});
+
+test("manual-standard content pages expose enough structure to answer and route", () => {
+  for (const file of [
+    "integrasjoner/index.html",
+    "ai-for-sma-bedrifter/index.html",
+    "ai-for-kundeservice/index.html",
+    "ai-for-markedsforing/index.html",
+    "ai-for-salg/index.html",
+    "ai-for-eiendomsmeglere/index.html"
+  ]) {
+    const html = fs.readFileSync(file, "utf8");
+    const h2Count = (html.match(/<h2\b/gi) || []).length;
+    assert.ok(h2Count >= 8, file + " should have at least 8 useful H2 sections");
+    assert.match(html, /Vanlige spørsmål/i, file + " should answer common questions");
+    assert.match(html, /Neste steg|Relevante løsninger|Se .*i praksis/i, file + " should route the reader onward");
+  }
+});
