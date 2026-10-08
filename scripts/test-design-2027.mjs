@@ -47,6 +47,8 @@ const contentPages = [
   "guider/chatgpt-claude-gemini-perplexity-bedrift/index.html",
   "case/index.html",
   "case/realtyflow/index.html",
+  "case/olivia/index.html",
+  "case/corporate-intelligence/index.html",
   "case/demosites/index.html",
   "case/familyhub/index.html",
   "case/remaster-reels/index.html",
