@@ -304,7 +304,10 @@ test("demo hub points to public internal product tours", () => {
     "/demo/olivia/",
     "/demo/remaster/",
     "/demo/corporate-intelligence/"
-  ]) assert.match(html, new RegExp('href=["\\']' + href.replace(/\//g, "\\/") + '["\\']'));
+  ]) assert.ok(
+    html.includes('href="' + href + '"') || html.includes("href='" + href + "'"),
+    "demo hub missing " + href
+  );
   assert.doesNotMatch(html, /realtyflow\.chatgenius\.pro\/demo/i);
   assert.doesNotMatch(html, /family\.chatgenius\.pro\/demo/i);
   assert.doesNotMatch(html, /remaster\.freddybremseth\.com\/demo/i);
