@@ -6,6 +6,11 @@ const pages = [
   ["index.html", "https://www.chatgenius.pro/"],
   ["apper/index.html", "https://www.chatgenius.pro/apper/"],
   ["demo/index.html", "https://www.chatgenius.pro/demo/"],
+  ["demo/realtyflow/index.html", "https://www.chatgenius.pro/demo/realtyflow/"],
+  ["demo/familyhub/index.html", "https://www.chatgenius.pro/demo/familyhub/"],
+  ["demo/olivia/index.html", "https://www.chatgenius.pro/demo/olivia/"],
+  ["demo/remaster/index.html", "https://www.chatgenius.pro/demo/remaster/"],
+  ["demo/corporate-intelligence/index.html", "https://www.chatgenius.pro/demo/corporate-intelligence/"],
   ["demosites/index.html", "https://www.chatgenius.pro/demosites/"],
   ["demosites/demo/index.html", "https://www.chatgenius.pro/demosites/demo/"],
   ["guider/index.html", "https://www.chatgenius.pro/guider/"],
@@ -84,6 +89,11 @@ test("sitemap source includes all strategic cluster paths", () => {
     "/ai-for-salg/",
     "/ai-for-eiendomsmeglere/",
     "/demo/",
+    "/demo/realtyflow/",
+    "/demo/familyhub/",
+    "/demo/olivia/",
+    "/demo/remaster/",
+    "/demo/corporate-intelligence/",
     "/demosites/demo/",
     "/guider/",
     "/guider/slik-kommer-bedriften-i-gang-med-ai/",
@@ -282,4 +292,41 @@ test("i18n build preserves manually curated localized homepages", () => {
   const build = fs.readFileSync("scripts/build-i18n.mjs", "utf8");
   assert.match(build, /manualLocales:\s*true/);
   assert.match(build, /if \(page\.manualLocales\)/);
+});
+
+
+test("demo hub points to public internal product tours", () => {
+  const html = fs.readFileSync("demo/index.html", "utf8");
+  for (const href of [
+    "/demo/realtyflow/",
+    "/demosites/demo/",
+    "/demo/familyhub/",
+    "/demo/olivia/",
+    "/demo/remaster/",
+    "/demo/corporate-intelligence/"
+  ]) assert.match(html, new RegExp('href=["\\']' + href.replace(/\//g, "\\/") + '["\\']'));
+  assert.doesNotMatch(html, /realtyflow\.chatgenius\.pro\/demo/i);
+  assert.doesNotMatch(html, /family\.chatgenius\.pro\/demo/i);
+  assert.doesNotMatch(html, /remaster\.freddybremseth\.com\/demo/i);
+});
+
+test("rich product demos show five-step tours and deeper feature exploration", () => {
+  for (const file of [
+    "demo/realtyflow/index.html",
+    "demo/familyhub/index.html",
+    "demo/olivia/index.html",
+    "demo/remaster/index.html",
+    "demo/corporate-intelligence/index.html",
+    "demosites/demo/index.html"
+  ]) {
+    const html = fs.readFileSync(file, "utf8");
+    assert.ok((html.match(/class="tour-scene/g) || []).length >= 5, file + " should show at least five tour scenes");
+    assert.match(html, /data-duration="15000"/, file + " should keep the 15-second auto tour");
+    assert.match(html, /Utforsk/i, file + " should offer deeper exploration after the tour");
+    assert.match(html, /product-demo\.css/, file + " should load shared demo CSS");
+    assert.match(html, /product-demo\.js/, file + " should load shared demo JS");
+  }
+  const corporate = fs.readFileSync("demo/corporate-intelligence/index.html", "utf8");
+  assert.match(corporate, /konseptdemo/i);
+  assert.match(corporate, /under utvikling/i);
 });
