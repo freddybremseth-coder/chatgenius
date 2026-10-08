@@ -22,7 +22,10 @@ const SITE = "https://www.chatgenius.pro";
 const LANGS = ["fr", "es", "de", "ru"];
 
 const PAGES = [
-  { src: "index.html", id: "index", urlPath: "/" },
+  // The localized homepages contain manually curated positioning and product-status
+  // copy. Keep them in canonical/hreflang + sitemap, but do not overwrite them
+  // from the Norwegian homepage until full content parity is translated.
+  { src: "index.html", id: "index", urlPath: "/", manualLocales: true },
   { src: "demosites/index.html", id: "demo", urlPath: "/demosites/" },
   { src: "apper/index.html", id: "apper", urlPath: "/apper/" },
 ];
@@ -146,6 +149,11 @@ for (const page of PAGES) {
   const noBlock = `  <link rel="canonical" href="${SITE}${page.urlPath}">\n${hreflangBlock(page.urlPath)}`;
   fs.writeFileSync(sourcePath, injectHead(source, noBlock));
   source = fs.readFileSync(sourcePath, "utf8");
+
+  if (page.manualLocales) {
+    console.log(`↷ localized homepages maintained manually: ${page.urlPath}`);
+    continue;
+  }
 
   for (const lang of LANGS) {
     const d = dict[lang];
