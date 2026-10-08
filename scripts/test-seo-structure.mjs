@@ -263,3 +263,23 @@ test("manual-standard content pages expose enough structure to answer and route"
     assert.match(html, /Neste steg|Relevante løsninger|Se .*i praksis/i, file + " should route the reader onward");
   }
 });
+
+
+test("localized homepages keep current ChatGenius positioning", () => {
+  const expected = {
+    "fr/index.html": [/Systèmes IA pour les entreprises/i, /RealtyFlow\/Nexus/, /Applications, démos et produits/i],
+    "es/index.html": [/Sistemas de IA para empresas/i, /RealtyFlow\/Nexus/, /Apps, demos y productos/i],
+    "de/index.html": [/KI-Systeme für Unternehmen/i, /RealtyFlow\/Nexus/, /Apps, Demos und Produkte/i],
+    "ru/index.html": [/ИИ-системы для бизнеса/i, /RealtyFlow\/Nexus/, /Приложения, демо и продукты/i],
+  };
+  for (const [file, patterns] of Object.entries(expected)) {
+    const html = fs.readFileSync(file, "utf8");
+    for (const pattern of patterns) assert.match(html, pattern, file + " missing localized positioning");
+  }
+});
+
+test("i18n build preserves manually curated localized homepages", () => {
+  const build = fs.readFileSync("scripts/build-i18n.mjs", "utf8");
+  assert.match(build, /manualLocales:\s*true/);
+  assert.match(build, /if \(page\.manualLocales\)/);
+});
