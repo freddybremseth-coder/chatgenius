@@ -113,7 +113,13 @@ window.CG_DICT = {
       a_banner: "🎉 Abonnement actif ! Consultez votre e-mail pour le reçu et la connexion.",
       a_note: "Tous les prix incluent gestion, mises à jour et support. Paiement sécurisé par Stripe. Des questions ?",
       a_loading: "Chargement des applis et tarifs…", a_none: "Aucune appli disponible pour le moment.", a_err: "Impossible de charger les applis. Réessayez plus tard.",
-      a_sub: "S'abonner", a_year: "Prix annuel", a_opening: "Ouverture du paiement…", a_soon_tag: "Bientôt", a_sub_tag: "Abonnez-vous", a_soon_price: "Bientôt disponible", a_notify: "Prévenez-moi", a_live: "Voir l'appli en ligne →", a_permonth: "/mois", a_peryear: "/an", a_or: "ou"
+      a_sub: "S'abonner", a_year: "Prix annuel", a_opening: "Ouverture du paiement…", a_soon_tag: "Bientôt", a_sub_tag: "Abonnement", a_soon_price: "Bientôt disponible", a_notify: "Prévenez-moi", a_live: "Voir l'appli en ligne →", a_permonth: "/mois", a_peryear: "/an", a_or: "ou",
+      a_live_tag: "En ligne",
+      a_demo_tag: "Démo",
+      a_available: "Disponible maintenant",
+      a_demo_price: "Démo / en développement",
+      a_view_demo: "Voir la démo",
+      a_open: "Ouvrir l'appli"
     },
     es: {
       pg_index_title: "ChatGenius.pro | Apps de IA, webs y formación práctica en IA",
@@ -223,7 +229,13 @@ window.CG_DICT = {
       a_banner: "🎉 ¡Suscripción activa! Revise su email para el recibo y el acceso.",
       a_note: "Todos los precios incluyen gestión, actualizaciones y soporte. Pago seguro con Stripe. ¿Preguntas?",
       a_loading: "Cargando apps y precios…", a_none: "No hay apps disponibles ahora mismo.", a_err: "No se pudieron cargar las apps. Inténtelo más tarde.",
-      a_sub: "Suscribirse", a_year: "Precio anual", a_opening: "Abriendo el pago…", a_soon_tag: "Próximamente", a_sub_tag: "Suscríbase hoy", a_soon_price: "Muy pronto", a_notify: "Avisarme", a_live: "Ver la app en vivo →", a_permonth: "/mes", a_peryear: "/año", a_or: "o"
+      a_sub: "Suscribirse", a_year: "Precio anual", a_opening: "Abriendo el pago…", a_soon_tag: "Próximamente", a_sub_tag: "Suscripción", a_soon_price: "Muy pronto", a_notify: "Avisarme", a_live: "Ver la app en vivo →", a_permonth: "/mes", a_peryear: "/año", a_or: "o",
+      a_live_tag: "En vivo",
+      a_demo_tag: "Demo",
+      a_available: "Disponible ahora",
+      a_demo_price: "Demo / en desarrollo",
+      a_view_demo: "Ver demo",
+      a_open: "Abrir la app"
     },
     de: {
       pg_index_title: "ChatGenius.pro | KI-Apps, Websites und praktische KI-Schulung",
@@ -333,7 +345,13 @@ window.CG_DICT = {
       a_banner: "🎉 Abo aktiv! Quittung und Zugang finden Sie in Ihrer E-Mail.",
       a_note: "Alle Preise inklusive Betrieb, Updates und Support. Sichere Zahlung über Stripe. Fragen?",
       a_loading: "Apps und Preise werden geladen…", a_none: "Derzeit keine Apps verfügbar.", a_err: "Apps konnten nicht geladen werden. Bitte später erneut versuchen.",
-      a_sub: "Abonnieren", a_year: "Jahrespreis", a_opening: "Zahlung wird geöffnet…", a_soon_tag: "Bald", a_sub_tag: "Jetzt abonnieren", a_soon_price: "Startet bald", a_notify: "Benachrichtigt mich", a_live: "App live ansehen →", a_permonth: "/Monat", a_peryear: "/Jahr", a_or: "oder"
+      a_sub: "Abonnieren", a_year: "Jahrespreis", a_opening: "Zahlung wird geöffnet…", a_soon_tag: "Bald", a_sub_tag: "Abonnement", a_soon_price: "Startet bald", a_notify: "Benachrichtigt mich", a_live: "App live ansehen →", a_permonth: "/Monat", a_peryear: "/Jahr", a_or: "oder",
+      a_live_tag: "Live",
+      a_demo_tag: "Demo",
+      a_available: "Jetzt verfügbar",
+      a_demo_price: "Demo / in Entwicklung",
+      a_view_demo: "Demo ansehen",
+      a_open: "App öffnen"
     },
     ru: {
       pg_index_title: "ChatGenius.pro | ИИ-приложения, сайты и практическое обучение ИИ",
@@ -443,6 +461,12 @@ window.CG_DICT = {
       a_banner: "🎉 Подписка активна! Чек и доступ — в вашей почте.",
       a_note: "Все цены включают обслуживание, обновления и поддержку. Оплата безопасно через Stripe. Вопросы?",
       a_loading: "Загружаем приложения и цены…", a_none: "Сейчас нет доступных приложений.", a_err: "Не удалось загрузить приложения. Попробуйте позже.",
-      a_sub: "Подписаться", a_year: "Годовая цена", a_opening: "Открываем оплату…", a_soon_tag: "Скоро", a_sub_tag: "Подпишитесь сегодня", a_soon_price: "Скоро запуск", a_notify: "Сообщить мне", a_live: "Открыть приложение →", a_permonth: "/мес", a_peryear: "/год", a_or: "или"
+      a_sub: "Подписаться", a_year: "Годовая цена", a_opening: "Открываем оплату…", a_soon_tag: "Скоро", a_sub_tag: "Подписка", a_soon_price: "Скоро запуск", a_notify: "Сообщить мне", a_live: "Открыть приложение →", a_permonth: "/мес", a_peryear: "/год", a_or: "или",
+      a_live_tag: "Доступно",
+      a_demo_tag: "Демо",
+      a_available: "Доступно сейчас",
+      a_demo_price: "Демо / в разработке",
+      a_view_demo: "Смотреть демо",
+      a_open: "Открыть приложение"
     }
   };
