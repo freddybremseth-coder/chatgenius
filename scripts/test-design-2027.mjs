@@ -141,3 +141,13 @@ test("rich demo layer is lightweight and reduced-motion safe", () => {
   assert.ok(fs.statSync("assets/product-demo.css").size <= 16000, "product demo CSS should stay <= 16 KB");
   assert.ok(fs.statSync("assets/product-demo.js").size <= 6000, "product demo JS should stay <= 6 KB");
 });
+
+
+test("demo feature tabs and cards define explicit readable contrast", () => {
+  const css = fs.readFileSync("assets/product-demo.css", "utf8");
+  assert.match(css, /\.feature-tab\{[^}]*background:#122235[^}]*color:#f5f9fc/);
+  assert.match(css, /\.feature-tab\.active\{[^}]*background:#0f6fff[^}]*color:#fff/);
+  assert.match(css, /\.feature-tab:focus-visible\{[^}]*outline:3px solid #8bd3ff/);
+  assert.match(css, /\.feature-item strong\{[^}]*color:#19344d/);
+  assert.match(css, /\.feature-item span\{[^}]*color:#4c667c/);
+});
